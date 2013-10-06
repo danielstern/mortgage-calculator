@@ -4,7 +4,8 @@ require.config({
     underscore: '../lib/underscore/underscore-min',
     'underscore.string': '../lib/underscore/underscore.string.min',
     angular: '../lib/angular/angular.min',
-    bootstrap: '../lib/bootstrap/js/bootstrap.min'
+    bootstrap: '../lib/bootstrap/js/bootstrap.min',
+    bootstrap_slider: '../lib/bootstrap/slider/js/bootstrap-slider'
   },
   shim: {
   	'underscore.string': {
@@ -12,6 +13,9 @@ require.config({
 	  },
 	  'bootstrap': {
 	 	  deps: ['jquery'],
+	  },
+	  'bootstrap_slider': {
+	 	  deps: ['bootstrap'],
 	  },
 	  'underscore': {
 	  	deps: ['underscore.string'],
@@ -37,6 +41,7 @@ require([
 	"app",
 	"angular",
 	"bootstrap",
+	"bootstrap_slider",
 	"Utility",
 	"Calculator",
 

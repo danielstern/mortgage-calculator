@@ -40,9 +40,9 @@ $(function () {
             plotOptions: {
                 area: {
                     pointStart: 0,
-					animation: false,
-					color: color,
-					pointEnd: numMonths / 12,
+                    animation: false,
+                    color: color,
+                    pointEnd: numMonths / 12,
                     marker: {
                         enabled: false,
                         symbol: 'circle',
@@ -54,10 +54,9 @@ $(function () {
                         }
                     }
                 },
-			
+                
             },
             series: _series
         });
-	}
-    });
-	
+}
+});

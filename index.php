@@ -9,83 +9,86 @@
 	
 	<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/slider/css/slider.css"
 	
 </head>
 <body>
 	<container   ng-controller='CalculatorController' >
-	<div class='container ng-cloak mainBody'>
-		<div class='row'>
-		<div class='col-md-6'>
+		<div class='container ng-cloak mainBody'>
+			<div class='row'>
+				<div class='col-md-6'>
 
-	
-  <form role='form'  class='well'>
-		
-		<h3>{{cp.calcname}}</h3>
-		 <div class="form-group">
-		<label>Starting Value
-		</label>
-			<input type="number"ng-model='cp.startingValue' type='text'/>
-		</div>
+					<form role='form'  class='well'>
 
-<div class="form-group">
-		<label>Recurring Deposit
-		</label>
-		<input type="number" ng-model='cp.recurringPayment'>
-		<div class='btn-group' data-toggle='buttons'>
-			<label class="btn btn-primary">
-	    <input type="radio" name="options" id="option1"> Yearly
-	  	</label>
-	  <label class="btn btn-primary active">
-	    <input type="radio" name="options" id="option2"> Monthly
-	  </label>
+						<h3>{{cp.calcname}}</h3>
+						<div class="form-group">
+							<label>Starting Value
+							</label>
+							<input class="form-control" type="number"ng-model='cp.startingValue' type='text'/>
+						</div>
 
-		</div>
-	</div>
+						<div class="form-group">
+							<label>Recurring Deposit
+							</label>
+							<input class="form-control" type="number" ng-model='cp.recurringPayment'>
+							<div class='btn-group' data-toggle='buttons'>
+								<label class="btn btn-primary">
+									<input type="radio" name="options" id="option1"> Yearly
+								</label>
+								<label class="btn btn-primary active">
+									<input type="radio" name="options" id="option2"> Monthly
+								</label>
 
-	<div class="form-group">
-		<label>Timeframe
-		</label> 
-			<input type="number" ng-model='cp.timeFrame' type='text'>
+							</div>
+<input id='slider1' type="text" class="span2" value="" data-slider-min="-20" data-slider-max="20" data-slider-step="1" data-slider-value="-14" data-slider-orientation="vertical" data-slider-selection="after"data-slider-tooltip="hide">
 
-			<div class='btn-group' data-toggle='buttons'>
-				<label class="btn active btn-primary">
-	    <input type="radio" name="options" id="option1"> Yearly
-	  	</label>
-	  <label class="btn btn-primary">
-	    <input type="radio" name="options" id="option2"> Monthly
-	  </label>
+						</div>
+
+
+						<div class="form-group">
+							<label>Timeframe
+							</label> 
+							<input class="form-control" type="number" ng-model='cp.timeFrame' type='text'>
+
+							<div class='btn-group' data-toggle='buttons'>
+								<label class="btn active btn-primary">
+									<input type="radio" name="options" id="option1"> Yearly
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="options" id="option2"> Monthly
+								</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>Interest Rate (%)
+							</label>
+							{{cp.interestRate}}
+							<input class="form-control" type="number" ng-model='cp.interestRate'>
+						</div>
+
+						<div class="form-group">
+							<label>Net Value at End
+							</label> 
+							{{cp.finalValue | currency}} 
+							<input class="form-control" type="number" ng-model='cp.finalValue' type='text'>
+						</div>
+					</form>
+
+
+				</div>
+				<div class='col-md-3'>
+					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
+				</div>
+
 			</div>
 		</div>
-
-		<div class="form-group">
-			<label>Interest Rate (%)
-			</label>
-				{{cp.interestRate}}
-				<input type="number" ng-model='cp.interestRate'>
-		</div>
-
-<div class="form-group">
-		<label>Net Value at End
-		</label> 
-			{{cp.finalValue | currency}} 
-		<input  type="number" ng-model='cp.finalValue' type='text'>
-	</div>
-	</form>
-	
-	
-	</div>
-	 <div class='col-md-3'>
-        <img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-   </div>
-	
-</div>
-</div>
 	</container>
 
-<div class='chartHolder'>
-<div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
-</div>
-<ng:view></ng:view>
+	<div class='chartHolder'>
+		<div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
+	</div>
+	<ng:view></ng:view>
 	
 </body>
 <!--<script src='js/calculator.js'></script>-->

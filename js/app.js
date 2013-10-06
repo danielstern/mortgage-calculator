@@ -1,4 +1,4 @@
-define(['angular','Calculator'] , function (angular, Calculator) {
+define(['angular','Calculator','jquery'] , function (angular, Calculator, $) {
 
   return angular.module('calculatorApp' , [])
    .controller('CalculatorController', ['$scope', function($scope) {
@@ -34,6 +34,8 @@ define(['angular','Calculator'] , function (angular, Calculator) {
       console.log('values?',values);
       
     }
+
+    $('#slider1').slider();
 
 
 
