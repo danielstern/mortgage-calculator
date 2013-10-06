@@ -1,12 +1,6 @@
 
   function calculator($scope,$http) {
-  /*
-  $http({method: 'GET', url: 'php/echo.php'}).
-  success(function(data, status, headers, config) {
-    // this callback will be called asynchronously
-    // when the response is available
-	console.log(data,status)
-  })*/
+
   
   // default values
   $scope.calculatorKind = 'netValueMode'
