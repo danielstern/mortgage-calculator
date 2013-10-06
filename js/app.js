@@ -55,7 +55,7 @@ cp.depositFreq = 'monthly';
     },
     {
       name:"Timeframe",
-      key:"timeFrame",
+      key:"numYears",
       chaser:" years"
     },
     {
@@ -68,7 +68,7 @@ cp.depositFreq = 'monthly';
     ]
 
     $scope.handleCalcInput = function(thing) {
-    var values = calc.calculate(cp);
+    var values = calc.calculate(cp).getValues();
 
 
     var selectedField = _.find($scope.fields, function(field){return field.selected})

@@ -14,6 +14,9 @@ define("Calculator", ['underscore'], function (_) {
     values.timeKind = 'yearly';
     values.depositFreq = 'monthly';
     values.finalValue = 500;
+
+    //var vo = new CalcValueObject(values);
+
     
 
     calc.calculate = function(cp) {
@@ -29,9 +32,23 @@ define("Calculator", ['underscore'], function (_) {
 			returnObj.interestRate = calc.getInterestRate();
 			returnObj.numMonths = calc.getNumMonths();
 
-			return returnObj;
+      var vo = new CalcValueObject(returnObj);
+
+			return vo;
 
     	
+    }
+
+    var CalcValueObject = function(_values) {
+
+      var values = {};
+
+      if (_values) _.extend(values,_values);
+
+      this.getValues = function() {
+        if (values.numMonths) values.numYears = values.numMonths/12;
+        return values;
+      }
     }
 
 
