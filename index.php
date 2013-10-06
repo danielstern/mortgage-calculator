@@ -18,45 +18,58 @@
 		<div class='col-md-6'>
 
 	
-  <form class='well' >
+  <form role='form'  class='well'>
 		
 		<h3>{{cp.calcname}}</h3>
+		 <div class="form-group">
 		<label>Starting Value
 		</label>
 			<input type="number"ng-model='cp.startingValue' type='text'/>
-
-
-		<label>Recurring Deposit
-		<input type="number" ng-model='cp.recurringPayment'>
-		<div class='btn-group' data-toggle='buttons-radio'>
-			<button class='btn'>Yearly</button>
-			<button class='btn btn-active active'>Monthly</button>
 		</div>
+
+<div class="form-group">
+		<label>Recurring Deposit
 		</label>
+		<input type="number" ng-model='cp.recurringPayment'>
+		<div class='btn-group' data-toggle='buttons'>
+			<label class="btn btn-primary">
+	    <input type="radio" name="options" id="option1"> Yearly
+	  	</label>
+	  <label class="btn btn-primary active">
+	    <input type="radio" name="options" id="option2"> Monthly
+	  </label>
 
+		</div>
+	</div>
 
+	<div class="form-group">
 		<label>Timeframe
+		</label> 
 			<input type="number" ng-model='cp.timeFrame' type='text'>
 
-			<div class='btn-group' data-toggle='buttons-radio'>
-				<button class='btn active'>Years</button>
-				<button class='btn'>Months</button>
+			<div class='btn-group' data-toggle='buttons'>
+				<label class="btn active btn-primary">
+	    <input type="radio" name="options" id="option1"> Yearly
+	  	</label>
+	  <label class="btn btn-primary">
+	    <input type="radio" name="options" id="option2"> Monthly
+	  </label>
 			</div>
-		</label> 
-
-			<label>Interest Rate (%)
-				<div class='value'>{{cp.interestRate}}
-				<input type="number" ng-model='cp.interestRate'>
-			</div>
-			</label>
-
-
-		<label>Net Value at End
-		<input  type="number" ng-model='cp.finalValue' type='text'>
-		<div class='value'>
-			 {{cp.finalValue | currency}} 
 		</div>
+
+		<div class="form-group">
+			<label>Interest Rate (%)
+			</label>
+				{{cp.interestRate}}
+				<input type="number" ng-model='cp.interestRate'>
+		</div>
+
+<div class="form-group">
+		<label>Net Value at End
 		</label> 
+			{{cp.finalValue | currency}} 
+		<input  type="number" ng-model='cp.finalValue' type='text'>
+	</div>
 	</form>
 	
 	
