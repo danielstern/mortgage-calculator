@@ -1,23 +1,14 @@
-define("Calculator", ['underscore'], function (_) {
+define("Calculator", ['underscore','settings'], function (_,settings) {
 
-  return function Calculator() {
+  return function Calculator(config) {
 
-    var calc = this;
-    calc.values = {};
-    var values = calc.values;
+     var defaults = settings.defaults;
 
-    values.startingValue = 100;
-    values.finalValue = 120;
-    values.interestRate = 10;
-    values.recurringPayment = 0;
-    values.timeFrame = 10;
-    values.timeKind = 'yearly';
-    values.depositFreq = 'monthly';
-    values.finalValue = 500;
+     var calc = this;
+     calc.values = defaults;
 
-    //var vo = new CalcValueObject(values);
+     var values = calc.values;
 
-    
 
     calc.calculate = function(cp) {
    
@@ -33,30 +24,12 @@ define("Calculator", ['underscore'], function (_) {
       returnObj.numMonths = calc.getNumMonths();
 			returnObj.startingValue = calc.getStartingValue();
 
-      var vo = new CalcValueObject(returnObj);
 
-			return vo;
+			return returnObj;
 
     	
     }
 
-    var CalcValueObject = function(_values) {
-
-      var values = {};
-
-      if (_values) _.extend(values,_values);
-
-      this.getValues = function() {
-        if (values.numMonths) values.timeFrame = Number(values.numMonths)/12;
-        return values;
-      }
-    }
-
-
-
-    calc.numMonths = function () {
-      return calc.timeFrame * 12
-    }
 
     calc.targetAccuracy = 0.0001; // increases the accuracy of the compound interest calculator. the higher it is, the higher you must make precision, which affects performance.
     calc.calculatorPrecision = 250; // this is an important value as it determines how often you get the "?"
@@ -68,7 +41,7 @@ define("Calculator", ['underscore'], function (_) {
 
       calc.allPfsCalculated = [];
 
-      var numMonths = values.timeFrame;
+      var numMonths = values.numMonths;
 
       if(values.timeKind == 'yearly') {
         numMonths *= 12;
@@ -190,13 +163,6 @@ define("Calculator", ['underscore'], function (_) {
       var count = calc.calculatorPrecision;
       var adjustmentAmount = 0.01;
 
-      if(numMonths > 100000) {
-
-        $('#interestError').html('That time frame is too long!')
-
-        return "?";
-      }
-
       while(count > 0) {
         calc.allPfsCalculated = [];
 
@@ -316,13 +282,5 @@ define("Calculator", ['underscore'], function (_) {
       return numMonths.toFixed(3);
 
     }
-
-    calc.sanitize = function (i) {
-      if(i == '?' || !i) return '?';
-      return Number(i);
-    }
-
- 
-
   }
 })

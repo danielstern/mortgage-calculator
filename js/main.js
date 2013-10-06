@@ -41,6 +41,7 @@ require([
 	"app",
 	"angular",
 	"bootstrap",
+	"settings",
 	"bootstrap_slider",
 	"Utility",
 	"Calculator",

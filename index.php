@@ -19,7 +19,7 @@
 				<div class='col-md-6'>
 					<h3>Financial Calculator</h3>
 					<table class='table table-bordered'>
-						<tr ng-repeat="field in fields" ng-controller='CalcFieldCtrl' ng-class="{'success':field.selected}" >
+						<tr ng-repeat="field in fields" ng-class="{'success':field.selected}" >
 							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
 								{{field.name}}
 							</td>
