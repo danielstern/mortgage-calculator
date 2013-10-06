@@ -3,10 +3,37 @@ define("Calculator", ['underscore'], function (_) {
   return function Calculator() {
 
     var calc = this;
+    calc.values = {};
+    var values = calc.values;
+
+    values.startingValue = 100;
+    values.finalValue = 120;
+    values.interestRate = 10;
+    values.recurringPayment = 0;
+    values.timeFrame = 10;
+    values.timeKind = 'yearly';
+    values.depositFreq = 'monthly';
+    values.finalValue = 500;
+    
 
     calc.calculate = function(cp) {
     	console.log('calculating...',cp);
+    	var differences = _.whatsChanged(values,cp);
+    	var key = _(differences).chain().keys().first().value();
+    	console.log('differences?',differences, key);
+			_.extend(values, differences);
+
+			var returnObj = {};
+			returnObj.finalValue = calc.getFinalValue();
+			console.log("What would the new final value have to be for all other vars to stay the same?",returnObj.finalValue)
+			returnObj.interestRate = calc.getInterestRate();
+			returnObj.numMonths = calc.getNumMonths();
+
+			return returnObj;
+
+    	
     }
+
 
 
     calc.numMonths = function () {
@@ -23,17 +50,17 @@ define("Calculator", ['underscore'], function (_) {
 
       calc.allPfsCalculated = [];
 
-      var numMonths = calc.timeFrame;
+      var numMonths = values.timeFrame;
 
-      if(calc.timeKind == 'yearly') {
+      if(values.timeKind == 'yearly') {
         numMonths *= 12;
       }
 
-      var p1 = Number(calc.startingValue);
+      var p1 = Number(values.startingValue);
       var pf = p1;
 
-      var pr = Number(calc.recurringPayment);
-      var yearlyInterestRate = Number(calc.interestRate);
+      var pr = Number(values.recurringPayment);
+      var yearlyInterestRate = Number(values.interestRate);
 
       var monthlyInterestRate = yearlyInterestRate / 12;
 
@@ -46,11 +73,11 @@ define("Calculator", ['underscore'], function (_) {
       var monthsThru = 0;
 
       for(var n = 0; n < numMonths; n++) {
-        if(calc.depositFreq == 'monthly') pf += pr;
+        if(values.depositFreq == 'monthly') pf += pr;
 
         //pf = pf * i;     // for calculating payments at the beginning of the period
 
-        if(calc.depositFreq == 'yearly') {
+        if(values.depositFreq == 'yearly') {
 
           if(monthsThru == 0) pf += pr;
           monthsThru++;
@@ -60,7 +87,6 @@ define("Calculator", ['underscore'], function (_) {
 
         pf = pf * i;
 
-        //calc.allPfsCalculated[n] = pf;
         calc.allPfsCalculated.push(pf);
 
       }
@@ -71,17 +97,17 @@ define("Calculator", ['underscore'], function (_) {
 
     calc.getInterestRate = function() {
 
-      var numMonths = calc.timeFrame;
+      var numMonths = values.timeFrame;
 
-      if(calc.timeKind == 'yearly') {
+      if(values.timeKind == 'yearly') {
         numMonths *= 12;
       }
 
-      var apf = calc.finalValue;
+      var apf = values.finalValue;
 
-      var p1 = Number(calc.startingValue);
+      var p1 = Number(values.startingValue);
       var pf = p1;
-      var pr = Number(calc.recurringPayment);
+      var pr = Number(values.recurringPayment);
       var i = 1.01;
 
       if(pf < p1) return 0;
@@ -107,9 +133,9 @@ define("Calculator", ['underscore'], function (_) {
         calc.allPfsCalculated = [];
 
         for(var n = 0; n < numMonths; n++) {
-          if(calc.depositFreq == 'monthly') pf += pr;
+          if(values.depositFreq == 'monthly') pf += pr;
 
-          if(calc.depositFreq == 'yearly') {
+          if(values.depositFreq == 'yearly') {
 
             if(monthsThru == 0) pf += pr;
             monthsThru++;
@@ -134,11 +160,9 @@ define("Calculator", ['underscore'], function (_) {
         precision = Math.abs(pf - apf);
 
         if(precision < calc.targetAccuracy) {
-          //  console.log("Good enough.", guessI);
           break;
         }
 
-        //console.log(calc.allPfsCalculated)
 
         adjustmentAmount *= 0.9;
         pf = p1;
@@ -158,11 +182,11 @@ define("Calculator", ['underscore'], function (_) {
 
       //return "?";
 
-      var apf = calc.finalValue;
-      var p1 = Number(calc.startingValue);
+      var apf = values.finalValue;
+      var p1 = Number(values.startingValue);
       var pf = p1;
-      var pr = Number(calc.recurringPayment);
-      var i = Number(calc.interestRate) / 12;
+      var pr = Number(values.recurringPayment);
+      var i = Number(values.interestRate) / 12;
       //	console.log("Interest rate per month?" , i);
 
       var monthsThru = 0;
@@ -182,9 +206,9 @@ define("Calculator", ['underscore'], function (_) {
         var numMonths = guessNumMonths;
 
         for(var n = 0; n < numMonths; n++) {
-          if(calc.depositFreq == 'monthly') pf += pr;
+          if(values.depositFreq == 'monthly') pf += pr;
 
-          if(calc.depositFreq == 'yearly') {
+          if(values.depositFreq == 'yearly') {
 
             if(monthsThru == 0) pf += pr;
             monthsThru++;

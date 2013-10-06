@@ -33,6 +33,7 @@ require([
 	"jquery",
 	"app",
 	"angular",
+	"Utility",
 	"Calculator",
 
 	], function($, app, angular) {
