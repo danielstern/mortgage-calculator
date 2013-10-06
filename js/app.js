@@ -55,7 +55,7 @@ cp.depositFreq = 'monthly';
     },
     {
       name:"Timeframe",
-      key:"numYears",
+      key:"timeFrame",
       chaser:" years"
     },
     {
