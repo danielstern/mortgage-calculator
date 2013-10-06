@@ -22,12 +22,14 @@ define(['angular','Calculator'] , function (angular, Calculator) {
     //calc.finalValue = getFinalValue(calc);
     cp.finalValue = 500;
 
-    /*$scope.$watchCollection($scope.cp, function(thing){
-      console.log('Cp changed.');
-    })*/
+    // bingo...
+    $scope.$watchCollection('cp', function(thing){
+      //console.log('Cp changed.',thing);
+      $scope.handleCalcInput(thing);
+    })
 
     $scope.handleCalcInput = function(thing) {
-      console.log("handle clac input",thing);
+      console.log("Handling calculator input...",thing);
     }
 
        /*

@@ -13,7 +13,7 @@
 	
 </head>
 <body>
-	<container  ng-controller='CalculatorController' >
+	<container   ng-controller='CalculatorController' >
 	<div class='container ng-cloak mainBody'>
 		<div class='row'>
 		<div class='span6'>
@@ -24,7 +24,7 @@
 		<h3>{{cp.calcname}}</h3>
 		<label>Starting Value
 		</label>
-			<input type="number" ng-change='handleCalcInput("cp:" + cp.startingValue)' ng-model='cp.startingValue' type='text'/>
+			<input type="number"ng-model='cp.startingValue' type='text'/>
 
 
 		<label>Recurring Deposit
