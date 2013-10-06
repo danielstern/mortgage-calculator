@@ -50,6 +50,5 @@
 	<ng:view></ng:view>
 	
 </body>
-<!--<script src='js/calculator.js'></script>-->
 <?php include('php/analytics.html') ; ?>
 </html>

@@ -30,8 +30,10 @@ body {
 	}
 
 .thumb {
-	width:200px;
-	height:200px;
+	width:100px;
+	height:100px;
+	position: absolute;
+
 }
 .thumb:hover {
 	width:250px;
@@ -44,8 +46,6 @@ body {
 }
 
 #chart-contain {
-	/*height:auto;
-	width:auto;*/
 	width:auto;
 	
 }
