@@ -9,14 +9,13 @@
 	
 	<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-responsive.css">
 	
 </head>
 <body>
 	<container   ng-controller='CalculatorController' >
 	<div class='container ng-cloak mainBody'>
 		<div class='row'>
-		<div class='span6'>
+		<div class='col-md-6'>
 
 	
   <form class='well' >
@@ -28,41 +27,41 @@
 
 
 		<label>Recurring Deposit
-		</label>
 		<input type="number" ng-model='cp.recurringPayment'>
 		<div class='btn-group' data-toggle='buttons-radio'>
 			<button class='btn'>Yearly</button>
 			<button class='btn btn-active active'>Monthly</button>
 		</div>
+		</label>
 
 
 		<label>Timeframe
-		</label> 
 			<input type="number" ng-model='cp.timeFrame' type='text'>
 
 			<div class='btn-group' data-toggle='buttons-radio'>
 				<button class='btn active'>Years</button>
 				<button class='btn'>Months</button>
 			</div>
+		</label> 
 
 			<label>Interest Rate (%)
-				<div class='value'>{{cp.interestRate}}</label> 
+				<div class='value'>{{cp.interestRate}}
 				<input type="number" ng-model='cp.interestRate'>
-	</div>
-		</label>
+			</div>
+			</label>
 
 
 		<label>Net Value at End
-		</label> 
 		<input  type="number" ng-model='cp.finalValue' type='text'>
 		<div class='value'>
 			 {{cp.finalValue | currency}} 
 		</div>
+		</label> 
 	</form>
 	
 	
 	</div>
-	 <div class='span2'>
+	 <div class='col-md-3'>
         <img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
    </div>
 	
