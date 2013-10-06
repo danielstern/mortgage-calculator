@@ -34,7 +34,9 @@
 					</div>
 
 					<div class='col-md-3 '>
+						<div id='chart-box'>
 					<div id='chart-contain'>
+					</div>
 					</div>
 				</div>
 					

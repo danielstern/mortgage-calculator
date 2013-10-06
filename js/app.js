@@ -3,8 +3,6 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
   return angular.module('calculatorApp' , [])
   .controller('CalculatorController', ['$scope', function($scope) {
 
-    console.log("initialize app,",settings)
-
    $scope.cp  = settings.defaults;
    var cp = $scope.cp ;
 
@@ -25,15 +23,13 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       cp[key] = parseInt(values[key]);
 
        $scope.updateChart(calc.getChartValues());
-    //  $scope.updateChart(calc.allPfsCalculated);
 
     }
 
     $scope.updateChart = function (values) {
-    //  console.log("Updating with...",values);
-  //    Chartmaster.mightyCircles(values);
+    
         Chartmaster.barChart(values);
-      //Chartmaster.makeSimpleLineGraph(values);
+    
     }
 
   $scope.handleRowClick = function(thing) {
