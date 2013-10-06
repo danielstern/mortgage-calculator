@@ -16,24 +16,21 @@
 	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-8'>
-					<form role='form' class="form-horizontal">
-						<div class="form-group" ng-repeat="field in fields" ng-controller='CalcFieldCtrl'>
-							<label for="{{field.name}}" class="col-lg-3 control-label">	
+				<div class='col-md-6'>
+					<table class='table table-bordered'>
+						<tr ng-repeat="field in fields" ng-controller='CalcFieldCtrl'>
+							<td class="col-lg-2">	
 								{{field.name}}
-							</label>
-							<div class="col-lg-2">
+							</td>
+							<td class="col-lg-2">
 								<input type="number" class='form-control' ng-model='cp[field.key]' id='{{field.name}}' name='{{field.name}}'/>							
-							</div>
-							<div class="col-lg-1">
+							</td>
+							<td class="col-lg-2">
 								{{cp[field.key]}}
-							</div>
-							<div class="col-lg-3">
-								<button class='btn'>Select</btn>
-							</div>
-						</div>
-					</form>
-				</div>
+							</td>
+						</tr>
+					</table>
+					</div>
 				<div class='col-md-3'>
 					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
 				</div>
@@ -41,10 +38,6 @@
 			</div>
 		</div>
 	</container>
-
-	<div class='chartHolder'>
-		<div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
-	</div>
 	<ng:view></ng:view>
 	
 </body>

@@ -28,6 +28,11 @@ cp.depositFreq = 'monthly';
       $scope.handleCalcInput(thing);
     })
 
+    $scope.select = function(val) {
+      console.log("Selected...",val);
+    }
+
+
     $scope.fields = [
     {
       name:"Starting Value",
@@ -66,6 +71,7 @@ cp.depositFreq = 'monthly';
 
 }])
 .controller('CalcFieldCtrl', ['$scope', function($scope) {
+
 
  /*_.defer(function(){
   $('#slider-'+$scope.field.key).slider()
