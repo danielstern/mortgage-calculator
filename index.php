@@ -16,16 +16,10 @@
 	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-11'>
-					<form role='form' class="form-horizontal well">
-						<div class="form-group" ng-repeat="field in fields">
-
-							<div class="btn-group" data-toggle="buttons" class="col-lg-2 control-label">
-								<label class="btn btn-primary">
-									<input type="checkbox" name="options" id="option1"> Lock
-								</label>
-							</div>
-							<label for="{{field.name}}" class="col-lg-2 control-label">	
+				<div class='col-md-8'>
+					<form role='form' class="form-horizontal">
+						<div class="form-group" ng-repeat="field in fields" ng-controller='CalcFieldCtrl'>
+							<label for="{{field.name}}" class="col-lg-3 control-label">	
 								{{field.name}}
 							</label>
 							<div class="col-lg-2">
@@ -34,12 +28,11 @@
 							<div class="col-lg-1">
 								{{cp[field.key]}}
 							</div>
-							<div class="col-lg-2">
-								<input id='slider1' type="text" class="form-control" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
+							<div class="col-lg-3">
+								<button class='btn'>Select</btn>
 							</div>
 						</div>
 					</form>
-
 				</div>
 				<div class='col-md-3'>
 					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
@@ -58,62 +51,3 @@
 <!--<script src='js/calculator.js'></script>-->
 <?php include('php/analytics.html') ; ?>
 </html>
-
-			<!--				<label>Starting Value
-						<div class="form-group">
-							</label>
-							<label>{{cp.startingValue}}
-							</label>
-							<input class="form-control span1 col-md-2" type="number"ng-model='cp.startingValue' type='text'/>
-						</div>
-							<!--<div class='btn-group' data-toggle='buttons' >
-								<label class="btn btn-primary" ng-repeat="option in field.radio">
-									<input type="radio" name="options" value='{{option.value}}' id="option1"> {{option.name}}
-								</label>
-							</div>
-
-						<div class="form-group">
-							<label>Recurring Deposit
-							</label>
-							<input class="form-control" type="number" ng-model='cp.recurringPayment'>
-							<div class='btn-group' data-toggle='buttons'>
-								<label class="btn btn-primary">
-									<input type="radio" name="options" id="option1"> Yearly
-								</label>
-								<label class="btn btn-primary active">
-									<input type="radio" name="options" id="option2"> Monthly
-								</label>
-
-							</div>
-
-						</div>
-
-
-						<div class="form-group">
-							<label>Timeframe
-							</label> 
-							<input class="form-control" type="number" ng-model='cp.timeFrame' type='text'>
-
-							<div class='btn-group' data-toggle='buttons'>
-								<label class="btn active btn-primary">
-									<input type="radio" name="options" id="option1"> Yearly
-								</label>
-								<label class="btn btn-primary">
-									<input type="radio" name="options" id="option2"> Monthly
-								</label>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label>Interest Rate (%)
-							</label>
-							{{cp.interestRate}}
-							<input class="form-control" type="number" ng-model='cp.interestRate'>
-						</div>
-
-						<div class="form-group">
-							<label>Net Value at End
-							</label> 
-							{{cp.finalValue | currency}} 
-							<input class="form-control" type="number" ng-model='cp.finalValue' type='text'>
-						</div>-->
