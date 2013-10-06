@@ -14,8 +14,6 @@
 </head>
 <body>
 	<container  ng-controller='CalculatorController' >
-
-	<?php include('php/includes/navbar.php') ; ?>
 	<div class='container ng-cloak mainBody'>
 		<div class='row'>
 		<div class='span6'>
@@ -64,6 +62,17 @@
 	</form>
 	
 	
+	</div>
+	<div class='span3'>
+		<li>
+			<a data-toggle='collapse' data-target='.nav-collapse' ng-click="calculatorKind = 'netValueMode'" id='navNetValueButton'>Net Value Calculator</a>
+		</li>
+		<li>
+			<a  data-toggle='collapse' data-target='.nav-collapse' ng-click="calculatorKind = 'interestMode'">Compound Rate of Return Calculator</a>	
+		</li>
+		<li>
+			<a data-toggle='collapse' data-target='.nav-collapse' ng-click="calculatorKind = 'timeFrameMode'">Timeframe Calculator</a>	  
+		</li>	
 	</div>
 </div>
 </div>
