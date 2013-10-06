@@ -3,8 +3,8 @@
 
 <html> 
 <head>
-	<title>Responsive Calculator</title>
-	<!--<meta name="viewport" content="width=device-width; initial-scale=1.0;">-->
+	<title>Daniel Stern Financial Calculator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script data-main="js/main" src="lib/require/require.js"></script>	
 	
 	<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">
@@ -62,6 +62,9 @@
 	
 	
 	</div>
+	 <div class='span2'>
+        <img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
+   </div>
 	
 </div>
 </div>

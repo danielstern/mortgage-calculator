@@ -17,15 +17,15 @@ define("Calculator", ['underscore'], function (_) {
     
 
     calc.calculate = function(cp) {
-    	console.log('calculating...',cp);
+   
     	var differences = _.whatsChanged(values,cp);
     	var key = _(differences).chain().keys().first().value();
-    	console.log('differences?',differences, key);
+    
 			_.extend(values, differences);
 
 			var returnObj = {};
 			returnObj.finalValue = calc.getFinalValue();
-			console.log("What would the new final value have to be for all other vars to stay the same?",returnObj.finalValue)
+		
 			returnObj.interestRate = calc.getInterestRate();
 			returnObj.numMonths = calc.getNumMonths();
 
@@ -234,10 +234,7 @@ define("Calculator", ['underscore'], function (_) {
 
         precision = Math.abs(pf - apf);
 
-        if(precision < timeTargetAccuracy) {
-          //  console.log("Good enough.", guessNumMonths);
-          break;
-        }
+        if(precision < timeTargetAccuracy) break; 
 
         adjustmentAmount *= 0.95;
         pf = p1;
@@ -245,9 +242,7 @@ define("Calculator", ['underscore'], function (_) {
         count--;
       }
 
-      //console.log('Precision?', precision)
       var temporalAccuracyTarget = pf * 0.22;
-      //console.log('temporal accuracy?' , temporalAccuracyTarget)
 
       if(isNaN(precision) || precision > temporalAccuracyTarget) return "?"
       return numMonths.toFixed(3);
