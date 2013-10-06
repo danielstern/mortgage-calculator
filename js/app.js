@@ -57,16 +57,21 @@ cp.depositFreq = 'monthly';
     },
     {
       name:"Final Value",
-      key:"finalValue"
+      key:"finalValue",
+      selected:"true"
     },
 
     ]
 
     $scope.handleCalcInput = function(thing) {
   var values = calc.calculate(cp);
-//  console.log('values?',values);
+  console.log('values?',values);
 
-}
+  }
+
+  $scope.handleRowClick = function(thing) {
+    console.log('clicked row', thing);
+  }
 
 
 }])

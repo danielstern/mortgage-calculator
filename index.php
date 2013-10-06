@@ -18,12 +18,12 @@
 			<div class='row'>
 				<div class='col-md-6'>
 					<table class='table table-bordered'>
-						<tr ng-repeat="field in fields" ng-controller='CalcFieldCtrl'>
-							<td class="col-lg-2">	
+						<tr ng-repeat="field in fields" ng-controller='CalcFieldCtrl' ng-class="{'success':field.selected}" >
+							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-								<input type="number" class='form-control' ng-model='cp[field.key]' id='{{field.name}}' name='{{field.name}}'/>							
+								<input type="number" class='form-control' ng-model='cp[field.key]' ng-disabled="field.selected" id='{{field.name}}' name='{{field.name}}'/>							
 							</td>
 							<td class="col-lg-2">
 								{{cp[field.key]}}
