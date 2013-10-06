@@ -16,18 +16,27 @@
 	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-5'>
+				<div class='col-md-11'>
 					<form role='form' class="form-horizontal well">
 						<div class="form-group" ng-repeat="field in fields">
-							<label for="{{field.name}}" class="col-lg-4 control-label">	
+
+							<div class="btn-group" data-toggle="buttons" class="col-lg-2 control-label">
+								<label class="btn btn-primary">
+									<input type="checkbox" name="options" id="option1"> Lock
+								</label>
+							</div>
+							<label for="{{field.name}}" class="col-lg-2 control-label">	
 								{{field.name}}
 							</label>
-							<div class="col-lg-3">
+							<div class="col-lg-2">
 								<input type="number" class='form-control' ng-model='cp[field.key]' id='{{field.name}}' name='{{field.name}}'/>							
 							</div>
+							<div class="col-lg-1">
+								{{cp[field.key]}}
+							</div>
 							<div class="col-lg-2">
-							{{cp[field.key]}}
-						</div>
+								<input id='slider1' type="text" class="form-control" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
+							</div>
 						</div>
 					</form>
 
@@ -50,7 +59,6 @@
 <?php include('php/analytics.html') ; ?>
 </html>
 
-<!--<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">-->
 			<!--				<label>Starting Value
 						<div class="form-group">
 							</label>
