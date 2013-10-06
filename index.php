@@ -24,7 +24,7 @@
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-								<input type="number" class='form-control' ng-model='cp[field.key]' ng-disabled="field.selected" id='{{field.name}}' name='{{field.name}}'/>							
+								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>							
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}{{cp[field.key]}}{{field.chaser}}

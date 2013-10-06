@@ -69,12 +69,16 @@ cp.depositFreq = 'monthly';
 
     $scope.handleCalcInput = function(thing) {
     var values = calc.calculate(cp);
-    console.log('values?',values);
+
+
     var selectedField = _.find($scope.fields, function(field){return field.selected})
     var key = selectedField.key;
-    console.log("Key?",key);
-    cp[key] = values[key];
-    console.log(cp,key,thing);
+
+    console.log("Values?",values,key,cp)
+
+    cp[key] = parseInt(values[key]);
+
+    
 
   }
 
