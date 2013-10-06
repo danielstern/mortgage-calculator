@@ -19,11 +19,11 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       _.extend(values, differences);
 
       var returnObj = {};
-      returnObj.finalValue = calc.getFinalValue();
     
       returnObj.interestRate = calc.getInterestRate();
       returnObj.numMonths = calc.getNumMonths();
       returnObj.startingValue = calc.getStartingValue();
+      returnObj.finalValue = calc.getFinalValue();
 
 
       return returnObj;
@@ -79,6 +79,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
         calc.allPfsCalculated.push(pf);
 
       }
+      console.log("Pushing...",calc.allPfsCalculated)
 
       return pf.toFixed(2);
 
@@ -204,6 +205,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
     calc.getChartValues = function () {
+      console.log("Returning...",calc.allPfsCalculated)
       return calc.allPfsCalculated;
     }
 

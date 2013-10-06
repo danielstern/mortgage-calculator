@@ -43,5 +43,5 @@ div.bar {
 }
 
 div.bar:hover {
-	width: 25px;
+	color:'red';
 }

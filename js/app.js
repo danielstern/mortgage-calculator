@@ -24,7 +24,8 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       var key = selectedField.key;
       cp[key] = parseInt(values[key]);
 
-      $scope.updateChart(calc.getChartValues());
+       $scope.updateChart(calc.getChartValues());
+    //  $scope.updateChart(calc.allPfsCalculated);
 
     }
 
