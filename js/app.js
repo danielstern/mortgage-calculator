@@ -36,11 +36,13 @@ cp.depositFreq = 'monthly';
     $scope.fields = [
     {
       name:"Starting Value",
-      key:"startingValue"
+      key:"startingValue",
+      primer:"$"
     },
     {
       name:"Interest Rate",
       key:"interestRate",
+      chaser:"%"
      /* radio:[
       {
         name:'Annually',
@@ -53,9 +55,11 @@ cp.depositFreq = 'monthly';
     },
     {
       name:"Timeframe",
-      key:"timeFrame"
+      key:"timeFrame",
+      chaser:" years"
     },
     {
+      primer:"$",
       name:"Final Value",
       key:"finalValue",
       selected:"true"
@@ -64,13 +68,22 @@ cp.depositFreq = 'monthly';
     ]
 
     $scope.handleCalcInput = function(thing) {
-  var values = calc.calculate(cp);
-  console.log('values?',values);
+    var values = calc.calculate(cp);
+    console.log('values?',values);
+    var selectedField = _.find($scope.fields, function(field){return field.selected})
+    var key = selectedField.key;
+    console.log("Key?",key);
+    cp[key] = values[key];
+    console.log(cp,key,thing);
 
   }
 
   $scope.handleRowClick = function(thing) {
     console.log('clicked row', thing);
+    _.each($scope.fields,function(field){field.selected = false})
+ 
+    var field = _.find($scope.fields, function(field){return field.key == thing})
+    field.selected = true;
   }
 
 
