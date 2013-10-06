@@ -13,26 +13,44 @@
 	
 </head>
 <body>
-	<container   ng-controller='CalculatorController' >
+	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-4'>
-
-					<form role='form'  class='well'>
-
+				<div class='col-md-5'>
+					<form role='form' class="form-horizontal well">
 						<div class="form-group" ng-repeat="field in fields">
-						<label>{{field.name}}</label>
-							<label>{{cp[field.key]}}
+							<label for="{{field.name}}" class="col-lg-4 control-label">	
+								{{field.name}}
 							</label>
-							<input class="form-control span1 col-md-2" type="number"ng-model='cp[field.key]' type='text'/>							
-							<div class='btn-group' data-toggle='buttons' >
-								<label class="btn btn-primary" ng-repeat="option in field.radio">
-									<input type="radio" name="options" value='{{option.value}}' id="option1"> {{option.name}}
-								</label>
+							<div class="col-lg-3">
+								<input type="number" class='form-control' ng-model='cp[field.key]' id='{{field.name}}' name='{{field.name}}'/>							
 							</div>
+							<div class="col-lg-2">
+							{{cp[field.key]}}
 						</div>
+						</div>
+					</form>
 
-						<!--<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">-->
+				</div>
+				<div class='col-md-3'>
+					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
+				</div>
+
+			</div>
+		</div>
+	</container>
+
+	<div class='chartHolder'>
+		<div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
+	</div>
+	<ng:view></ng:view>
+	
+</body>
+<!--<script src='js/calculator.js'></script>-->
+<?php include('php/analytics.html') ; ?>
+</html>
+
+<!--<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">-->
 			<!--				<label>Starting Value
 						<div class="form-group">
 							</label>
@@ -40,6 +58,11 @@
 							</label>
 							<input class="form-control span1 col-md-2" type="number"ng-model='cp.startingValue' type='text'/>
 						</div>
+							<!--<div class='btn-group' data-toggle='buttons' >
+								<label class="btn btn-primary" ng-repeat="option in field.radio">
+									<input type="radio" name="options" value='{{option.value}}' id="option1"> {{option.name}}
+								</label>
+							</div>
 
 						<div class="form-group">
 							<label>Recurring Deposit
@@ -86,24 +109,3 @@
 							{{cp.finalValue | currency}} 
 							<input class="form-control" type="number" ng-model='cp.finalValue' type='text'>
 						</div>-->
-					</form>
-
-
-				</div>
-				<div class='col-md-3'>
-					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-				</div>
-
-			</div>
-		</div>
-	</container>
-
-	<div class='chartHolder'>
-		<div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
-	</div>
-	<ng:view></ng:view>
-	
-</body>
-<!--<script src='js/calculator.js'></script>-->
-<?php include('php/analytics.html') ; ?>
-</html>

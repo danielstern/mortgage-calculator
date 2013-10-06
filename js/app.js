@@ -58,7 +58,7 @@ define(['angular','Calculator','jquery'] , function (angular, Calculator, $) {
     ]
 
     $scope.handleCalcInput = function(thing) {
-      console.log("Handling calculator input...",thing);
+  //    console.log("Handling calculator input...",thing);
       var values = calc.calculate(cp);
       console.log('values?',values);
       
