@@ -1,4 +1,4 @@
-define(['angular','Calculator','jquery','settings'] , function (angular, Calculator, $, settings) {
+define(['angular','Calculator','jquery','settings','Chartmaster'] , function (angular, Calculator, $, settings, Chartmaster) {
 
   return angular.module('calculatorApp' , [])
   .controller('CalculatorController', ['$scope', function($scope) {
@@ -22,11 +22,17 @@ define(['angular','Calculator','jquery','settings'] , function (angular, Calcula
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
       var key = selectedField.key;
-
-      console.log("Values?",values,key,cp)
-
       cp[key] = parseInt(values[key]);
 
+      $scope.updateChart(calc.getChartValues());
+
+    }
+
+    $scope.updateChart = function (values) {
+    //  console.log("Updating with...",values);
+  //    Chartmaster.mightyCircles(values);
+        Chartmaster.barChart(values);
+      //Chartmaster.makeSimpleLineGraph(values);
     }
 
   $scope.handleRowClick = function(thing) {

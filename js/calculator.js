@@ -2,38 +2,36 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
   return function Calculator(config) {
 
-     var defaults = settings.defaults;
-
-     var calc = this;
-     calc.values = defaults;
+    var calc = this;
+     
+    calc.values = settings.defaults
+    calc.targetAccuracy = 0.0001; // increases the accuracy of the compound interest calculator. the higher it is, the higher you must make precision, which affects performance.
+    calc.calculatorPrecision = 250; // this is an important value as it determines how often you get the "?"
 
      var values = calc.values;
 
 
     calc.calculate = function(cp) {
    
-    	var differences = _.whatsChanged(values,cp);
-    	var key = _(differences).chain().keys().first().value();
+      var differences = _.whatsChanged(values,cp);
+      var key = _(differences).chain().keys().first().value();
     
-			_.extend(values, differences);
+      _.extend(values, differences);
 
-			var returnObj = {};
-			returnObj.finalValue = calc.getFinalValue();
-		
-			returnObj.interestRate = calc.getInterestRate();
+      var returnObj = {};
+      returnObj.finalValue = calc.getFinalValue();
+    
+      returnObj.interestRate = calc.getInterestRate();
       returnObj.numMonths = calc.getNumMonths();
-			returnObj.startingValue = calc.getStartingValue();
+      returnObj.startingValue = calc.getStartingValue();
 
 
-			return returnObj;
+      return returnObj;
 
-    	
+      
     }
 
 
-    calc.targetAccuracy = 0.0001; // increases the accuracy of the compound interest calculator. the higher it is, the higher you must make precision, which affects performance.
-    calc.calculatorPrecision = 250; // this is an important value as it determines how often you get the "?"
-    // Affects the accuracy of the compound interest guess at the cost of processing power.
 
     calc.allPfsCalculated = [];
 
@@ -90,11 +88,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
       calc.allPfsCalculated = [];
 
-      var numMonths = values.timeFrame;
-
-      if(values.timeKind == 'yearly') {
-        numMonths *= 12;
-      }
+      var numMonths = values.numMonths;
 
       var pf = Number(values.finalValue);
       var p1 = pf;
@@ -138,11 +132,8 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     calc.getInterestRate = function() {
 
-      var numMonths = values.timeFrame;
+      var numMonths = values.numMonths;
 
-      if(values.timeKind == 'yearly') {
-        numMonths *= 12;
-      }
 
       var apf = values.finalValue;
 
@@ -212,23 +203,24 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     }
 
-    calc.getNumMonths = function() {
+    calc.getChartValues = function () {
+      return calc.allPfsCalculated;
+    }
 
-      //return "?";
+    calc.getNumMonths = function() {
 
       var apf = values.finalValue;
       var p1 = Number(values.startingValue);
       var pf = p1;
       var pr = Number(values.recurringPayment);
       var i = Number(values.interestRate) / 12;
-      //	console.log("Interest rate per month?" , i);
 
       var monthsThru = 0;
 
       var guessNumMonths = 120;
 
       var precision;
-      var targetPrecision = 10; // less than this amount apart	
+      var targetPrecision = 25; // less than this amount apart	
 
       var timeTargetAccuracy = 50;
 

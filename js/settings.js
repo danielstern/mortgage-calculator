@@ -20,7 +20,7 @@ return {	defaults:{
 	    chaser:"%"
 	  },
 	  {
-	    name:"Timeframe",
+	    name:"Time",
 	    key:"numMonths",
 	    chaser:" months"
 	  },
