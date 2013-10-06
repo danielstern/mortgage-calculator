@@ -38,7 +38,7 @@ require([
 	], function($, app, angular) {
 
 		console.log('calculator booted.');
-   	 //angular.bootstrap(document , ['lisaApp']);
+   	angular.bootstrap(document , ['calculatorApp']);
 		
 })
 

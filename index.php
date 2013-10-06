@@ -1,10 +1,10 @@
 <!doctype HTML>
 <!-- Copyright 2013 danielstern.ca - -->
 
-<html ng-app> 
+<html> 
 <head>
 	<title>Responsive Calculator</title>
-	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<!--<meta name="viewport" content="width=device-width; initial-scale=1.0;">-->
 	<script data-main="js/main" src="lib/require/require.js"></script>	
 	
 	<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">
@@ -13,50 +13,66 @@
 	
 </head>
 <body>
-	<container>
+	<container  ng-controller='CalculatorController' >
 
 	<?php include('php/includes/navbar.php') ; ?>
-		<div class='container ng-cloak mainBody'>
-		<h3>{{calcname}}</h3>
+	<div class='container ng-cloak mainBody'>
+		<div class='row'>
+		<div class='span6'>
+
 	
+  <form class='well' >
 		
-		Starting Value
-		<input type="number" ng-model='startingValue' value='100' type='text'/>
+		<h3>{{cp.calcname}}</h3>
+		<label>Starting Value
+		</label>
+			<input type="number" ng-change='handleCalcInput("cp:" + cp.startingValue)' ng-model='cp.startingValue' type='text'/>
 
-		Recurring Deposit
 
-		<input type="number" ng-model='recurringPayment' type='text'>
+		<label>Recurring Deposit
+		</label>
+		<input type="number" ng-model='cp.recurringPayment'>
 		<div class='btn-group' data-toggle='buttons-radio'>
-			<button class='btn' ng-click="depositFreq = 'yearly'">Yearly</button>
-			<button class='btn btn-active active' ng-click="depositFreq = 'monthly'">Monthly</button>
+			<button class='btn'>Yearly</button>
+			<button class='btn btn-active active'>Monthly</button>
 		</div>
 
 
-		<label class='{{calculatorKind}}-timeFrame-mode-only timeFrame-mode-only'>{{timeFrame}}</label> 
-		<input type="number" class='{{calculatorKind}}-timeFrame-mode-hide' ng-model='timeFrame' type='text'>
+		<label>Timeframe
+		</label> 
+		{{cp.timeFrame}}
+			<input type="number" ng-model='cp.timeFrame' type='text'>
 
-		<div class='btn-group' data-toggle='buttons-radio'>
-			<button class='btn active' ng-click="timeKind = 'yearly'">Years</button>
-			<button class='btn' ng-click="timeKind = 'monthly'">Months</button>
+			<div class='btn-group' data-toggle='buttons-radio'>
+				<button class='btn active'>Years</button>
+				<button class='btn'>Months</button>
+			</div>
+
+			<label>Interest Rate (%)
+				<div class='value'>{{cp.interestRate}}</label> 
+				<input type="number" ng-model='cp.interestRate'>
+	</div>
+		</label>
+
+
+		<label>Net Value at End
+		</label> 
+		<input  type="number" ng-model='cp.finalValue' type='text'>
+		<div class='value'>
+			 {{cp.finalValue | currency}} 
 		</div>
-
-			Interest Rate 
-			<label class='{{calculatorKind}}-interest-mode-only interest-mode-only'>{{interestRate}}%</label> 
-			<input type="number" ng-model='interestRate' class='{{calculatorKind}}-interest-mode-hide' type='text'>
-
-
-		Net Value at End
-		<label class='{{calculatorKind}}-net-value-only net-value-only'> {{finalValue | currency}} </label> 
-		<input  type="number" class='{{calculatorKind}}-net-value-hide' ng-model='finalValue' type='text'>
+	</form>
 	
 	
 	</div>
-
+</div>
+</div>
 	</container>
 
 <div class='chartHolder'>
 <div id="chart" class='float-right' style="height: 400px; margin: 0 auto"></div>
 </div>
+<ng:view></ng:view>
 	
 </body>
 <!--<script src='js/calculator.js'></script>-->

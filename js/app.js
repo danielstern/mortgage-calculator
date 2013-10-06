@@ -1,7 +1,34 @@
-define(['angular'] , function (angular) {
+define(['angular','Calculator'] , function (angular, Calculator) {
 
   return angular.module('calculatorApp' , [])
-   .controller('calculatorController', ['$scope', function($scope) {
+   .controller('CalculatorController', ['$scope', function($scope) {
+
+    var calc = new Calculator();
+    console.log("made clalculator",calc);
+
+    $scope.calculatorProperties = {};
+    $scope.cp =  $scope.calculatorProperties;
+    var cp = $scope.calculatorProperties;
+
+    cp.calculatorKind = 'netValueMode'
+    cp.calcname = "Net Value After Calculator";
+    cp.startingValue = 100;
+    cp.finalValue = 120;
+    cp.interestRate = 10;
+    cp.recurringPayment = 0;
+    cp.timeFrame = 10;
+    cp.timeKind = 'yearly';
+    cp.depositFreq = 'monthly';
+    //calc.finalValue = getFinalValue(calc);
+    cp.finalValue = 500;
+
+    /*$scope.$watchCollection($scope.cp, function(thing){
+      console.log('Cp changed.');
+    })*/
+
+    $scope.handleCalcInput = function(thing) {
+      console.log("handle clac input",thing);
+    }
 
        /*
   var changeWatch = calc.$watch('finalValue+interestRate+timeFrame+startingValue+recurringPayment+timeKind+depositFreq+endValueInput+calculatorKind', function (value) {

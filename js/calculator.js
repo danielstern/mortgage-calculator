@@ -1,18 +1,9 @@
-define("Calculator", [''], function () {
+define("Calculator", ['underscore'], function (_) {
+
   return function Calculator() {
 
     var calc = this;
-    calc.calculatorKind = 'netValueMode'
-    calc.calcname = "Net Value After Calculator";
-    calc.startingValue = 100;
-    calc.finalValue = 120;
-    calc.interestRate = 10;
-    calc.recurringPayment = 0;
-    calc.timeFrame = 10;
-    calc.timeKind = 'yearly';
-    calc.depositFreq = 'monthly';
-    //calc.finalValue = getFinalValue(calc);
-    calc.finalValue = 500;
+
 
     calc.numMonths = function () {
       return calc.timeFrame * 12
@@ -74,7 +65,7 @@ define("Calculator", [''], function () {
 
     }
 
-    function getInterestRate() {
+    calc.getInterestRate = function() {
 
       var numMonths = calc.timeFrame;
 
@@ -159,7 +150,7 @@ define("Calculator", [''], function () {
 
     }
 
-    function getNumMonths(calc) {
+    calc.getNumMonths = function() {
 
       //return "?";
 
