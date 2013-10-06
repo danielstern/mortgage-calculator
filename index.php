@@ -16,16 +16,18 @@
 	<container   ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-6'>
+				<div class='col-md-3'>
 
 					<form role='form'  class='well'>
 
-						<h3>{{cp.calcname}}</h3>
-						<div class="form-group">
 							<label>Starting Value
 							</label>
-							<input class="form-control" type="number"ng-model='cp.startingValue' type='text'/>
+						<div class="form-group">
+							<label>{{cp.startingValue}}
+							</label>
+							<input class="form-control span1 col-md-2" type="number"ng-model='cp.startingValue' type='text'/>
 						</div>
+								<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
 
 						<div class="form-group">
 							<label>Recurring Deposit
@@ -40,7 +42,6 @@
 								</label>
 
 							</div>
-<input id='slider1' type="text" class="span2" value="" data-slider-min="-20" data-slider-max="20" data-slider-step="1" data-slider-value="-14" data-slider-orientation="vertical" data-slider-selection="after"data-slider-tooltip="hide">
 
 						</div>
 
