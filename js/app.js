@@ -4,7 +4,7 @@ define(['angular','Calculator'] , function (angular, Calculator) {
    .controller('CalculatorController', ['$scope', function($scope) {
 
     var calc = new Calculator();
-    console.log("made clalculator",calc);
+   // console.log("made clalculator",calc);
 
     $scope.calculatorProperties = {};
     $scope.cp =  $scope.calculatorProperties;
@@ -30,6 +30,7 @@ define(['angular','Calculator'] , function (angular, Calculator) {
 
     $scope.handleCalcInput = function(thing) {
       console.log("Handling calculator input...",thing);
+      var values = calc.calculate(cp);
     }
 
        /*

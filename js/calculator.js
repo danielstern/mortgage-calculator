@@ -4,6 +4,10 @@ define("Calculator", ['underscore'], function (_) {
 
     var calc = this;
 
+    calc.calculate = function(cp) {
+    	console.log('calculating...',cp);
+    }
+
 
     calc.numMonths = function () {
       return calc.timeFrame * 12
