@@ -28,6 +28,35 @@ define(['angular','Calculator','jquery'] , function (angular, Calculator, $) {
       $scope.handleCalcInput(thing);
     })
 
+    $scope.fields = [
+    {
+      name:"Starting Value",
+      key:"startingValue"
+    },
+    {
+      name:"Interest Rate",
+      key:"interestRate",
+     /* radio:[
+      {
+        name:'Annually',
+        value:'annually'
+      },
+      {
+        name:'Monthly',
+        value:'monthly'
+      }]*/
+    },
+    {
+      name:"Timeframe",
+      key:"timeFrame"
+    },
+    {
+      name:"Final Value",
+      key:"finalValue"
+    },
+
+    ]
+
     $scope.handleCalcInput = function(thing) {
       console.log("Handling calculator input...",thing);
       var values = calc.calculate(cp);
@@ -35,12 +64,12 @@ define(['angular','Calculator','jquery'] , function (angular, Calculator, $) {
       
     }
 
-    $('#slider1').slider()
+/*    $('#slider1').slider()
     .on('slide',function(e) {
       console.log(e.value);
       $scope.cp.startingValue = e.value;
       $scope.$apply();
-    });
+    });*/
 
   }])
 });

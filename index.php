@@ -16,18 +16,30 @@
 	<container   ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
-				<div class='col-md-3'>
+				<div class='col-md-4'>
 
 					<form role='form'  class='well'>
 
-							<label>Starting Value
+						<div class="form-group" ng-repeat="field in fields">
+						<label>{{field.name}}</label>
+							<label>{{cp[field.key]}}
 							</label>
+							<input class="form-control span1 col-md-2" type="number"ng-model='cp[field.key]' type='text'/>							
+							<div class='btn-group' data-toggle='buttons' >
+								<label class="btn btn-primary" ng-repeat="option in field.radio">
+									<input type="radio" name="options" value='{{option.value}}' id="option1"> {{option.name}}
+								</label>
+							</div>
+						</div>
+
+						<!--<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">-->
+			<!--				<label>Starting Value
 						<div class="form-group">
+							</label>
 							<label>{{cp.startingValue}}
 							</label>
 							<input class="form-control span1 col-md-2" type="number"ng-model='cp.startingValue' type='text'/>
 						</div>
-								<input id='slider1' type="text" class="" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show">
 
 						<div class="form-group">
 							<label>Recurring Deposit
@@ -73,7 +85,7 @@
 							</label> 
 							{{cp.finalValue | currency}} 
 							<input class="form-control" type="number" ng-model='cp.finalValue' type='text'>
-						</div>
+						</div>-->
 					</form>
 
 
