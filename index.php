@@ -13,13 +13,13 @@
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/slider/css/slider.css"
 	
 </head>
-<body>
-	<container ng-controller='CalculatorController' >
+<body id="body-{{colorScheme}}" ng-controller='CalculatorController'>
+	<container  >
 		<div class='container ng-cloak mainBody'>
 			
 			<div class='row'>
 				<div class='col-md-5'>
-					<table class='table table-bordered'>
+					<table class='table table-bordered white-bg'>
 						<tr ng-repeat="field in fields" ng-class="{'success':field.selected}" >
 							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
 								{{field.name}}

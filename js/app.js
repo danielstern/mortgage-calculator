@@ -45,7 +45,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
       var stats = {};
       stats = _.clone(cp);
-      stats.values = calc.getStatistics().values;
+      stats.values = calc.getStatistics(cp).values;
 
       Chartmaster.barChart(stats.values, "#chart-container-1");
       Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")

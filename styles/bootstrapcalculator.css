@@ -41,9 +41,21 @@ body {
   top: 0; left: 0; bottom: 0; right: 0;
 }
 
+.white-bg {
+	background-color: white;
+}
+
+#body-sith .white-bg {
+	background-color: #ddd;
+}
+
 img {
 	border:none;
 	border:0;
+}
+
+#body-sith {
+	background-color: #333;
 }
 
 textarea:focus, input:focus, .btn:focus{

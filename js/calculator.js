@@ -43,10 +43,12 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       
     }
 
-    calc.getStatistics = function() {
+    calc.getStatistics = function(paramaters) {
 
       var stats = {};
 
+      calc.getFinalValue(paramaters);
+    
       stats.values = calc.getChartValues();
     //  stats.numMonths = calc.values.numMonths;
     //  stats.startingValue = calc.values.startingValue;
