@@ -60,7 +60,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
 		this.donut = function(values, selector) {
 
-			console.log("Donut time",values)
+		//	console.log("Donut time",values)
 
 				var pi = Math.PI;
 
@@ -92,7 +92,7 @@ define("Chartmaster", ['underscore'], function (_) {
         			.total()
         			.value();
 
-        		console.log("allPrevvals...",allPreviousValues,'last value',values[i-1])
+      //  		console.log("allPrevvals...",allPreviousValues,'last value',values[i-1])
         		
         		r.startPercent =  scale(allPreviousValues);
         	}
@@ -102,7 +102,7 @@ define("Chartmaster", ['underscore'], function (_) {
         	r.start = scaleRads(r.startPercent);
         	r.size = scaleRads(r.sizePercent);
 
-        	console.log("Data?",r)
+      //  	console.log("Data?",r)
 
         	return r;
         })

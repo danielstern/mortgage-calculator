@@ -3,7 +3,7 @@ return {	defaults:{
    startingValue:100,
    finalValue:120,
    interestRate:10,
-   numMonths:120,
+   numMonths:60,
    recurringPayment:0,
    depositFreq:'monthly',
    finalValue:500,
@@ -14,12 +14,13 @@ return {	defaults:{
 	  {
 	    name:"Starting Value",
 	    key:"startingValue",
-	    primer:"$"
+	    primer:"$",
+	    step:100
 	  },
 	   {
 	    name:"Monthly Payment",
 	    key:"recurringPayment",
-	    primer:"$"
+	    primer:"$",
 	  },
 	  {
 	    name:"Interest Rate",
@@ -30,7 +31,8 @@ return {	defaults:{
 	  {
 	    name:"Time (Months)",
 	    key:"numMonths",
-	    chaser:' months'
+	    chaser:' months',
+	    step:5
 	  },
 	 /* {
 	    name:"Time (Years)",
@@ -41,6 +43,7 @@ return {	defaults:{
 	    primer:"$",
 	    name:"Final Value",
 	    key:"finalValue",
+	    step:100
 
 	}]
 }

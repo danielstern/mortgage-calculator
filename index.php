@@ -25,7 +25,8 @@
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>					
+								<input type='number' step={{field.step}} ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
+								<!--<input id="intNumber" type="range" min="1" max="20" value="10">		-->
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}
