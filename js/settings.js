@@ -9,6 +9,7 @@ return {	defaults:{
    finalValue:500,
 	},
 	showTimeAs:'years',
+	showRecurring:'show',
 	fields:[
 	  {
 	    name:"Starting Value",

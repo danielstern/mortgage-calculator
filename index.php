@@ -20,7 +20,7 @@
 			<div class='row'>
 				<div class='col-md-5'>
 					<table class='table table-bordered white-bg'>
-						<tr ng-repeat="field in fields" ng-class="{'success':field.selected}" >
+						<tr ng-repeat="field in fields"  ng-class="{'success':field.selected}" ngIf="field.display != 'hide'">
 							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
 								{{field.name}}
 							</td>
@@ -72,6 +72,7 @@
 								</label>
 							</div>
 						</div>
+					
 					</form>
 				</div>
 			</div>

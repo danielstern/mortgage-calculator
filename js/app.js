@@ -6,6 +6,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.cp  = settings.defaults;
     $scope.fields = settings.fields;
     $scope.colorScheme = 'jedi';
+    $scope.showRecurring = settings.showRecurring;
 
     var cp = $scope.cp ;
     var calc = new Calculator();
@@ -32,7 +33,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       stats.values = calc.getStatistics(cp).values;
 
       Chartmaster.barChart(stats.values, "#chart-container-1");
-      Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")
+      Chartmaster.donut([stats.startingValue,stats.finalValue, stats.recurringPayment * stats.numMonths], "#chart-container-2")
     }
 
     $scope.handleRowClick = function(thing) {

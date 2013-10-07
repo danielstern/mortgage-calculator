@@ -106,13 +106,16 @@ textarea:focus, input:focus, .btn:focus{
 }
 
 #settings {
-	height:70px;
+	min-height:70px;
 	overflow:hidden;
 }
 
+.hidden {
+	display:none;
+}
 #settings.open {
-	height:140px;
-	overflow:hidden;
+	height:auto;
+	overflow:none;
 }
 
 #settings .form-group {
