@@ -21,6 +21,7 @@ return {	defaults:{
 	    name:"Monthly Payment",
 	    key:"recurringPayment",
 	    primer:"$",
+	    noCalc:true
 	  },
 	  {
 	    name:"Interest Rate",

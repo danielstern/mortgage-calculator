@@ -38,11 +38,12 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
     $scope.handleRowClick = function(thing) {
 
+      var field = _.find($scope.fields, function(field){return field.key == thing})
+      if (field.noCalc) return;
       _.each($scope.fields,function(field){
         field.selected = false
       })
       
-      var field = _.find($scope.fields, function(field){return field.key == thing})
       field.selected = true;
     }
 
