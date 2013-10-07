@@ -31,6 +31,16 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       
     }
 
+    calc.getStatistics = function() {
+      var stats = {};
+      stats.values = calc.getChartValues();
+      stats.numMonths = calc.values.numMonths;
+      stats.startingValue = calc.values.startingValue;
+      stats.finalValue = calc.values.finalValue;
+
+      return stats;
+    }
+
 
 
     calc.allPfsCalculated = [];
@@ -79,8 +89,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
         calc.allPfsCalculated.push(pf);
 
       }
-      console.log("Pushing...",calc.allPfsCalculated)
-
+      
       return pf.toFixed(2);
 
     }
@@ -205,7 +214,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
     calc.getChartValues = function () {
-      console.log("Returning...",calc.allPfsCalculated)
+     // console.log("Returning...",calc.allPfsCalculated)
       return calc.allPfsCalculated;
     }
 

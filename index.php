@@ -34,15 +34,15 @@
 					</div>
 
 					<div class='col-md-3 '>
-						<div id='chart-box'>
-					<div id='chart-contain'>
-					</div>
+					  <div class='chart-box'>
+							<div id='chart-container-1'>
+				 			</div>
 					</div>
 				</div>
 					
-				<div class='col-md-3 '>
+				<!---<div class='col-md-3 '>
 					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-				</div>
+				</div>-->
 
 			</div>
 		</div>

@@ -22,13 +22,14 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       var key = selectedField.key;
       cp[key] = parseInt(values[key]);
 
-       $scope.updateChart(calc.getChartValues());
+       $scope.updateChart(calc.getStatistics());
 
     }
 
-    $scope.updateChart = function (values) {
-    
-        Chartmaster.barChart(values);
+    $scope.updateChart = function (stats) {
+      console.log("Stats?",stats);
+      var values = stats.values;    
+      Chartmaster.barChart(values, "#chart-container-1");
     
     }
 

@@ -1,39 +1,41 @@
 define("Chartmaster", ['underscore'], function (_) {
 
-
 	function Chartmaster() {
 
+		this.barChart = function(values, selector) {
 
-	this.barChart = function(values) {
-		var dataset = values;
+			d3.select(selector).selectAll("div").remove();
 
+			var minValue = _.min(values);
+			var maxValue = _.max(values);
 
-  d3.select("#chart-contain").selectAll("div").remove();
+			var ratio =  100 / maxValue;
 
-  var minValue = _.min(values);
-  var maxValue = _.max(values);
+			var numValues = values.length;
+			var eachWidth = 200 / numValues;
 
-  var ratio =  100 / maxValue;
-
-
-
-   var numValues = dataset.length;
-   var eachWidth = 100 / numValues;
-  
-		d3.select("#chart-contain")
+			d3.select(selector)
 			.append("div")
-	    .attr("class", "thumb")
-			.selectAll("div")
-	    .data(dataset)
-	    .enter()
-	    .append("div")
-	    .attr("class", "bar")
-	    .style("width", eachWidth + "%")
-	    .style("height", function(d) {
-	        var barHeight = d * ratio;
-	        return barHeight + "%";
-	    });
-}
+			.attr("class", "thumb")
+		//	.selectAll("div")
+			.append("svg")
+			.style('height','100%')
+			.style('width','100%')
+			.selectAll("rect")
+			.data(values)
+			.enter()
+			.append("rect")
+			.attr("x",function(d,i){
+				return i + '%';
+			})
+			.attr("y",function(d){
+				return (100 - (d * ratio)) + '%';
+			})
+		  .attr("width",eachWidth+'%')
+		  .attr("height",function(d){
+		  	return (d * ratio) + '%';
+		  })
+		}
 
 	}
 	return new Chartmaster();
