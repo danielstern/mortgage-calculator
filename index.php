@@ -16,7 +16,7 @@
 <body>
 	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
-		
+			
 			<div class='row'>
 				<div class='col-md-6'>
 					<table class='table table-bordered'>
@@ -32,18 +32,12 @@
 							</td>
 						</tr>
 					</table>
-					</div>
-
-					<div class='col-md-6 '>
-							<div id='chart-container-1' class='inline-block'></div>
-							<div id='chart-container-2' class='inline-block'></div>
-					
 				</div>
-					
-			<!--	<div class='col-md-3 '>
-					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-				</div>-->
 
+				<div class='col-md-6 '>
+					<div id='chart-container-1' class='inline-block'></div>
+					<div id='chart-container-2' class='inline-block'></div>
+				</div>
 			</div>
 		</div>
 	</container>

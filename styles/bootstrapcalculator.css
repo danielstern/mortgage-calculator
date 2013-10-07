@@ -4,11 +4,8 @@ body {
 		
 }
 
-
 .ng-cloak {
-
   display: none;
-
 }
 
 .animate, html * {
@@ -33,7 +30,6 @@ body {
 	width: 75%;
 	text-align: center;
 	opacity: 0;
-	
 }
 
 .frame {

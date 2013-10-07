@@ -2,21 +2,20 @@ require.config({
   paths: {
     jquery: '../lib/jquery/jquery-2.0.3.min',
     underscore: '../lib/underscore/underscore-min',
-    'underscore.string': '../lib/underscore/underscore.string.min',
+    underscore_string: '../lib/underscore/underscore.string.min',
     angular: '../lib/angular/angular.min',
     bootstrap: '../lib/bootstrap/js/bootstrap.min',
     d3: '../lib/d3/d3.min',
-    less: '../lib/less/less-1.3.3.min',
   },
   shim: {
-  	'underscore.string': {
+  	'underscore_string': {
 	    exports: '_.str',
 	  },
 	  'bootstrap': {
 	 	  deps: ['jquery'],
 	  },
 	  'underscore': {
-	  	deps: ['underscore.string'],
+	  	deps: ['underscore_string'],
 	    exports: '_',
 	    init: function(_str) {
 

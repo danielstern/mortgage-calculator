@@ -3,8 +3,9 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
   return angular.module('calculatorApp' , [])
   .controller('CalculatorController', ['$scope', function($scope) {
 
-   $scope.cp  = settings.defaults;
-   var cp = $scope.cp ;
+    $scope.cp  = settings.defaults;
+    $scope.fields = settings.fields;
+    var cp = $scope.cp ;
 
     var calc = new Calculator();
 
@@ -12,7 +13,6 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $scope.handleCalcInput(thing);
     })
 
-    $scope.fields = settings.fields;
 
     $scope.handleCalcInput = function(thing) {
 
@@ -20,28 +20,28 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
       var key = selectedField.key;
-      cp[key] = parseInt(values[key]);
+      cp[key] = Number(values[key]);
 
-       $scope.updateChart(calc.getStatistics());
+      $scope.updateChart(calc.getStatistics());
 
     }
 
     $scope.updateChart = function (stats) {
-  //    console.log("Stats?",stats);
-      var values = stats.values;    
-      Chartmaster.barChart(values, "#chart-container-1");
+
+      Chartmaster.barChart(stats.values, "#chart-container-1");
       Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")
-    
+      
     }
 
-  $scope.handleRowClick = function(thing) {
-    console.log('clicked row', thing);
-    _.each($scope.fields,function(field){field.selected = false})
- 
-    var field = _.find($scope.fields, function(field){return field.key == thing})
-    field.selected = true;
-  }
+    $scope.handleRowClick = function(thing) {
 
-
+      _.each($scope.fields,function(field){
+        field.selected = false
+      })
+      
+      var field = _.find($scope.fields, function(field){return field.key == thing})
+      field.selected = true;
+    }
+    
   }])
 });
