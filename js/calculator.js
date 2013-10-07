@@ -4,26 +4,41 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     var calc = this;
      
-    calc.values = settings.defaults
     calc.targetAccuracy = 0.0001; // increases the accuracy of the compound interest calculator. the higher it is, the higher you must make precision, which affects performance.
     calc.calculatorPrecision = 250; // this is an important value as it determines how often you get the "?"
 
-     var values = calc.values;
+    var values;
 
 
-    calc.calculate = function() {
+    calc.calculate = function(paramaters, directive) {
 
+      //var returnObj = {};
 
-      var returnObj = {};
-    
-      returnObj.interestRate = calc.getInterestRate();
-      returnObj.numMonths = calc.getNumMonths();
-      returnObj.numYears = calc.getNumMonths() / 12;
-      returnObj.startingValue = calc.getStartingValue();
-      returnObj.finalValue = calc.getFinalValue();
+    //  console.log("Got calculation request...",paramaters,directive);
+  
+      var res = undefined;
 
+      switch(directive) {
+        case 'interestRate' :
+          res =  calc.getInterestRate(paramaters);
+          break;
+          
+        case('startingValue') :
+          res = calc.getStartingValue(paramaters);
+          break;
 
-      return returnObj;
+        case('finalValue') :
+          res = calc.getFinalValue(paramaters);
+          break;
+
+        case('numMonths') :
+          res = calc.getNumMonths(paramaters);
+          break;
+        
+      }
+  
+
+      return res;
 
       
     }
@@ -33,9 +48,9 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       var stats = {};
 
       stats.values = calc.getChartValues();
-      stats.numMonths = calc.values.numMonths;
-      stats.startingValue = calc.values.startingValue;
-      stats.finalValue = calc.values.finalValue;
+    //  stats.numMonths = calc.values.numMonths;
+    //  stats.startingValue = calc.values.startingValue;
+    //  stats.finalValue = calc.values.finalValue;
 
       return stats;
     }
@@ -44,7 +59,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     calc.allPfsCalculated = [];
 
-    calc.getFinalValue = function () {
+    calc.getFinalValue = function (values) {
 
       calc.allPfsCalculated = [];
 
@@ -93,7 +108,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     }
 
-     calc.getStartingValue = function () {
+     calc.getStartingValue = function (values) {
 
       calc.allPfsCalculated = [];
 
@@ -139,7 +154,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
 
-    calc.getInterestRate = function() {
+    calc.getInterestRate = function(values) {
 
       var numMonths = values.numMonths;
 
@@ -217,7 +232,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       return calc.allPfsCalculated;
     }
 
-    calc.getNumMonths = function() {
+    calc.getNumMonths = function(values) {
 
       var apf = values.finalValue;
       var p1 = Number(values.startingValue);

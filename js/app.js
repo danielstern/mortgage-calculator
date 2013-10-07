@@ -8,6 +8,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.fields = settings.fields;
 
     var cp = $scope.cp ;
+    $scope.numYears = cp.numMonths / 12;
 
     var calc = new Calculator();
 
@@ -18,25 +19,40 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
 
 
-    $scope.$watchCollection('cp', function(thing){
 
-      $scope.handleCalcInput(thing);
+    $scope.$watchCollection('cp', function(){
+      console.log("Cp changed...",cp);
+      $scope.handleCalcInput();
     })
 
 
-    $scope.handleCalcInput = function(thing) {
+    $scope.handleCalcInput = function() {
 
-      var _calcParams = _.clone(cp);
-      if ($scope.showTimeAs == 'years') _calcParams.numMonths = cp.numYears * 12;
+      var directive = _.find($scope.fields, function(field){return field.selected}).key;
 
-      var values = calc.calculate(cp);
+      var cpClone = _.clone(cp);
+      cpClone.numMonths = $scope.numYears * 12;
+
+      console.log("Calclulating...", cpClone)
+
+      var values = calc.calculate(cpClone,directive);
+
+    //  console.log("Got results...",values);
+    //  return;
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
       var key = selectedField.key;
-      cp[key] = Number(values[key]);
+      if (key != 'numMonths') {
+        cp[key] = Number(values);
+      } else {
+        if ($scope.showTimeAs == 'years') cp['numYears'] = Number(values) / 12;        
+        if ($scope.showTimeAs == 'months') cp['numMonths'] = Number(values);        
+      }
+
+      //if ($scope.showTimeAs != 'years') cp['numYears'] = Number(values);
 
 
-      $scope.updateChart(calc.getStatistics());
+     // $scope.updateChart(calc.getStatistics());
 
     }
 

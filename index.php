@@ -29,7 +29,7 @@
 								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		
 							</span>
 								<span ng-if="field.key == 'numMonths' && showTimeAs == 'months'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		</span>					
-								<span ng-if="field.key == 'numMonths' && showTimeAs == 'years'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp.numYears'/>		</span>					
+								<span ng-if="field.key == 'numMonths' && showTimeAs == 'years'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp["numYears"]'/>		</span>					
 
 							</td>
 							<td class="col-lg-2">
