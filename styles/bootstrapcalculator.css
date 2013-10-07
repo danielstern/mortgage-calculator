@@ -60,6 +60,10 @@ body {
 	transform:rotate(12deg);
 }
 
+.pinned {
+	border:1px solid #ccc;
+}
+
 .chart-container:hover .thumb:not(:hover) {
 	opacity: 0.75;
 }
