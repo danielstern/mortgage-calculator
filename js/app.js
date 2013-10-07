@@ -42,6 +42,10 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       var field = _.find($scope.fields, function(field){return field.key == thing})
       field.selected = true;
     }
+
+    $('.chart-container > *').click(function(e){
+      $(this).find('.thumb').toggleClass('pinned');
+    })
     
   }])
 });

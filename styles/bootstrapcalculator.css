@@ -46,11 +46,16 @@ body {
 	height:100px;
 	background-color:#eee;
 	position: relative;
+	margin:auto;
 }
 
-.thumb:hover {
+.thumb:hover, .thumb.pinned {
 	width:250px;
 	height:250px;
+}
+
+.chart-container:hover .thumb:not(:hover) {
+	opacity: 0.75;
 }
 
 .thumb:hover .chart-title {
@@ -58,6 +63,8 @@ body {
 }
 
 .inline-block {
-	margin: 5px;
-	display:inline-block;
+	margin: auto;
+	position: relative;
+	display: block;
+	/*display:inline-block;*/
 }
