@@ -34,9 +34,9 @@
 					</div>
 
 					<div class='col-md-3 '>
-
-							<div id='chart-container-1'>
-					</div>
+							<div id='chart-container-1' class='shuffler'></div>
+							<div id='chart-container-2' class='shuffler'></div>
+					
 				</div>
 					
 				<div class='col-md-3 '>

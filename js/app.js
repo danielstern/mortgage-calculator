@@ -30,6 +30,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
   //    console.log("Stats?",stats);
       var values = stats.values;    
       Chartmaster.barChart(values, "#chart-container-1");
+      Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")
     
     }
 

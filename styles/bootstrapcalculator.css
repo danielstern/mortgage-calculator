@@ -23,8 +23,8 @@ body {
 }
 
 .thumb {
-	width:125px;
-	height:125px;
+	width:100px;
+	height:100px;
 	background-color:#eee;
 	margin: auto;
 	position: relative;
@@ -58,4 +58,9 @@ body {
 
 .thumb:hover .chart-title {
 	opacity: 1;
+}
+
+.shuffler {
+	margin: 5px;
+/*	display:inline-block;*/
 }
