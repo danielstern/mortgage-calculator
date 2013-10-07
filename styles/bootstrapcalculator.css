@@ -30,6 +30,19 @@ body {
 	position: relative;
 }
 
+
+.chart-title {
+	position: absolute;
+	font-size:1rem;
+	left: 0px;
+	right: 0px;
+	bottom: 2px;
+	margin: auto;
+	width: 75%;
+	text-align: center;
+	opacity: 0;
+	
+}
 .frame {
 	height: 85%;
 	width: 85%;
@@ -43,7 +56,11 @@ body {
 	height:250px;
 }
 
+.thumb:hover .chart-title {
+	opacity: 1;
+}
+
 
 rect:hover {
 	opacity: 0.5;
-};
+}

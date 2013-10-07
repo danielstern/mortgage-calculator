@@ -59,10 +59,10 @@ define("Chartmaster", ['underscore'], function (_) {
 			})
 
 			d3.select(selector)
-				.selectAll("svg")
-				.append("g")
-				.append("rect")
-				.attr("width","100%")
+				.select("div")
+				.append("div").text("Value over Time")
+				.attr("class","chart-title");
+				
 		}
 
 	}
