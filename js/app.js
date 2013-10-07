@@ -27,7 +27,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     }
 
     $scope.updateChart = function (stats) {
-      console.log("Stats?",stats);
+  //    console.log("Stats?",stats);
       var values = stats.values;    
       Chartmaster.barChart(values, "#chart-container-1");
     

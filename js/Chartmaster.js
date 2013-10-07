@@ -12,7 +12,7 @@ define("Chartmaster", ['underscore'], function (_) {
 			var ratio =  100 / maxValue;
 
 			var numValues = values.length;
-			var eachWidth = 200 / numValues;
+			var eachWidth = 192 / numValues;
 
 			d3.select(selector)
 			.append("div")
