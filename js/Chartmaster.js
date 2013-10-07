@@ -57,11 +57,8 @@ define("Chartmaster", ['underscore'], function (_) {
 
 				var pi = Math.PI;
 
-			//	console.log("donut time...",values);
-
-			if ($(selector).find('.thumb').length > 0) return;
-
-				d3.select(selector).selectAll("div").remove();
+				d3.select(selector).selectAll("svg").remove();
+				d3.select(selector).selectAll("text").remove();
 
 				var scaleRads = d3.scale.linear()
 					.domain([0,100])
@@ -71,15 +68,11 @@ define("Chartmaster", ['underscore'], function (_) {
 					.domain([0,_.total(values)])
 					.range([0,100]);
 
-			/*	var data = [
-        {start: 0, size: pi * 0.5, color: "orange"},
-        {start: pi * 0.5, size: 2 * Math.PI - pi * 0.5, color: "blue"},
-        ];*/
 
         var colors = ['orange','green','green','yellow']
 
         var data = _.map(values,function(value,i){
-      //  	console.log("making data...",value,i);
+
         	var r = {};
         	r.color = colors[i];
         	r.startPercent = (i == 0) ? 0 : scale(values[i-1]);
@@ -87,8 +80,6 @@ define("Chartmaster", ['underscore'], function (_) {
 
         	r.start = scaleRads(r.startPercent);
         	r.size = scaleRads(r.sizePercent);
-
-     //   	console.log(r);
 
         	return r;
         })
@@ -100,38 +91,35 @@ define("Chartmaster", ['underscore'], function (_) {
 					  .startAngle(function(d, i){return d.start;})
 					  .endAngle(function(d, i){return d.start + d.size;})
 						;
+				var frame = d3.select(selector)
+					.select(".frame");
 
-				var chart = d3.select(selector)
-						.append("div")
-						.attr("class", "thumb animate")
-						.append("div")
-						.attr("class", "frame animate")
-						.append("svg:svg")
-						.attr("preserveAspectRatio","xMinYMin meet")
-						.attr("viewBox","0,0,100,100")
+				var chart = frame
+					.append("svg:svg")
+					.attr("preserveAspectRatio","xMinYMin meet")
+					.attr("viewBox","0,0,100,100")
 
-						.attr("class", "chart")
-						.attr("width", "100%")
-						.attr("height", "100%").append("svg:g")
-						.attr("transform", "translate(50,50)")
-						;
+					.attr("class", "chart")
+					.attr("width", "100%")
+					.attr("height", "100%").append("svg:g")
+					.attr("transform", "translate(50,50)")
 
 				chart.selectAll("path")
-						.data(data)
-						.enter().append("svg:path")
-						.style("fill", function(d, i){
-							return d.color;
-						})
-						.attr("d", arc)
-						.attr("class","blockV rotate-hover")
-						;
+					.data(data)
+					.enter().append("svg:path")
+					.style("fill", function(d, i){
+						return d.color;
+					})
+					.attr("d", arc)
+					.attr("class","blockV rotate-hover");
 
+			var outer = d3.select(selector)
+					.select(".thumb");
 
-
-			d3.select(selector)
-				.select("div")
-				.append("div").text("Initial vs Final Value")
-				.attr("class","chart-title");
+		  outer
+				.append("text")
+				.text("Initial vs Final Value")
+				.attr("class","chart-title")
 		}
 	}
 	return new Chartmaster();

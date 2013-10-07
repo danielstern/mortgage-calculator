@@ -37,10 +37,15 @@
 				<div class='col-md-3'>
 				<div class='chart-container'>
 						<div id='chart-container-1' class='inline-block'></div>
-						<div id='chart-container-2' class='inline-block'></div>
+							<div id='chart-container-2' class='inline-block'>
+				 			<div class='thumb'>
+							 <div class='frame'>
+							</div>
+						</div>
+					</div>
+					</div>
 				</div>
 				</div>
-			</div>
 
 		</div>
 	</container>
