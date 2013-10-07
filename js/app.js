@@ -6,26 +6,35 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.cp  = settings.defaults;
     $scope.showTimeAs = settings.showTimeAs;
     $scope.fields = settings.fields;
+
     var cp = $scope.cp ;
 
     var calc = new Calculator();
 
+
     $scope.$watch('showTimeAs',function(thing){
-      console.log("Changed showtimeas...",thing)
+      console.log("Changed showtimeas...",thing);     
     })
 
+
+
     $scope.$watchCollection('cp', function(thing){
+
       $scope.handleCalcInput(thing);
     })
 
 
     $scope.handleCalcInput = function(thing) {
 
+      var _calcParams = _.clone(cp);
+      if ($scope.showTimeAs == 'years') _calcParams.numMonths = cp.numYears * 12;
+
       var values = calc.calculate(cp);
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
       var key = selectedField.key;
       cp[key] = Number(values[key]);
+
 
       $scope.updateChart(calc.getStatistics());
 

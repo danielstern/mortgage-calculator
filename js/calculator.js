@@ -11,17 +11,14 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
      var values = calc.values;
 
 
-    calc.calculate = function(cp) {
-   
-      var differences = _.whatsChanged(values,cp);
-      var key = _(differences).chain().keys().first().value();
-    
-      _.extend(values, differences);
+    calc.calculate = function() {
+
 
       var returnObj = {};
     
       returnObj.interestRate = calc.getInterestRate();
       returnObj.numMonths = calc.getNumMonths();
+      returnObj.numYears = calc.getNumMonths() / 12;
       returnObj.startingValue = calc.getStartingValue();
       returnObj.finalValue = calc.getFinalValue();
 
@@ -32,7 +29,9 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
     calc.getStatistics = function() {
+
       var stats = {};
+
       stats.values = calc.getChartValues();
       stats.numMonths = calc.values.numMonths;
       stats.startingValue = calc.values.startingValue;

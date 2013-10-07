@@ -25,7 +25,12 @@
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>							
+								<span ng-if="field.key != 'numMonths'">
+								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		
+							</span>
+								<span ng-if="field.key == 'numMonths' && showTimeAs == 'months'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		</span>					
+								<span ng-if="field.key == 'numMonths' && showTimeAs == 'years'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp.numYears'/>		</span>					
+
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}

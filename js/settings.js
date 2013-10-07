@@ -5,6 +5,7 @@ return {	defaults:{
    interestRate:10,
    recurringPayment:0,
    numMonths:120,
+   numYears:10,
    depositFreq:'monthly',
    finalValue:500,
 	},
