@@ -50,6 +50,18 @@
 					</div>
 					</div>
 				</div>
+				<div class='col-md-3'>
+					<form class='well'>
+						<div class="btn-group" data-toggle="buttons" id='controls'>
+					  <label class="btn btn-primary active">
+					    <input type="radio" name="options" checked data-toggle='active' id="option1"> Monthly
+					  </label>
+					  <label class="btn btn-primary">
+					    <input type="radio" name="options" id="option2"> Yearly
+					  </label>
+					</div>
+					</form>
+				</div>
 				</div>
 
 		</div>
