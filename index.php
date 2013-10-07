@@ -17,7 +17,6 @@
 		<div class='container ng-cloak mainBody'>
 			<div class='row'>
 				<div class='col-md-6'>
-					<h4>Financial Calculator</h4>
 					<table class='table table-bordered'>
 						<tr ng-repeat="field in fields" ng-class="{'success':field.selected}" >
 							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
@@ -34,15 +33,14 @@
 					</div>
 
 					<div class='col-md-3 '>
-					  <div class='chart-box'>
+
 							<div id='chart-container-1'>
-				 			</div>
 					</div>
 				</div>
 					
-				<!---<div class='col-md-3 '>
+				<div class='col-md-3 '>
 					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-				</div>-->
+				</div>
 
 			</div>
 		</div>

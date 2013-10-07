@@ -16,11 +16,9 @@ define("Chartmaster", ['underscore'], function (_) {
 
 			d3.select(selector)
 			.append("div")
-			.attr("class", "thumb")
-		//	.selectAll("div")
+			.attr("class", "thumb animate")
 			.append("svg")
-			.style('height','100%')
-			.style('width','100%')
+			.attr("class","blockV")
 			.selectAll("rect")
 			.data(values)
 			.enter()
@@ -35,6 +33,10 @@ define("Chartmaster", ['underscore'], function (_) {
 		  .attr("height",function(d){
 		  	return (d * ratio) + '%';
 		  })
+		  .attr("fill", function(d) {
+		  	
+			    return "rgb(25, 12, " + Math.floor(String(Number(d) * Number(ratio))) + ")";
+			})
 		}
 
 	}
