@@ -4,7 +4,8 @@ define("Chartmaster", ['underscore'], function (_) {
 
 		this.barChart = function(values, selector) {
 
-			d3.select(selector).selectAll("div").remove();
+			d3.select(selector).selectAll("svg").remove();
+			d3.select(selector).selectAll("text").remove();
 			var numValues = values.length;
 
 			
@@ -17,11 +18,10 @@ define("Chartmaster", ['underscore'], function (_) {
 
 			var eachWidth = (100 / numValues) + .2;
 
-			d3.select(selector)
-			.append("div")
-			.attr("class", "thumb animate")
-			.append("div")
-			.attr("class", "frame animate")
+				var frame = d3.select(selector)
+					.select(".frame");
+
+			frame
 			.append("svg")
 			
 			.attr("preserveAspectRatio","xMinYMin meet")
@@ -47,9 +47,12 @@ define("Chartmaster", ['underscore'], function (_) {
 			})
 
 
-			d3.select(selector)
-				.select("div")
-				.append("div").text("Value over Time")
+
+			var outer = d3.select(selector)
+					.select(".thumb");
+		  outer
+				.append("text")
+				.text("Value over Time")
 				.attr("class","chart-title");
 		}
 
