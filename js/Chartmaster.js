@@ -24,7 +24,8 @@ define("Chartmaster", ['underscore'], function (_) {
 			.enter()
 			.append("rect")
 			.attr("x",function(d,i){
-				return i + '%';
+				var x = 100 / numValues;
+				return (i * x) + '%';
 			})
 			.attr("y",function(d){
 				return (100 - (d * ratio)) + '%';
@@ -34,7 +35,7 @@ define("Chartmaster", ['underscore'], function (_) {
 		  	return (d * ratio) + '%';
 		  })
 		  .attr("fill", function(d) {
-		  	
+
 			    return "rgb(25, 12, " + Math.floor(String(Number(d) * Number(ratio))) + ")";
 			})
 		}
