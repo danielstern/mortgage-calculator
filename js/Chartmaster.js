@@ -17,10 +17,10 @@ define("Chartmaster", ['underscore'], function (_) {
 				.domain([_.min(values),_.max(values)])
 				.range([0,100]);
 
-
+/*
 			var xScale = d3.scale.linear()
           .domain([0, numValues])
-          .range([0, 100]);
+          .range([0, 125]);
 
 
 			//var xAvixScale = d3.scale.linear()
@@ -28,11 +28,14 @@ define("Chartmaster", ['underscore'], function (_) {
 										.scale(xScale)
 										.orient('bottom')
 
+*/
 			var eachWidth = 192 / numValues;
 
 			d3.select(selector)
 			.append("div")
 			.attr("class", "thumb animate")
+			.append("div")
+			.attr("class", "frame animate")
 			.append("svg")
 			.attr("class","blockV")
 			.selectAll("rect")
@@ -58,7 +61,8 @@ define("Chartmaster", ['underscore'], function (_) {
 			d3.select(selector)
 				.selectAll("svg")
 				.append("g")
-				.call(xAxis);
+				.append("rect")
+				.attr("width","100%")
 		}
 
 	}

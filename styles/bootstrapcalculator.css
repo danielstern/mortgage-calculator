@@ -26,6 +26,16 @@ body {
 	width:125px;
 	height:125px;
 	background-color:#eee;
+	position: relative;
+}
+
+.frame {
+	height: 85%;
+	width: 85%;
+	background-color: #eaeaea;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 .thumb:hover {
 	width:250px;
