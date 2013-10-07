@@ -25,9 +25,7 @@
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-
 								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>					
-
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}
@@ -59,20 +57,9 @@
 						<div id='toggle-settings'>
 							<button class='btn btn-large btn-default'>
 						<span class='glyphicon glyphicon-wrench rotate90'></span>
+						<span class='glyphicon glyphicon-cog rotate180'></span>
 					</button>
 					</div>
-						<!--<div class='form-group '>
-							<div class='radio'>
-								<label>
-									<input type="radio" ng-model="showTimeAs" value='months' name="options" checked data-toggle='active' id="option1">Show Time In Months
-								</label>
-							</div>
-							<div class='radio'>
-								<label>
-									<input type="radio" ng-model="showTimeAs" value='years' name="options" id="option2"> Show Time In Years
-								</label>
-							</div>
-						</div>-->
 							<div class='form-group '>
 							<div class='radio'>
 								<label>

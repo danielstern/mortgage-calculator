@@ -95,8 +95,20 @@ textarea:focus, input:focus, .btn:focus{
 
 #settings.open .rotate90 {
 	-webkit-transform:rotate(90deg);
-	-moz-transform:rotate(90deg);
-	transform:rotate(90deg);
+
+}
+
+#settings.open .rotate360 {
+	-webkit-transform:rotate(360deg);
+
+
+}
+
+#settings.open .rotate180 {
+	-webkit-transform:rotate(-180deg);
+
+	
+	-webkit-transform-origin: 50% 54%;
 
 }
 

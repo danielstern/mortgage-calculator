@@ -13,22 +13,14 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
     var calc = new Calculator();
 
-
     $scope.$watchCollection('cp', function(){
-
       $scope.handleCalcInput();
     })
 
 
     $scope.handleCalcInput = function() {
-
       var directive = _.find($scope.fields, function(field){return field.selected}).key;
-
-      var cpClone = _.clone(cp);
-
- 
-
-      var values = calc.calculate(cpClone,directive);
+      var values = calc.calculate(_.clone(cp),directive);
 
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
