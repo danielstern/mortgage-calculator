@@ -8,6 +8,8 @@ define("Chartmaster", ['underscore'], function (_) {
 			d3.select(selector).selectAll("text").remove();
 			var numValues = values.length;
 
+
+
 			
 			var minValue = _.min(values);
 			var maxValue = _.max(values);
@@ -58,6 +60,8 @@ define("Chartmaster", ['underscore'], function (_) {
 
 		this.donut = function(values, selector) {
 
+			console.log("Donut time",values)
+
 				var pi = Math.PI;
 
 				d3.select(selector).selectAll("svg").remove();
@@ -72,17 +76,33 @@ define("Chartmaster", ['underscore'], function (_) {
 					.range([0,100]);
 
 
-        var colors = ['orange','green','green','yellow']
+        var colors = ['orange','green','blue','yellow']
 
         var data = _.map(values,function(value,i){
-
+       
         	var r = {};
         	r.color = colors[i];
-        	r.startPercent = (i == 0) ? 0 : scale(values[i-1]);
-        	r.sizePercent = scale(value);
+        	if (i == 0) {
+        		r.startPercent = 0;	
+        	}
+        	else{
+        		//r.startPercent =  scale(values[i-1]);
+        		var allPreviousValues = _.chain(values)
+        			.first(i)
+        			.total()
+        			.value();
 
+        		console.log("allPrevvals...",allPreviousValues,'last value',values[i-1])
+        		
+        		r.startPercent =  scale(allPreviousValues);
+        	}
+        	
+
+        	r.sizePercent = scale(value);
         	r.start = scaleRads(r.startPercent);
         	r.size = scaleRads(r.sizePercent);
+
+        	console.log("Data?",r)
 
         	return r;
         })
