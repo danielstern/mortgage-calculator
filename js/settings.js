@@ -8,6 +8,7 @@ return {	defaults:{
    depositFreq:'monthly',
    finalValue:500,
 	},
+	showTimeAs:'years',
 	fields:[
 	  {
 	    name:"Starting Value",
@@ -23,7 +24,6 @@ return {	defaults:{
 	  {
 	    name:"Time",
 	    key:"numMonths",
-	    chaser:" months"
 	  },
 	  {
 	    primer:"$",

@@ -4,10 +4,15 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
   .controller('CalculatorController', ['$scope', function($scope) {
 
     $scope.cp  = settings.defaults;
+    $scope.showTimeAs = settings.showTimeAs;
     $scope.fields = settings.fields;
     var cp = $scope.cp ;
 
     var calc = new Calculator();
+
+    $scope.$watch('showTimeAs',function(thing){
+      console.log("Changed showtimeas...",thing)
+    })
 
     $scope.$watchCollection('cp', function(thing){
       $scope.handleCalcInput(thing);
@@ -47,7 +52,9 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $(this).find('.thumb').toggleClass('pinned');
     })
 
-    $('[checked]').button('toggle');
+    console.log('showtime...',$scope.showTimeAs)
+
     
   }])
+
 });
