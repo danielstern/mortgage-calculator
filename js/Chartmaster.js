@@ -23,7 +23,7 @@ define("Chartmaster", ['underscore'], function (_) {
 			.append("div")
 			.attr("class", "frame animate")
 			.append("svg")
-			.attr("class","blockV")
+			
 			.attr("preserveAspectRatio","xMinYMin meet")
 			.attr("viewBox","0,0,100,100")
 			.selectAll("rect")
@@ -57,7 +57,9 @@ define("Chartmaster", ['underscore'], function (_) {
 
 				var pi = Math.PI;
 
-			//	console.log("donut time...",values)
+			//	console.log("donut time...",values);
+
+			if ($(selector).find('.thumb').length > 0) return;
 
 				d3.select(selector).selectAll("div").remove();
 
@@ -105,9 +107,8 @@ define("Chartmaster", ['underscore'], function (_) {
 						.append("div")
 						.attr("class", "frame animate")
 						.append("svg:svg")
-								.attr("class","blockV")
-					.attr("preserveAspectRatio","xMinYMin meet")
-					.attr("viewBox","0,0,100,100")
+						.attr("preserveAspectRatio","xMinYMin meet")
+						.attr("viewBox","0,0,100,100")
 
 						.attr("class", "chart")
 						.attr("width", "100%")
@@ -122,6 +123,7 @@ define("Chartmaster", ['underscore'], function (_) {
 							return d.color;
 						})
 						.attr("d", arc)
+						.attr("class","blockV rotate-hover")
 						;
 
 

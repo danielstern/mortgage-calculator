@@ -54,6 +54,12 @@ body {
 	height:250px;
 }
 
+.thumb:hover .rotate-hover {
+	-webkit-transform:rotate(12deg);
+	-moz-transform:rotate(12deg);
+	transform:rotate(12deg);
+}
+
 .chart-container:hover .thumb:not(:hover) {
 	opacity: 0.75;
 }
