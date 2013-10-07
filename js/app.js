@@ -52,7 +52,11 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $(this).find('.thumb').toggleClass('pinned');
     })
 
-    console.log('showtime...',$scope.showTimeAs)
+    $('#toggle-settings').click(function(e){
+      $('#settings').toggleClass('open');
+    });
+
+   // console.log('showtime...',$scope.showTimeAs)
 
     
   }])

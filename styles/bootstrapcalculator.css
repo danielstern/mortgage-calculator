@@ -41,6 +41,15 @@ body {
   top: 0; left: 0; bottom: 0; right: 0;
 }
 
+img {
+	border:none;
+	border:0;
+}
+
+textarea:focus, input:focus, .btn:focus{
+    outline: 0 !important;
+}
+
 .thumb {
 	width:100px;
 	height:100px;
@@ -69,6 +78,33 @@ body {
 }
 
 .thumb:hover .chart-title {
+	opacity: 1;
+}
+
+#settings.open .rotate90 {
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	transform:rotate(90deg);
+
+}
+
+#settings {
+	height:70px;
+	overflow:hidden;
+}
+
+#settings.open {
+	height:140px;
+	overflow:hidden;
+}
+
+#settings .form-group {
+	display: none;
+	opacity: 0;
+}
+
+#settings.open .form-group {
+	display: block;
 	opacity: 1;
 }
 
