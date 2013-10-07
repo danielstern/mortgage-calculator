@@ -1,7 +1,5 @@
 body {
-
   padding-top: 5em;
-		
 }
 
 .ng-cloak {
@@ -100,16 +98,11 @@ textarea:focus, input:focus, .btn:focus{
 
 #settings.open .rotate360 {
 	-webkit-transform:rotate(360deg);
-
-
 }
 
 #settings.open .rotate180 {
-	-webkit-transform:rotate(-180deg);
-
-	
+	-webkit-transform:rotate(-180deg);	
 	-webkit-transform-origin: 50% 54%;
-
 }
 
 #settings {

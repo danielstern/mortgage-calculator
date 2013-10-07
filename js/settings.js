@@ -3,8 +3,8 @@ return {	defaults:{
    startingValue:100,
    finalValue:120,
    interestRate:10,
-   recurringPayment:0,
    numMonths:120,
+   recurringPayment:0,
    depositFreq:'monthly',
    finalValue:500,
 	},
@@ -13,6 +13,11 @@ return {	defaults:{
 	  {
 	    name:"Starting Value",
 	    key:"startingValue",
+	    primer:"$"
+	  },
+	   {
+	    name:"Monthly Payment",
+	    key:"recurringPayment",
 	    primer:"$"
 	  },
 	  {

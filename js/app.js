@@ -4,13 +4,10 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
   .controller('CalculatorController', ['$scope', function($scope) {
 
     $scope.cp  = settings.defaults;
-    $scope.showTimeAs = settings.showTimeAs;
     $scope.fields = settings.fields;
     $scope.colorScheme = 'jedi';
 
     var cp = $scope.cp ;
-    $scope.numYears = cp.numMonths / 12;
-
     var calc = new Calculator();
 
     $scope.$watchCollection('cp', function(){
@@ -19,21 +16,16 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
 
     $scope.handleCalcInput = function() {
-      var directive = _.find($scope.fields, function(field){return field.selected}).key;
-      var values = calc.calculate(_.clone(cp),directive);
-
-
-      var selectedField = _.find($scope.fields, function(field){return field.selected})
+      var selectedField = _.find($scope.fields, function(field){return field.selected});
       var key = selectedField.key;
+      var directive = key;
+      var value = calc.calculate(_.clone(cp),directive);
 
-        cp[key] = Number(values);
-
-
+      cp[key] = Number(value);
       $scope.updateChart();
-
     }
 
-    $scope.updateChart = function (stats) {
+    $scope.updateChart = function () {
 
       var stats = {};
       stats = _.clone(cp);
@@ -41,7 +33,6 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
 
       Chartmaster.barChart(stats.values, "#chart-container-1");
       Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")
-      
     }
 
     $scope.handleRowClick = function(thing) {
@@ -61,8 +52,6 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $('#toggle-settings').click(function(e){
       $('#settings').toggleClass('open');
     });
-
-   // console.log('showtime...',$scope.showTimeAs)
 
     
   }])

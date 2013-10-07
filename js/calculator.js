@@ -11,10 +11,6 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
 
     calc.calculate = function(paramaters, directive) {
-
-      //var returnObj = {};
-
-    //  console.log("Got calculation request...",paramaters,directive);
   
       var res = undefined;
 
@@ -37,7 +33,6 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
         
       }
   
-
       return res;
 
       
@@ -46,15 +41,10 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     calc.getStatistics = function(paramaters) {
 
       var stats = {};
-
       calc.getFinalValue(paramaters);
-    
       stats.values = calc.getChartValues();
-    //  stats.numMonths = calc.values.numMonths;
-    //  stats.startingValue = calc.values.startingValue;
-    //  stats.finalValue = calc.values.finalValue;
-
       return stats;
+
     }
 
 
@@ -222,7 +212,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       }
 
       i = ((guessI - 1) * 12) * 100;
-      //	console.log("How many guesses did it take?: " + count);
+
       if(precision > 10 || isNaN(precision || count >= calc.calculatorPrecision)) return "?"
       $('#interestError').html('');
       return i.toFixed(3);
@@ -230,7 +220,6 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
     calc.getChartValues = function () {
-     // console.log("Returning...",calc.allPfsCalculated)
       return calc.allPfsCalculated;
     }
 
