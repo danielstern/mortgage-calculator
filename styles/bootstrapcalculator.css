@@ -59,8 +59,3 @@ body {
 .thumb:hover .chart-title {
 	opacity: 1;
 }
-
-
-rect:hover {
-	opacity: 0.5;
-}
