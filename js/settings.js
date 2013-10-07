@@ -17,7 +17,8 @@ return {	defaults:{
 	  {
 	    name:"Interest Rate",
 	    key:"interestRate",
-	    chaser:"%"
+	    chaser:"%",
+	    selected:"true"
 	  },
 	  {
 	    name:"Time",
@@ -28,7 +29,7 @@ return {	defaults:{
 	    primer:"$",
 	    name:"Final Value",
 	    key:"finalValue",
-	    selected:"true"
+
 	}]
 }
 })

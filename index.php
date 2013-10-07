@@ -39,9 +39,9 @@
 					
 				</div>
 					
-				<div class='col-md-3 '>
+			<!--	<div class='col-md-3 '>
 					<img src='../misc/teacher2.jpg' class="img-thumbnail" width='auto' height='auto'>
-				</div>
+				</div>-->
 
 			</div>
 		</div>

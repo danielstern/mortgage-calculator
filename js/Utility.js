@@ -7,6 +7,9 @@ define("Utility", ['underscore'], function (_) {
       })
 
       return returnObj;
+    },
+    total: function(values) {
+    	return _.reduce(values,function(memo,num){return memo+num})
     }
   })
 });

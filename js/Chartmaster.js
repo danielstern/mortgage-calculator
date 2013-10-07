@@ -15,7 +15,7 @@ define("Chartmaster", ['underscore'], function (_) {
 				.domain([_.min(values),_.max(values)])
 				.range([0,100]);
 
-			var eachWidth = 192 / numValues;
+			var eachWidth = (100 / numValues) + .2;
 
 			d3.select(selector)
 			.append("div")
@@ -24,24 +24,26 @@ define("Chartmaster", ['underscore'], function (_) {
 			.attr("class", "frame animate")
 			.append("svg")
 			.attr("class","blockV")
+			.attr("preserveAspectRatio","xMinYMin meet")
+			.attr("viewBox","0,0,100,100")
 			.selectAll("rect")
 			.data(values)
 			.enter()
 			.append("rect")
 			.attr("x",function(d,i){
 				var x = 100 / numValues;
-				return (i * x) + '%';
+				return (i * x);
 			})
 			.attr("y",function(d){
-				return (100 - scale(d)) + '%';
+				return (100 - scale(d));
 			})
-		  .attr("width",eachWidth+'%')
+		  .attr("width",eachWidth)
 		  .attr("height",function(d){
-		  	return scale(d) + '%';
+		  	return scale(d);
 		  })
 		  .attr("fill", function(d) {
 
-			    return "rgb(100, 100, " + (100 + Math.floor(scale(d))) + ")";
+			    return "rgb(0, 0, 255)";
 			})
 
 
@@ -53,63 +55,81 @@ define("Chartmaster", ['underscore'], function (_) {
 
 		this.donut = function(values, selector) {
 
+				var pi = Math.PI;
+
+				console.log("donut time...",values)
+
 				d3.select(selector).selectAll("div").remove();
 
-		var color = d3.scale.ordinal()
-		    .range(["#98abc5", "#ff8c00"]);
+				var scaleRads = d3.scale.linear()
+					.domain([0,100])
+					.range([0,2 * Math.PI]);
 
-		    var configObject = {};
-		    configObject.radius = 50;
+				var scale = d3.scale.linear()
+					.domain([0,_.total(values)])
+					.range([0,100]);
 
-		    window.configObject = configObject;
+			/*	var data = [
+        {start: 0, size: pi * 0.5, color: "orange"},
+        {start: pi * 0.5, size: 2 * Math.PI - pi * 0.5, color: "blue"},
+        ];*/
 
-		var arc = d3.svg.arc()
-		    .outerRadius(configObject.radius)
-		    .innerRadius(configObject.radius - 10);
+        var colors = ['orange','green','green','yellow']
 
-		var pie = d3.layout.pie()
-		    .sort(null)
-		    .value(function(d) { return d });
+        var data = _.map(values,function(value,i){
+        	console.log("making data...",value,i);
+        	var r = {};
+        	r.color = colors[i];
+        	r.startPercent = (i == 0) ? 0 : scale(values[i-1]);
+        	r.sizePercent = scale(value);
 
-			console.log("donut time...",values)
+        	r.start = scaleRads(r.startPercent);
+        	r.size = scaleRads(r.sizePercent);
 
-			var svg = d3.select(selector)
-				.append("div")
-				.attr("class", "thumb animate")
-				.append("div")
-				.attr("class", "frame animate")
-				.append("svg")
-				.attr("class","blockV")
-				.attr("preserveAspectRatio","xMinYMin meet")
-				.attr("viewBox","0,0,100,100")
+        	console.log(r);
 
-
-
-
-		  values.forEach(function(d) {
-		    d = +d;
-		  });
-
-		  var g = svg.selectAll(".arc")
-		      .data(pie(values))
-		   	  .enter().append("g")
-		      .attr("class", "arc")
-		      .style("width","25")
-
-		  g.append("path")
-		      .attr("d", arc)
-		      .style("fill", function(d) { return color(d); });
+        	return r;
+        })
 
 
+				var arc = d3.svg.arc()
+						.innerRadius(20)
+						.outerRadius(45)
+					  .startAngle(function(d, i){return d.start;})
+					  .endAngle(function(d, i){return d.start + d.size;})
+						;
 
-			
-			
-		/*	d3.select(selector).selectAll("div").remove();
+				var chart = d3.select(selector)
+						.append("div")
+						.attr("class", "thumb animate")
+						.append("div")
+						.attr("class", "frame animate")
+						.append("svg:svg")
+								.attr("class","blockV")
+					.attr("preserveAspectRatio","xMinYMin meet")
+					.attr("viewBox","0,0,100,100")
+
+						.attr("class", "chart")
+						.attr("width", "100%")
+						.attr("height", "100%").append("svg:g")
+						.attr("transform", "translate(50,50)")
+						;
+
+				chart.selectAll("path")
+						.data(data)
+						.enter().append("svg:path")
+						.style("fill", function(d, i){
+							return d.color;
+						})
+						.attr("d", arc)
+						;
+
+
 
 			d3.select(selector)
 				.select("div")
-				.append("div").text("Initial Investment vs Final Payoff")
-				.attr("class","chart-title");*/
+				.append("div").text("Initial vs Final Value")
+				.attr("class","chart-title");
 		}
 	}
 	return new Chartmaster();
