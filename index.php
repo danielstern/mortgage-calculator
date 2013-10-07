@@ -18,7 +18,7 @@
 		<div class='container ng-cloak mainBody'>
 			
 			<div class='row'>
-				<div class='col-md-6'>
+				<div class='col-md-5'>
 					<table class='table table-bordered'>
 						<tr ng-repeat="field in fields" ng-class="{'success':field.selected}" >
 							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
@@ -52,14 +52,28 @@
 				</div>
 				<div class='col-md-3'>
 					<form class='well'>
+						<div class='form-group'>
+						<div>Compound Interest</div>
 						<div class="btn-group" data-toggle="buttons" id='controls'>
-					  <label class="btn btn-primary active">
+					  <label class="btn btn-default active">
 					    <input type="radio" name="options" checked data-toggle='active' id="option1"> Monthly
 					  </label>
-					  <label class="btn btn-primary">
+					  <label class="btn btn-default">
 					    <input type="radio" name="options" id="option2"> Yearly
 					  </label>
 					</div>
+				</div>
+			<div class='form-group'>
+					<div>Show Time In</div>
+					<div class="btn-group" data-toggle="buttons" id='controls'>
+					  <label class="btn btn-default active">
+					    <input type="radio" name="options" checked data-toggle='active' id="option1"> Months
+					  </label>
+					  <label class="btn btn-default">
+					    <input type="radio" name="options" id="option2"> Years
+					  </label>
+					</div>
+				</div>
 					</form>
 				</div>
 				</div>
