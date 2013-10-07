@@ -29,7 +29,7 @@ define("Chartmaster", ['underscore'], function (_) {
 										.orient('bottom')
 
 */
-			var eachWidth = 192 / numValues;
+			var eachWidth = 100 / numValues;
 
 			d3.select(selector)
 			.append("div")

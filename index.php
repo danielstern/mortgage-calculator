@@ -15,6 +15,7 @@
 <body>
 	<container ng-controller='CalculatorController' >
 		<div class='container ng-cloak mainBody'>
+		
 			<div class='row'>
 				<div class='col-md-6'>
 					<table class='table table-bordered'>
