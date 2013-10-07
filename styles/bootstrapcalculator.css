@@ -22,14 +22,6 @@ body {
 	height: 100%;
 }
 
-.thumb {
-	width:100px;
-	height:100px;
-	background-color:#eee;
-	margin: auto;
-	position: relative;
-}
-
 
 .chart-title {
 	position: absolute;
@@ -43,14 +35,23 @@ body {
 	opacity: 0;
 	
 }
+
 .frame {
 	height: 85%;
 	width: 85%;
-	background-color: #eaeaea;
+	background-color: #fefefe;
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
+
+.thumb {
+	width:100px;
+	height:100px;
+	background-color:#eee;
+	position: relative;
+}
+
 .thumb:hover {
 	width:250px;
 	height:250px;
@@ -60,7 +61,7 @@ body {
 	opacity: 1;
 }
 
-.shuffler {
+.inline-block {
 	margin: 5px;
-/*	display:inline-block;*/
+	display:inline-block;
 }

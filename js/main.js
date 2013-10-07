@@ -6,6 +6,7 @@ require.config({
     angular: '../lib/angular/angular.min',
     bootstrap: '../lib/bootstrap/js/bootstrap.min',
     d3: '../lib/d3/d3.min',
+    less: '../lib/less/less-1.3.3.min',
   },
   shim: {
   	'underscore.string': {

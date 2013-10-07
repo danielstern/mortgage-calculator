@@ -57,7 +57,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
 				var pi = Math.PI;
 
-				console.log("donut time...",values)
+			//	console.log("donut time...",values)
 
 				d3.select(selector).selectAll("div").remove();
 
@@ -77,7 +77,7 @@ define("Chartmaster", ['underscore'], function (_) {
         var colors = ['orange','green','green','yellow']
 
         var data = _.map(values,function(value,i){
-        	console.log("making data...",value,i);
+      //  	console.log("making data...",value,i);
         	var r = {};
         	r.color = colors[i];
         	r.startPercent = (i == 0) ? 0 : scale(values[i-1]);
@@ -86,7 +86,7 @@ define("Chartmaster", ['underscore'], function (_) {
         	r.start = scaleRads(r.startPercent);
         	r.size = scaleRads(r.sizePercent);
 
-        	console.log(r);
+     //   	console.log(r);
 
         	return r;
         })
