@@ -2,16 +2,32 @@ define("Chartmaster", ['underscore'], function (_) {
 
 	function Chartmaster() {
 
+
+
 		this.barChart = function(values, selector) {
 
 			d3.select(selector).selectAll("div").remove();
+			var numValues = values.length;
 
+			
 			var minValue = _.min(values);
 			var maxValue = _.max(values);
 
-			var ratio =  100 / maxValue;
+			var scale = d3.scale.linear()
+				.domain([_.min(values),_.max(values)])
+				.range([0,100]);
 
-			var numValues = values.length;
+
+			var xScale = d3.scale.linear()
+          .domain([0, numValues])
+          .range([0, 100]);
+
+
+			//var xAvixScale = d3.scale.linear()
+			var xAxis = d3.svg.axis()
+										.scale(xScale)
+										.orient('bottom')
+
 			var eachWidth = 192 / numValues;
 
 			d3.select(selector)
@@ -28,16 +44,21 @@ define("Chartmaster", ['underscore'], function (_) {
 				return (i * x) + '%';
 			})
 			.attr("y",function(d){
-				return (100 - (d * ratio)) + '%';
+				return (100 - scale(d)) + '%';
 			})
 		  .attr("width",eachWidth+'%')
 		  .attr("height",function(d){
-		  	return (d * ratio) + '%';
+		  	return scale(d) + '%';
 		  })
 		  .attr("fill", function(d) {
 
-			    return "rgb(25, 12, " + Math.floor(String(Number(d) * Number(ratio))) + ")";
+			    return "rgb(25, 12, " + Math.floor(scale(d)) + ")";
 			})
+
+			d3.select(selector)
+				.selectAll("svg")
+				.append("g")
+				.call(xAxis);
 		}
 
 	}
