@@ -6,6 +6,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.cp  = settings.defaults;
     $scope.showTimeAs = settings.showTimeAs;
     $scope.fields = settings.fields;
+    $scope.colorScheme = 'jedi';
 
     var cp = $scope.cp ;
     $scope.numYears = cp.numMonths / 12;
@@ -13,15 +14,8 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     var calc = new Calculator();
 
 
-    $scope.$watch('showTimeAs',function(thing){
-      console.log("Changed showtimeas...",thing);     
-    })
-
-
-
-
     $scope.$watchCollection('cp', function(){
-      console.log("Cp changed...",cp);
+
       $scope.handleCalcInput();
     })
 
@@ -31,32 +25,27 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       var directive = _.find($scope.fields, function(field){return field.selected}).key;
 
       var cpClone = _.clone(cp);
-      cpClone.numMonths = $scope.numYears * 12;
 
-      console.log("Calclulating...", cpClone)
+ 
 
       var values = calc.calculate(cpClone,directive);
 
-    //  console.log("Got results...",values);
-    //  return;
 
       var selectedField = _.find($scope.fields, function(field){return field.selected})
       var key = selectedField.key;
-      if (key != 'numMonths') {
+
         cp[key] = Number(values);
-      } else {
-        if ($scope.showTimeAs == 'years') cp['numYears'] = Number(values) / 12;        
-        if ($scope.showTimeAs == 'months') cp['numMonths'] = Number(values);        
-      }
-
-      //if ($scope.showTimeAs != 'years') cp['numYears'] = Number(values);
 
 
-     // $scope.updateChart(calc.getStatistics());
+      $scope.updateChart();
 
     }
 
     $scope.updateChart = function (stats) {
+
+      var stats = {};
+      stats = _.clone(cp);
+      stats.values = calc.getStatistics().values;
 
       Chartmaster.barChart(stats.values, "#chart-container-1");
       Chartmaster.donut([stats.startingValue,stats.finalValue], "#chart-container-2")

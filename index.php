@@ -25,19 +25,14 @@
 								{{field.name}}
 							</td>
 							<td class="col-lg-2">
-								<span ng-if="field.key != 'numMonths'">
-								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		
-							</span>
-								<span ng-if="field.key == 'numMonths' && showTimeAs == 'months'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>		</span>					
-								<span ng-if="field.key == 'numMonths' && showTimeAs == 'years'"><input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp["numYears"]'/>		</span>					
+
+								<input type='number' ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>					
 
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}
-								<span ng-if="field.key != 'numMonths'">{{cp[field.key]}}</span>
-								<span ng-if="field.key == 'numMonths' && showTimeAs == 'years'">{{cp[field.key] /12 | number:2}}</span>
-								<span ng-if="field.key == 'numMonths' && showTimeAs == 'months'">{{cp[field.key]}}</span>
-								<span ng-bind="field.chaser"></span> <span ng-if="field.key == 'numMonths'" ng-bind="showTimeAs"></span>
+								<span>{{cp[field.key]}}</span>
+								<span ng-bind="field.chaser"></span>
 							</td>
 						</tr>
 					</table>
@@ -60,13 +55,13 @@
 					</div>
 				</div>
 				<div class='col-md-3'>
-					<form class='well open' id='settings'>
+					<form class='well' id='settings'>
 						<div id='toggle-settings'>
 							<button class='btn btn-large btn-default'>
 						<span class='glyphicon glyphicon-wrench rotate90'></span>
 					</button>
 					</div>
-						<div class='form-group '>
+						<!--<div class='form-group '>
 							<div class='radio'>
 								<label>
 									<input type="radio" ng-model="showTimeAs" value='months' name="options" checked data-toggle='active' id="option1">Show Time In Months
@@ -75,6 +70,18 @@
 							<div class='radio'>
 								<label>
 									<input type="radio" ng-model="showTimeAs" value='years' name="options" id="option2"> Show Time In Years
+								</label>
+							</div>
+						</div>-->
+							<div class='form-group '>
+							<div class='radio'>
+								<label>
+									<input type="radio" ng-model="colorScheme" value='jedi' name="options" checked data-toggle='active'>Color Scheme &ndash; Jedi
+								</label>
+							</div>
+							<div class='radio'>
+								<label>
+									<input type="radio" ng-model="colorScheme" value='sith' name="options">Color Scheme &ndash; Sith
 								</label>
 							</div>
 						</div>

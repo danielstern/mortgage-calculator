@@ -22,9 +22,15 @@ return {	defaults:{
 	    selected:"true"
 	  },
 	  {
-	    name:"Time",
+	    name:"Time (Months)",
 	    key:"numMonths",
+	    chaser:' months'
 	  },
+	 /* {
+	    name:"Time (Years)",
+	    key:"numYears",
+	    chaser:' years'
+	  },*/
 	  {
 	    primer:"$",
 	    name:"Final Value",
