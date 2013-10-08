@@ -1,7 +1,7 @@
 define(['angular','Calculator','jquery','settings','Chartmaster'] , function (angular, Calculator, $, settings, Chartmaster) {
 
   return angular.module('calculatorApp' , [])
-  .controller('CalculatorController', ['$scope', function($scope) {
+  .controller('CalculatorController', ['$scope','chartService', function($scope , chartService) {
 
     $scope.cp  = settings.defaults;
     $scope.fields = settings.fields;
@@ -32,40 +32,52 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       var value = calc.calculate(_.clone(cp),directive);
 
       cp[key] = Number(value);
-      $scope.updateChart();
-    }
+    
+    chartService.updateChart($scope.getFullStats());
+}
 
-    $scope.updateChart = function () {
 
-      var stats = {};
-      stats = _.clone(cp);
-      stats.values = calc.getStatistics(cp).values;
+  $scope.getFullStats = function () {
+    var stats = {};
+    stats = _.clone(cp);
+    stats.values = calc.getStatistics(cp).values;
+    return stats;
+  }
+    _.defer(function(){chartService.updateChart($scope.getFullStats())});
 
-   //   console.log("Updating charts...",stats);
+  $scope.handleRowClick = function(thing) {
 
-      Chartmaster.barChart(stats.values, "#chart-container-1");
-      Chartmaster.donut([stats.startingValue,stats.finalValue, stats.recurringPayment * stats.numMonths], "#chart-container-2")
-    }
-
-    _.defer($scope.updateChart);
-
-    $scope.handleRowClick = function(thing) {
-
-      var field = _.find($scope.fields, function(field){return field.key == thing})
-      if (field.noCalc) return;
-      _.each($scope.fields,function(field){
-        field.selected = false
-      })
-      
-      field.selected = true;
-    }
-
-    $('.chart-container > *').click(function(e){
-      $(this).find('.thumb').toggleClass('pinned');
+    var field = _.find($scope.fields, function(field){return field.key == thing})
+    if (field.noCalc) return;
+    _.each($scope.fields,function(field){
+      field.selected = false
     })
 
-    
-  }])
- 
+    field.selected = true;
+  }
+
+  $('.chart-container > *').click(function(e){
+    $(this).find('.thumb').toggleClass('pinned');
+  })
+
+
+}])
+.controller('ChartCtrl', ['$scope', 'chartService', function($scope, chartService) {
+
+   function updateChart (stats) {
+   Chartmaster.barChart(stats.values, "#chart-container-1");
+   Chartmaster.donut([stats.startingValue,stats.finalValue, stats.recurringPayment * stats.numMonths], "#chart-container-2")
+ }
+
+ chartService.updateChart = updateChart;
+ console.log("Ctrl init",chartService)
+
+}])
+
+.service('chartService', function() {
+  this.updateChart = function() {
+    return console.warn("this is the old service...")
+  };
+});
 
 });
