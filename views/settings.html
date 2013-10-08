@@ -1,10 +1,13 @@
 <form class='well' id='settings' ng-controller='SettingsCtrl' ng:class="{true:'open', false:'closed'}[settingsOpen == true]">
-	<div id='toggle-settings' ng-click="settingsOpen = !settingsOpen;toggleSettingsOpen();" >
+	<span id='toggle-settings' ng-click="settingsOpen = !settingsOpen;toggleSettingsOpen();" >
 		<button class='btn btn-large btn-default'>
 			<span class='glyphicon glyphicon-wrench rotate90'></span>
 			<span class='glyphicon glyphicon-cog rotate180'></span>
 		</button>
-	</div>
+	</span>
+		<button class='btn btn-large btn-default'>
+			<span class='glyphicon glyphicon-question-sign'></span>
+		</button>
 	<div class='form-group '>
 		<div class='radio'>
 			<label>

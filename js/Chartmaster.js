@@ -16,7 +16,7 @@ define("Chartmaster", ['underscore'], function (_) {
         .domain([_.min(values), _.max(values)])
         .range([0, 100]);
 
-      var eachWidth = (100 / numValues) + 0;
+      var eachWidth = (50 / numValues) + 0;
 
       var frame = d3.select(selector)
         .select(".frame");
@@ -26,7 +26,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
       .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "0,0,100,100")
-        .attr("shape-rendering", "crispEdges")
+       // .attr("shape-rendering", "crispEdges")
         .selectAll("rect")
         .data(values)
         .enter()
@@ -163,6 +163,8 @@ define("Chartmaster", ['underscore'], function (_) {
         .text("Initial vs Final Value")
         .attr("class", "chart-title")
     }
+
+
   }
   return new Chartmaster();
 

@@ -8,7 +8,6 @@
 	<script src="lib/less/less-1.3.3.min.js"></script>	
 	<script data-main="js/main" src="lib/require/require.js"></script>	
 	
-	<!--<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">-->
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/slider/css/slider.css"
 	
@@ -16,7 +15,7 @@
 <body id="body-{{colorScheme}}" ng-controller='MainCtrl'>
 	<container  >
 		<div class='container ng-cloak mainBody'>
-			
+			<h2>Financial Calculator</h2>
 			<div class='row'>
 
 				<div class='col-md-5'>
