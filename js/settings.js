@@ -10,6 +10,7 @@ return {	defaults:{
 	},
 	showTimeAs:'years',
 	showRecurring:'show',
+	settingsOpen:'true',
 	fields:[
 	  {
 	    name:"Starting Value",

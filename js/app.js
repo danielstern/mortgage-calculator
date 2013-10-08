@@ -7,6 +7,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.fields = settings.fields;
     $scope.colorScheme = 'jedi';
     $scope.showRecurring = settings.showRecurring;
+    $scope.settingsOpen = settings.settingsOpen;
 
     var cp = $scope.cp ;
     var calc = new Calculator();
@@ -14,6 +15,14 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
     $scope.$watchCollection('cp', function(){
       $scope.handleCalcInput();
     })
+
+    $scope.$watchCollection('settings',function(){
+      console.log("Settings changed....")
+    })
+
+    $scope.changeColorScheme = function (scheme) {
+      $scope.colorScheme = scheme;
+    }
 
 
     $scope.handleCalcInput = function() {
@@ -51,12 +60,29 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $(this).find('.thumb').toggleClass('pinned');
     })
 
-
+/*
     $('#toggle-settings').click(function(e){
       $('#settings').toggleClass('open');
     });
-
+*/
     
+  }])
+  .controller('FormCtrl', ['$scope','$rootScope', function($scope, $rootScope) {
+
+    $scope.settingsOpen = true;
+    console.log("Form ctrl...",$scope.$parent,$rootScope)
+
+    $scope.toggleSettingsOpen = function(e) {
+      console.log("Toggle settings open",$scope.$parent.cp);
+      //$scope.$parent.settingsOpen = !$scope.$parent.settingsOpen;
+    }
+
+    $scope.$watch('colorScheme', function(e){
+      console.log("Color scheme changed...");
+      $scope.$parent.changeColorScheme($scope.colorScheme);
+
+    })
+
   }])
 
 });
