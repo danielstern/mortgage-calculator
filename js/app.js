@@ -54,11 +54,11 @@ define(['angular','jquery','settings'] , function (angular, $, settings) {
 
     field.selected = true;
   }
-_.defer(function(){
-  $('.chart-container > *').click(function(e){
-    $(this).find('.thumb').toggleClass('pinned');
+  _.defer(function(){
+    $('.chart-container > *').click(function(e){
+      $(this).find('.thumb').toggleClass('pinned');
+    })
   })
-})
 
 }])
 
