@@ -120,12 +120,28 @@ define("Chartmaster", ['underscore'], function (_) {
 
       chart.selectAll("path")
         .data(data)
-        .enter().append("svg:path")
+        .enter()
+        .append("svg:path")
         .style("fill", function (d, i) {
           return d.color;
         })
         .attr("d", arc)
-        .attr("class", "blockV rotate-hover");
+      //  .attr("class", "rotate-hover")
+
+
+
+      var arcs = chart.selectAll("g.arc")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("class", "show-on-hover")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .style("font","6px Arial")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return 'label'; });
+    
+
+
 
       var outer = d3.select(selector)
         .select(".thumb");
