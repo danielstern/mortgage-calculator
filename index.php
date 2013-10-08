@@ -13,11 +13,12 @@
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/slider/css/slider.css"
 	
 </head>
-<body id="body-{{colorScheme}}" ng-controller='CalculatorController'>
+<body id="body-{{colorScheme}}" ng-controller='MainCtrl'>
 	<container  >
 		<div class='container ng-cloak mainBody'>
 			
 			<div class='row'>
+
 				<div class='col-md-5'>
 					<table class='table table-bordered white-bg'>
 						<tr ng-repeat="field in fields"  ng-class="{'success':field.selected}" ngIf="field.display != 'hide'">
@@ -26,12 +27,11 @@
 							</td>
 							<td class="col-lg-2">
 								<input type='number' step={{field.step}} ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
-								<!--<input id="intNumber" type="range" min="1" max="20" value="10">		-->
 							</td>
 							<td class="col-lg-2">
 								{{field.primer}}
-								<span>{{cp[field.key]}}</span>
-								<span ng-bind="field.chaser"></span>
+								{{cp[field.key]}}
+								{{field.chaser}}
 							</td>
 						</tr>
 					</table>
@@ -40,16 +40,16 @@
 				<div class='col-md-4'>
 					<div data-ng-include="'views/charts.html'"></div>
 				</div>
+
 				<div class='col-md-3'>
-					<div data-ng-include="'views/settings.html'"></div>
-					
+					<div data-ng-include="'views/settings.html'"></div>	
 				</div>
+
 			</div>
 
 		</div>
 	</container>
 	<ng:view></ng:view>
-	
 </body>
 <?php include('php/analytics.html') ; ?>
 </html>

@@ -53,7 +53,6 @@ require([
 
 	], function($, app, angular) {
 
-		console.log('calculator booted.');
    	angular.bootstrap(document , ['calculatorApp']);
 		
 })

@@ -8,9 +8,7 @@ return {	defaults:{
    depositFreq:'monthly',
    finalValue:500,
 	},
-	showTimeAs:'years',
-	showRecurring:'show',
-	settingsOpen:'true',
+	settingsOpen:true,
 	fields:[
 	  {
 	    name:"Starting Value",
@@ -46,7 +44,6 @@ return {	defaults:{
 	    name:"Final Value",
 	    key:"finalValue",
 	    step:100
-
 	}]
 }
 })

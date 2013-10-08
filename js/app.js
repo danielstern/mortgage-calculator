@@ -1,7 +1,7 @@
 define(['angular','jquery','settings'] , function (angular, $, settings) {
 
   return angular.module('calculatorApp' , [])
-  .controller('CalculatorController', ['$scope','chartService', 'calculationService', function($scope , chartService, calculationService) {
+  .controller('MainCtrl', ['$scope','chartService', 'calculationService', function($scope , chartService, calculationService) {
 
     $scope.cp  = settings.defaults;
     $scope.fields = settings.fields;
