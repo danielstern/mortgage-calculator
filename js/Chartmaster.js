@@ -139,7 +139,9 @@ define("Chartmaster", ['underscore'], function (_) {
         .enter()
         .append("text")
         .attr("class", "show-on-hover")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("transform", function(d) { 
+          return "translate(" + (arc.centroid(d) + ")"; 
+        })
         .style("font","5px Arial")
         .attr("text-anchor", "middle")
         .text(function(d) { if (d.size == 0) return ''; return d.name; });
