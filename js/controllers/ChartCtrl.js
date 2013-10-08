@@ -7,7 +7,12 @@ define(['app','Chartmaster'] , function (app,Chartmaster) {
  		}
 
  		chartService.updateChart = updateChart;
- 		console.log("Ctrl init",chartService)
+ 		
+ 		_.defer(function () {
+ 		  $('.chart-container > *').click(function (e) {
+ 		    $(this).find('.thumb').toggleClass('pinned');
+ 		  })
+ 		})
 
  	}])
 })

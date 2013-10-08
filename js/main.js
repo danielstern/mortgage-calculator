@@ -49,6 +49,7 @@ require([
 	
 	"controllers/SettingsCtrl",
 	"controllers/ChartCtrl",
+	"controllers/MainCtrl",
 
 	"services/chartService",
 	"services/calculationService",
