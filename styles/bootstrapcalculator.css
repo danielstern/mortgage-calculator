@@ -118,6 +118,10 @@ textarea:focus, input:focus, .btn:focus{
 	overflow:none;
 }
 
+rect:hover {
+	opacity: 0.5;
+}
+
 #settings .form-group {
 	display: none;
 	opacity: 0;

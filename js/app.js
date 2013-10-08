@@ -51,6 +51,7 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $(this).find('.thumb').toggleClass('pinned');
     })
 
+
     $('#toggle-settings').click(function(e){
       $('#settings').toggleClass('open');
     });

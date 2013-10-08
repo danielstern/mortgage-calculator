@@ -54,27 +54,8 @@
 					</div>
 				</div>
 				<div class='col-md-3'>
-					<form class='well' id='settings'>
-						<div id='toggle-settings'>
-							<button class='btn btn-large btn-default'>
-						<span class='glyphicon glyphicon-wrench rotate90'></span>
-						<span class='glyphicon glyphicon-cog rotate180'></span>
-					</button>
-					</div>
-							<div class='form-group '>
-							<div class='radio'>
-								<label>
-									<input type="radio" ng-model="colorScheme" value='jedi' name="options" checked data-toggle='active'>Color Scheme &ndash; Jedi
-								</label>
-							</div>
-							<div class='radio'>
-								<label>
-									<input type="radio" ng-model="colorScheme" value='sith' name="options">Color Scheme &ndash; Sith
-								</label>
-							</div>
-						</div>
+					<div data-ng-include="'views/settings.html'"></div>
 					
-					</form>
 				</div>
 			</div>
 
