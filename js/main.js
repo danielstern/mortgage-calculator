@@ -40,8 +40,14 @@ require([
 	"d3",
 	"bootstrap",
 	"settings",
-	"Chartmaster",
+	
 	"controllers/SettingsCtrl",
+	"controllers/ChartCtrl",
+
+	"services/chartService",
+	"services/calculationService",
+
+	"Chartmaster",
 	"Utility",
 	"Calculator",
 
