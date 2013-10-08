@@ -8,7 +8,7 @@
 	<script src="lib/less/less-1.3.3.min.js"></script>	
 	<script data-main="js/main" src="lib/require/require.js"></script>	
 	
-	<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">
+	<!--<link rel="stylesheet" type="text/css" href="styles/bootstrapcalculator.css">-->
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/slider/css/slider.css"
 	
@@ -20,21 +20,8 @@
 			<div class='row'>
 
 				<div class='col-md-5'>
-					<table class='table table-bordered white-bg'>
-						<tr ng-repeat="field in fields"  ng-class="{'success':field.selected}" ngIf="field.display != 'hide'">
-							<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
-								{{field.name}}
-							</td>
-							<td class="col-lg-2">
-								<input type='number' step={{field.step}} ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
-							</td>
-							<td class="col-lg-2">
-								{{field.primer}}
-								{{cp[field.key]}}
-								{{field.chaser}}
-							</td>
-						</tr>
-					</table>
+					<div data-ng-include="'views/interface.html'"></div>
+					
 				</div>
 
 				<div class='col-md-4'>

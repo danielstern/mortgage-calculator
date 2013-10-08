@@ -1,4 +1,4 @@
-define(['angular','jquery','settings'] , function (angular, $, settings) {
+define(['angular','jquery','settings','css!../styles/bootstrapcalculator'] , function (angular, $, settings) {
 
   return angular.module('calculatorApp' , [])
   .controller('MainCtrl', ['$scope','chartService', 'calculationService', function($scope , chartService, calculationService) {

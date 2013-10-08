@@ -6,6 +6,7 @@ require.config({
     angular: '../lib/angular/angular.min',
     bootstrap: '../lib/bootstrap/js/bootstrap.min',
     d3: '../lib/d3/d3.min',
+    'd3': '../lib/d3/d3.min',
   },
   shim: {
   	'underscore_string': {
@@ -31,6 +32,11 @@ require.config({
 	priority: [
 		'angular'
 	],
+	map: {
+  '*': {
+    'css': '../lib/require-css/css' // or whatever the path to require-css is
+  	}
+	}
 });
 
 require([
