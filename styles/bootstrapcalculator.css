@@ -17,6 +17,37 @@ body {
 	height: 100%;
 }
 
+.backgroundV {
+	background-size: 100% 100%;
+
+}
+
+.centered-absl {
+
+	  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+
+}
+
+.glyph-large {
+	font-size: 550%;
+	width: 80px;
+	height: 90px;
+}
+
+.fade-in {
+	 -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
 
 .chart-title {
 	position: absolute;

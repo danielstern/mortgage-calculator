@@ -8,7 +8,7 @@ return {	defaults:{
    depositFreq:'monthly',
    finalValue:500,
 	},
-	settingsOpen:true,
+	settingsOpen:false,
 	fields:[
 	  {
 	    name:"Starting Value",

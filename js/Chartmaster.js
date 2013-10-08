@@ -4,6 +4,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
     this.barChart = function (values, selector) {
 
+    	 d3.select(selector).selectAll(".glyphicon").remove();
       d3.select(selector).selectAll("svg").remove();
       d3.select(selector).selectAll("text").remove();
       var numValues = values.length;
@@ -58,6 +59,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
       var pi = Math.PI;
 
+      d3.select(selector).selectAll(".glyphicon").remove();
       d3.select(selector).selectAll("svg").remove();
       d3.select(selector).selectAll("text").remove();
 
