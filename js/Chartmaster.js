@@ -71,7 +71,9 @@ define("Chartmaster", ['underscore'], function (_) {
         .domain([0, _.total(values)])
         .range([0, 100]);
 
-      var colors = ['orange', 'green', 'teal', 'yellow']
+      var colors = ['orange', 'green', 'teal', 'yellow'];
+      var keys = ['init','interest','payment']
+      var names = ['Initial','Interest','Increments']
 
       var data = _.map(values, function (value, i) {
 
@@ -92,6 +94,8 @@ define("Chartmaster", ['underscore'], function (_) {
         r.sizePercent = scale(value);
         r.start = scaleRads(r.startPercent);
         r.size = scaleRads(r.sizePercent);
+        r.key = keys[i];
+        r.name = names[i];
 
         return r;
       })
@@ -126,7 +130,7 @@ define("Chartmaster", ['underscore'], function (_) {
           return d.color;
         })
         .attr("d", arc)
-      //  .attr("class", "rotate-hover")
+        //.attr("class", "rotate-hover")
 
 
 
@@ -136,9 +140,9 @@ define("Chartmaster", ['underscore'], function (_) {
         .append("text")
         .attr("class", "show-on-hover")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .style("font","6px Arial")
+        .style("font","5px Arial")
         .attr("text-anchor", "middle")
-        .text(function(d) { return 'label'; });
+        .text(function(d) { if (d.size == 0) return ''; return d.name; });
     
 
 
