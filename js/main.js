@@ -41,6 +41,7 @@ require([
 	"bootstrap",
 	"settings",
 	"Chartmaster",
+	"controllers/SettingsCtrl",
 	"Utility",
 	"Calculator",
 

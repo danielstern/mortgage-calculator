@@ -41,9 +41,13 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       stats = _.clone(cp);
       stats.values = calc.getStatistics(cp).values;
 
+   //   console.log("Updating charts...",stats);
+
       Chartmaster.barChart(stats.values, "#chart-container-1");
       Chartmaster.donut([stats.startingValue,stats.finalValue, stats.recurringPayment * stats.numMonths], "#chart-container-2")
     }
+
+    _.defer($scope.updateChart);
 
     $scope.handleRowClick = function(thing) {
 
@@ -60,29 +64,8 @@ define(['angular','Calculator','jquery','settings','Chartmaster'] , function (an
       $(this).find('.thumb').toggleClass('pinned');
     })
 
-/*
-    $('#toggle-settings').click(function(e){
-      $('#settings').toggleClass('open');
-    });
-*/
     
   }])
-  .controller('FormCtrl', ['$scope','$rootScope', function($scope, $rootScope) {
-
-    $scope.settingsOpen = true;
-    console.log("Form ctrl...",$scope.$parent,$rootScope)
-
-    $scope.toggleSettingsOpen = function(e) {
-      console.log("Toggle settings open",$scope.$parent.cp);
-      //$scope.$parent.settingsOpen = !$scope.$parent.settingsOpen;
-    }
-
-    $scope.$watch('colorScheme', function(e){
-      console.log("Color scheme changed...");
-      $scope.$parent.changeColorScheme($scope.colorScheme);
-
-    })
-
-  }])
+ 
 
 });
