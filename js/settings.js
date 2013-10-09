@@ -14,7 +14,7 @@ return {	defaults:{
 	    name:"Starting Value",
 	    key:"startingValue",
 	    primer:"$",
-	    step:100
+	    step:25
 	  },
 	   {
 	    name:"Monthly Payment",

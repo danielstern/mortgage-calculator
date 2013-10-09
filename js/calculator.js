@@ -47,7 +47,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       stats.startingValue = paramaters.startingValue;
       stats.startingValue = paramaters.startingValue;
 
-      console.log("Get stats,",paramaters,stats)
+   //   console.log("Get stats,",paramaters,stats)
       return stats;
 
     }

@@ -73,8 +73,6 @@ define("Chartmaster", ['underscore'], function (_) {
 
     this.stackedChart = function (stats, selector) {
 
-      return;
-
       cm.clearElements(selector);
 
       var values = stats.values;
@@ -85,7 +83,7 @@ define("Chartmaster", ['underscore'], function (_) {
       var numValues = values.length;
 
       var scale = d3.scale.linear()
-        .domain([0, _.max(values)])
+        .domain([0, stats.finalValue])
         .range([0, 100]);
 
       var eachWidth = (50 / numValues) + 0;
@@ -95,26 +93,6 @@ define("Chartmaster", ['underscore'], function (_) {
 
       var svg = cm.addScalingSVG(frame);
 
-     svg.selectAll("rect.g")
-      .data(values,function(d){return d;})
-      .enter()
-      .append("rect")
-      //.append("rect")
-      .attr("x", function (d, i) {
-          var x = 100 / numValues;
-          return(i * x);
-        })
-          .attr("y", function (d, i) {
-          return(100 - scale(i * stats.recurringPayment) - scale(startingVal));
-        })
-      .attr("width", eachWidth)
-      .attr("height", function (d, i) {
-          return scale(i * stats.recurringPayment);
-       })
-      .attr("fill", function (d) {
-
-          return "green";
-        })
      
       svg.selectAll("rect.y")
         .data(values)
@@ -132,7 +110,62 @@ define("Chartmaster", ['underscore'], function (_) {
           return scale(startingVal);
         })
         .attr("fill", function (d) {
-          return "purple";
+          return "blue";
+        })
+
+     svg.selectAll("rect.r")
+      .data(values)
+      .enter()
+      .append("rect")
+      .attr("x", function (d, i) {
+          var x = 100 / numValues;
+          return(i * x);
+        })
+          .attr("y", function (d, i) {
+          return(100 - scale(i * stats.recurringPayment) - scale(startingVal));
+        })
+      .attr("width", eachWidth)
+      .attr("height", function (d, i) {
+          return scale(i * stats.recurringPayment);
+       })
+      .attr("fill", function (d) {
+
+          return "orange";
+        })
+
+      function getTotalInterest (values, i) {
+        return _.chain(values)
+                 .first(i)
+                 .pluck('interestPaid')
+                 .total()
+                 .value();
+      }
+
+
+     svg.selectAll("rect.m")
+      .data(values)
+      .enter()
+      .append("rect")
+      .attr("x", function (d, i) {
+          var x = 100 / numValues;
+          return(i * x);
+        })
+          .attr("y", function (d, i) {
+            var totalInterestPaid = getTotalInterest(values, i);
+          return(100 - scale(i * stats.recurringPayment) - scale(startingVal) - scale(totalInterestPaid));
+          return 0;
+        })
+      .attr("width", eachWidth)
+      .attr("height", function (d, i) {
+
+        var totalInterestPaid = getTotalInterest(values, i);
+
+         //   console.log('Total interested Paid?', totalInterestPaid);
+            return scale(totalInterestPaid);
+       })
+      .attr("fill", function (d) {
+
+          return "teal";
         })
 
 

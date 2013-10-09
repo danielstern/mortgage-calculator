@@ -4,7 +4,7 @@
 			{{field.name}}
 		</td>
 		<td class="col-lg-2">
-			<input type='number' step={{field.step}} ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
+			<input type='number' step={{field.step}} min=0 ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
 		</td>
 		<td class="col-lg-2">
 			{{field.primer}}
