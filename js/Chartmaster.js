@@ -33,7 +33,8 @@ define("Chartmaster", ['underscore'], function (_) {
       var numValues = values.length;
 
       var scale = d3.scale.linear()
-        .domain([_.min(values), _.max(values)])
+     //   .domain([_.min(values), _.max(values)])
+        .domain([0, _.max(values)])
         .range([0, 100]);
 
       var eachWidth = (50 / numValues) + 0;
@@ -67,6 +68,8 @@ define("Chartmaster", ['underscore'], function (_) {
     }
 
     this.stackedChart = function (stats, selector) {
+
+      return;
 
       cm.clearElements(selector);
 
@@ -127,6 +130,8 @@ define("Chartmaster", ['underscore'], function (_) {
         .attr("fill", function (d) {
           return "purple";
         })
+
+
     
 
       cm.appendTitle(selector, "???")
