@@ -2,15 +2,35 @@ define("Chartmaster", ['underscore'], function (_) {
 
   function Chartmaster() {
 
-    this.barChart = function (values, selector) {
+    var cm = this;
 
-    	 d3.select(selector).selectAll(".glyphicon").remove();
+    this.clearElements = function(selector) {
+      d3.select(selector).selectAll(".glyphicon").remove();
       d3.select(selector).selectAll("svg").remove();
       d3.select(selector).selectAll("text").remove();
-      var numValues = values.length;
+    }
 
-      var minValue = _.min(values);
-      var maxValue = _.max(values);
+    this.appendTitle = function(selector, title) {
+        var outer = d3.select(selector)
+        .select(".thumb");
+      outer
+        .append("text")
+        .text(title)
+        .attr("class", "chart-title");
+    }
+
+    this.addScalingSVG = function(selection) {
+      return   selection
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0,0,100,100")
+    }
+
+    this.barChart = function (values, selector) {
+
+      cm.clearElements(selector);
+    	
+      var numValues = values.length;
 
       var scale = d3.scale.linear()
         .domain([_.min(values), _.max(values)])
@@ -21,11 +41,7 @@ define("Chartmaster", ['underscore'], function (_) {
       var frame = d3.select(selector)
         .select(".frame");
 
-      frame
-        .append("svg")
-
-      .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0,0,100,100")
+      cm.addScalingSVG(frame)
        // .attr("shape-rendering", "crispEdges")
         .selectAll("rect")
         .data(values)
@@ -47,21 +63,12 @@ define("Chartmaster", ['underscore'], function (_) {
           return "rgb(0, 0, 255)";
         })
 
-      var outer = d3.select(selector)
-        .select(".thumb");
-      outer
-        .append("text")
-        .text("Value over Time")
-        .attr("class", "chart-title");
+      cm.appendTitle(selector, "Value over Time")
     }
 
     this.donut = function (values, selector) {
 
-      var pi = Math.PI;
-
-      d3.select(selector).selectAll(".glyphicon").remove();
-      d3.select(selector).selectAll("svg").remove();
-      d3.select(selector).selectAll("text").remove();
+     cm.clearElements(selector);
 
      // console.log('Vlaues?',values)
       values [1] -= values[0];
@@ -102,8 +109,6 @@ define("Chartmaster", ['underscore'], function (_) {
         r.key = keys[i];
         r.name = names[i];
 
- //       console.log("It's high time for I,",r)
-
         return r;
       })
 
@@ -116,17 +121,12 @@ define("Chartmaster", ['underscore'], function (_) {
         .endAngle(function (d, i) {
           return d.start + d.size;
         });
+
       var frame = d3.select(selector)
         .select(".frame");
 
-      var chart = frame
-        .append("svg:svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0,0,100,100")
-
-      .attr("class", "chart")
-        .attr("width", "100%")
-        .attr("height", "100%").append("svg:g")
+      var chart = cm.addScalingSVG(frame)
+        .append("svg:g")
         .attr("transform", "translate(50,50)")
 
       chart.selectAll("path")
@@ -137,33 +137,22 @@ define("Chartmaster", ['underscore'], function (_) {
           return d.color;
         })
         .attr("d", arc)
-        //.attr("class", "rotate-hover")
 
 
-
-      var arcs = chart.selectAll("g.arc")
+      chart.selectAll("g.arc")
         .data(data)
         .enter()
         .append("text")
         .attr("class", "show-on-hover")
         .attr("transform", function(d) { 
-          return "translate(" + arc.centroid(d) + ")"; })
+          return "translate(" + arc.centroid(d) + ")"; 
+        })
         .style("font","5px Arial")
         .attr("text-anchor", "middle")
         .text(function(d) { if (d.size == 0) return ''; return d.name; });
     
-
-
-
-      var outer = d3.select(selector)
-        .select(".thumb");
-
-      outer
-        .append("text")
-        .text("Initial vs Final Value")
-        .attr("class", "chart-title")
-    }
-
+        cm.appendTitle(selector, "Contributions vs. Interest")
+      }
 
   }
   return new Chartmaster();
