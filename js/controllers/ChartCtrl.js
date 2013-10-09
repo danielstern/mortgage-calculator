@@ -4,7 +4,7 @@ define(['app','Chartmaster'] , function (app,Chartmaster) {
  		function updateChart (stats) {
  			Chartmaster.barChart(stats.values, "#chart-container-1");
  			Chartmaster.donut([stats.startingValue,stats.finalValue, stats.recurringPayment * stats.numMonths], "#chart-container-2")
- 		//	Chartmaster.lineChart(stats, "#chart-container-3")
+ 		  Chartmaster.stackedChart(stats, "#chart-container-3")
  		}
 
  		chartService.updateChart = updateChart;

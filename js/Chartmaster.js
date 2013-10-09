@@ -66,6 +66,51 @@ define("Chartmaster", ['underscore'], function (_) {
       cm.appendTitle(selector, "Value over Time")
     }
 
+    this.stackedChart = function (stats, selector) {
+
+      cm.clearElements(selector);
+
+      var values = stats.values;
+      var startingVal = stats.startingValue;
+
+      console.log("Lineplot...",stats)
+      
+      var numValues = values.length;
+
+      var scale = d3.scale.linear()
+        .domain([_.min(values), _.max(values)])
+        .range([0, 100]);
+
+      var eachWidth = (50 / numValues) + 0;
+
+      var frame = d3.select(selector)
+        .select(".frame");
+
+      cm.addScalingSVG(frame)
+       // .attr("shape-rendering", "crispEdges")
+        .selectAll("rect")
+        .data(values)
+        .enter()
+        .append("rect")
+        .attr("x", function (d, i) {
+          var x = 100 / numValues;
+          return(i * x);
+        })
+        .attr("y", function (d) {
+          return(100 - startingVal / d * 100);
+        })
+        .attr("width", eachWidth)
+        .attr("height", function (d) {
+          return startingVal / d * 100;
+        })
+        .attr("fill", function (d) {
+
+          return "purple";
+        })
+
+      cm.appendTitle(selector, "Value over Time")
+    }
+
     this.donut = function (values, selector) {
 
      cm.clearElements(selector);
