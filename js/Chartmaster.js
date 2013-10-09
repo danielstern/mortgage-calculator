@@ -78,7 +78,7 @@ define("Chartmaster", ['underscore'], function (_) {
       var values = stats.values;
       var startingVal = stats.startingValue;
 
-      console.log("Lineplot...",stats)
+    //  console.log("Lineplot...",stats)
       
       var numValues = values.length;
 
