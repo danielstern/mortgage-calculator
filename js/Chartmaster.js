@@ -171,7 +171,7 @@ define("Chartmaster", ['underscore'], function (_) {
 
     
 
-      cm.appendTitle(selector, "???")
+      cm.appendTitle(selector, "Stacked Values")
     }
 
     this.donut = function (values, selector) {
