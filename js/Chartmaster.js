@@ -87,8 +87,29 @@ define("Chartmaster", ['underscore'], function (_) {
         .select(".frame");
 
       var svg = cm.addScalingSVG(frame);
-     /*
-      svg.selectAll("rect")
+
+     svg.selectAll("rect.g")
+      .data(values,function(d){return d;})
+      .enter()
+      .append("rect")
+      //.append("rect")
+      .attr("x", function (d, i) {
+          var x = 100 / numValues;
+          return(i * x);
+        })
+          .attr("y", function (d, i) {
+          return(100 - scale(i * stats.recurringPayment) - startingVal / d * 100);
+        })
+      .attr("width", eachWidth)
+      .attr("height", function (d, i) {
+          return scale(i * stats.recurringPayment);
+       })
+      .attr("fill", function (d) {
+
+          return "green";
+        })
+     
+      svg.selectAll("rect.y")
         .data(values)
         .enter()
         .append("rect")
@@ -106,30 +127,10 @@ define("Chartmaster", ['underscore'], function (_) {
         .attr("fill", function (d) {
 
           return "purple";
-        })*/
-
-     svg
-      .selectAll("rect")
-      .data(values)
-      .enter()
-      .append("rect")
-      .attr("x", function (d, i) {
-          var x = 100 / numValues;
-          return(i * x);
         })
-          .attr("y", function (d, i) {
-          return(100 - scale(i * stats.recurringPayment));
-        })
-      .attr("width", eachWidth)
-      .attr("height", function (d, i) {
-          return scale(i * stats.recurringPayment);
-       })
-      .attr("fill", function (d) {
+     
 
-          return "green";
-        })
-
-      cm.appendTitle(selector, "Value over Time")
+      cm.appendTitle(selector, "???")
     }
 
     this.donut = function (values, selector) {
