@@ -98,7 +98,7 @@ define("Chartmaster", ['underscore'], function (_) {
           return(i * x);
         })
           .attr("y", function (d, i) {
-          return(100 - scale(i * stats.recurringPayment) - startingVal / d * 100);
+          return(100 - scale(i * stats.recurringPayment) - scale(startingVal));
         })
       .attr("width", eachWidth)
       .attr("height", function (d, i) {
@@ -118,17 +118,16 @@ define("Chartmaster", ['underscore'], function (_) {
           return(i * x);
         })
         .attr("y", function (d) {
-          return(100 - startingVal / d * 100);
+          return(100 -scale(startingVal));
         })
         .attr("width", eachWidth)
         .attr("height", function (d) {
-          return startingVal / d * 100;
+          return scale(startingVal);
         })
         .attr("fill", function (d) {
-
           return "purple";
         })
-     
+    
 
       cm.appendTitle(selector, "???")
     }
