@@ -6,9 +6,10 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
      
     calc.targetAccuracy = 0.0001; // increases the accuracy of the compound interest calculator. the higher it is, the higher you must make precision, which affects performance.
     calc.calculatorPrecision = 250; // this is an important value as it determines how often you get the "?"
+    calc.allPfsCalculated = [];
+
 
     var values;
-
 
     calc.calculate = function(paramaters, directive) {
   
@@ -53,11 +54,20 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
 
 
-    calc.allPfsCalculated = [];
+
+    calc.refreshStashesValues = function() {
+      calc.allPfsCalculated = [];      
+    }
+
+    calc.stashValue = function(value) {
+      calc.allPfsCalculated.push(value);      
+    }
+
+    calc.refreshStashesValues();
 
     calc.getFinalValue = function (values) {
 
-      calc.allPfsCalculated = [];
+      calc.refreshStashesValues();
 
       var numMonths = values.numMonths;
 
@@ -82,21 +92,17 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
       var monthsThru = 0;
 
       for(var n = 0; n < numMonths; n++) {
-        if(values.depositFreq == 'monthly') pf += pr;
 
-        //pf = pf * i;     // for calculating payments at the beginning of the period
-
-        if(values.depositFreq == 'yearly') {
-
-          if(monthsThru == 0) pf += pr;
-          monthsThru++;
-          if(monthsThru == 12) monthsThru = 0;
-
-        }
-
+        pf += pr;
         pf = pf * i;
 
-        calc.allPfsCalculated.push(pf);
+        var stats = {};
+        stats.total = pf;
+        stats.payment = pr;
+        stats.interestPaid = (pf * i) - pf;
+
+    //    calc.stashValue(pf);
+        calc.stashValue(stats);
 
       }
       
@@ -105,9 +111,7 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
     }
 
      calc.getStartingValue = function (values) {
-
-      calc.allPfsCalculated = [];
-
+ 
       var numMonths = values.numMonths;
 
       var pf = Number(values.finalValue);
@@ -140,8 +144,6 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
         }
 
         pf = pf / i;
-
-        calc.allPfsCalculated.push(pf);
 
       }
 

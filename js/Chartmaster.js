@@ -26,15 +26,19 @@ define("Chartmaster", ['underscore'], function (_) {
         .attr("viewBox", "0,0,100,100")
     }
 
-    this.barChart = function (values, selector) {
+    this.barChart = function (stats, selector) {
 
       cm.clearElements(selector);
+
+      var values = stats.values;
+
+  //    console.log("bar chart Values?",values)
     	
       var numValues = values.length;
 
       var scale = d3.scale.linear()
      //   .domain([_.min(values), _.max(values)])
-        .domain([0, _.max(values)])
+        .domain([0, stats.finalValue])
         .range([0, 100]);
 
       var eachWidth = (50 / numValues) + 0;
@@ -53,11 +57,11 @@ define("Chartmaster", ['underscore'], function (_) {
           return(i * x);
         })
         .attr("y", function (d) {
-          return(100 - scale(d));
+          return(100 - scale(d.total));
         })
         .attr("width", eachWidth)
         .attr("height", function (d) {
-          return scale(d);
+          return scale(d.total);
         })
         .attr("fill", function (d) {
 
@@ -209,7 +213,7 @@ define("Chartmaster", ['underscore'], function (_) {
         })
         .attr("d", arc)
 
-
+/*
       chart.selectAll("g.arc")
         .data(data)
         .enter()
@@ -221,7 +225,7 @@ define("Chartmaster", ['underscore'], function (_) {
         .style("font","5px Arial")
         .attr("text-anchor", "middle")
         .text(function(d) { if (d.size == 0) return ''; return d.name; });
-    
+  */  
         cm.appendTitle(selector, "Contributions vs. Interest")
       }
 
