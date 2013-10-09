@@ -4,9 +4,9 @@ return {	defaults:{
    finalValue:120,
    interestRate:10,
    numMonths:60,
-   recurringPayment:0,
+   recurringPayment:100,
    depositFreq:'monthly',
-   finalValue:500,
+   finalValue:10000,
 	},
 	settingsOpen:false,
 	fields:[
