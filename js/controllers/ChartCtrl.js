@@ -7,6 +7,8 @@ define(['app','Chartmaster'] , function (app,Chartmaster) {
  		  Chartmaster.stackedChart(stats, "#chart-container-3")
  		}
 
+ 		$scope.charts = [1,2,3]
+
  		chartService.updateChart = updateChart;
  		
  		_.defer(function () {

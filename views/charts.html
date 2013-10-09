@@ -1,6 +1,6 @@
 <div ng-controller='ChartCtrl'>
 	<div class='chart-container'>
-		<div id='chart-container-1'>
+		<!--<div id='chart-container-1'>
 			<div class='thumb'>
 				<div class='frame'>
 					<span class="glyphicon centered-absl fade-in glyph-large glyphicon-question-sign"></span>
@@ -20,6 +20,7 @@
 					<span class="glyphicon centered-absl fade-in glyph-large glyphicon-question-sign"></span>
 				</div>
 			</div>
-		</div>
+		</div>-->
+		<div ng-repeat="chart in charts" data-ng-include="'views/chart.html'"></div>
 	</div>
 </div>
