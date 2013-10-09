@@ -36,9 +36,7 @@ define(['app', 'settings'], function (app, settings) {
       }
 
       $scope.getFullStats = function () {
-        var stats = {};
-        stats = _.clone(cp);
-        stats.values = calculationService.getValues(cp);
+        var stats = calculationService.getStats(cp);
         return stats;
       }
       _.defer(function () {

@@ -40,9 +40,13 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     calc.getStatistics = function(paramaters) {
 
-      var stats = {};
-      calc.getFinalValue(paramaters);
-      stats.values = calc.getChartValues();
+      var stats = _.clone(paramaters);
+      
+      stats.values = calc.getChartValues(paramaters);
+      stats.startingValue = paramaters.startingValue;
+      stats.startingValue = paramaters.startingValue;
+
+      console.log("Get stats,",paramaters,stats)
       return stats;
 
     }
@@ -219,7 +223,8 @@ define("Calculator", ['underscore','settings'], function (_,settings) {
 
     }
 
-    calc.getChartValues = function () {
+    calc.getChartValues = function (paramaters) {
+      calc.getFinalValue(paramaters);
       return calc.allPfsCalculated;
     }
 

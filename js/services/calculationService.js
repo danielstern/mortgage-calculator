@@ -5,8 +5,8 @@ define(['app','Calculator'] , function (app, Calculator) {
 	 		return calc.calculate(params,directive);
 		}
 
-		this.getValues = function(params) {
-			return calc.getStatistics(params).values;
+		this.getStats = function(params) {
+			return calc.getStatistics(params);
 		}
 	});
 })
