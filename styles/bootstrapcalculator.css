@@ -128,22 +128,18 @@ textarea:focus, input:focus, .btn:focus{
 	opacity: 1;
 }
 
-#settings.open .rotate90 {
+.settingsOpen .rotate90 {
 	-webkit-transform:rotate(90deg);
 
 }
 
-#settings.open .rotate360 {
-	-webkit-transform:rotate(360deg);
-}
-
-#settings.open .rotate180 {
+.settingsOpen .rotate180 {
 	-webkit-transform:rotate(-180deg);	
 	-webkit-transform-origin: 50% 54%;
 }
 
 #settings {
-	min-height:70px;
+  min-height:70px;
 	overflow:hidden;
 }
 
@@ -151,20 +147,34 @@ textarea:focus, input:focus, .btn:focus{
 	display:none;
 }
 #settings.open {
-	height:auto;
-	overflow:none;
+	/*height:auto;
+	overflow:none;*/
+}
+
+.pad-top {
+	margin-top:10px;
 }
 
 
-#settings .form-group {
+.settings {
 	display: none;
 	opacity: 0;
 }
 
-#settings.open .form-group {
+.settingsOpen .settings {
 	display: block;
 	opacity: 1;
 }
+
+/*.instructions {
+	display: none;
+	opacity: 0;
+}
+
+.instructionsOpen .instructions {
+	display: block;
+	opacity: 1;
+}*/
 
 .inline-block {
 	margin: auto;

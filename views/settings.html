@@ -1,14 +1,14 @@
-<form class='well' id='settings' ng-controller='SettingsCtrl' ng:class="{true:'open', false:'closed'}[settingsOpen == true]">
-	<span id='toggle-settings' ng-click="settingsOpen = !settingsOpen;toggleSettingsOpen();" >
+<form class='well' id='settings' ng-controller='SettingsCtrl' ng:class="{settingsOpen:settingsOpen}" >
+	<span id='toggle-settings' ng-click="settingsOpen = !settingsOpen;" >
 		<button class='btn btn-large btn-default'>
 			<span class='glyphicon glyphicon-wrench rotate90'></span>
 			<span class='glyphicon glyphicon-cog rotate180'></span>
 		</button>
-	</span>
+	</span ng-click="instructionsOpen = !instructionsOpen;">
 		<button class='btn btn-large btn-default'>
 			<span class='glyphicon glyphicon-question-sign'></span>
 		</button>
-	<div class='form-group '>
+	<div class='form-group settings'>
 		<div class='radio'>
 			<label>
 				<input type="radio" ng-model="colorScheme" value='jedi' name="options" checked data-toggle='active'>Color Scheme &ndash; Jedi
@@ -20,4 +20,9 @@
 			</label>
 		</div>
 	</div>
+	<!--<div class='form-group instructions'>
+		<p class='pad-top'>Click on the name of a variable (e.g, Starting Value) to calculate it.</p>
+		<p>Hover over graphs to enlarge them. Click on a graph to pin it.</p>
+	</div>-->
 </form>
+</div>
