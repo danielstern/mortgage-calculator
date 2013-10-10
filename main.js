@@ -55,6 +55,7 @@ require([
 	"charts/ChartCtrl",
 	"charts/chartService",
 	"charts/Chartmaster",
+	"charts/rcChart",
 
 	"calculator/calculationService",
 	"calculator/Calculator",
