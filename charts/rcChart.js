@@ -10,8 +10,8 @@ define(['app','charts/Chartmaster'] , function (app, Chartmaster) {
       						"<span class='glyphicon centered-absl fade-in glyph-large glyphicon-question-sign'></span>"	+ 
       					"</div></div>",
       link: function (scope, elem, attrs) {
-        console.log("Recognized RC Chart",scope.kind,scope.target,chartService);
-        chartService.updateChart();
+        console.log("Recognized RC Chart",scope.kind);
+        chartService.addChart(scope.kind,elem);
         },
     }
   }]);

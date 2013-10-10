@@ -32,7 +32,7 @@ define(['app', 'common/defaults'], function (app, settings) {
 
         cp[key] = Number(value);
 
-        chartService.updateChart($scope.getFullStats());
+        chartService.updateCharts($scope.getFullStats());
       }
 
       $scope.getFullStats = function () {
@@ -40,7 +40,7 @@ define(['app', 'common/defaults'], function (app, settings) {
         return stats;
       }
       _.defer(function () {
-        chartService.updateChart($scope.getFullStats())
+        chartService.updateCharts($scope.getFullStats())
       });
 
       $scope.handleRowClick = function (thing) {
