@@ -47,7 +47,6 @@ define(['underscore'], function (_) {
       stats.startingValue = paramaters.startingValue;
       stats.startingValue = paramaters.startingValue;
 
-   //   console.log("Get stats,",paramaters,stats)
       return stats;
 
     }
