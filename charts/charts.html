@@ -1,5 +1,7 @@
 <div ng-controller='ChartCtrl'>
 	<div class='chart-container'>
-		<div ng-repeat="chart in charts" data-ng-include="'charts/chart.html'"></div>
+		<div ng-repeat="chart in charts">
+			<div rc-chart kind="chart.kind" target="chart.kind"></div>
+		</div>
 	</div>
 </div>
