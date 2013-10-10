@@ -192,7 +192,7 @@ define(['underscore'], function (_) {
         .domain([0, _.total(values)])
         .range([0, 100]);
 
-      var colors = ['orange', 'green', 'teal', 'yellow'];
+      var colors = ['orange', 'cyan', 'violet', 'green'];
       var keys = ['init','interest','payment']
       var names = ['Initial','Interest','Increments'];
 
@@ -247,7 +247,7 @@ define(['underscore'], function (_) {
         })
         .attr("d", arc)
 
-/*
+
       chart.selectAll("g.arc")
         .data(data)
         .enter()
@@ -259,7 +259,7 @@ define(['underscore'], function (_) {
         .style("font","5px Arial")
         .attr("text-anchor", "middle")
         .text(function(d) { if (d.size == 0) return ''; return d.name; });
-  */  
+   
         cm.appendTitle(selector, "Contributions vs. Interest")
       }
 
