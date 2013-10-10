@@ -1,0 +1,15 @@
+<table class='table table-bordered white-bg'>
+	<tr ng-repeat="field in fields"  ng-class="{'success':field.selected}" ngIf="field.display != 'hide'">
+		<td class="col-lg-2" ng-click="handleRowClick(field.key)">	
+			{{field.name}}
+		</td>
+		<td class="col-lg-2">
+			<input type='number' step={{field.step}} min=0 ng-disabled="field.selected" class='form-control' ng-model='cp[field.key]'/>			
+		</td>
+		<td class="col-lg-2">
+			{{field.primer}}
+			{{cp[field.key]}}
+			{{field.chaser}}
+		</td>
+	</tr>
+</table>
