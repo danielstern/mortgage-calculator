@@ -8,7 +8,7 @@ define(['app',] , function (app) {
  		
  		_.defer(function () {
  		  $('.chart-container > *').click(function (e) {
- 		    $(this).find('.thumb').toggleClass('pinned');
+ 		    $(this).find('.thumb-box').toggleClass('pinned');
  		  })
  		})
 

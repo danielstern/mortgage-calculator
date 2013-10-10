@@ -6,9 +6,9 @@ define(['app','charts/Chartmaster'] , function (app, Chartmaster) {
       	kind: '=',
       	target: '=',
       },
-      template: "<div class='thumb'><div class='frame'>" 	+ 
+      template: "<div class='thumb-box'><div class='thumb'><div class='frame'>" 	+ 
       						"<span class='glyphicon centered-absl fade-in glyph-large glyphicon-question-sign'></span>"	+ 
-      					"</div></div>",
+      					"</div></div></div>",
       link: function (scope, elem, attrs) {
         chartService.addChart(scope.kind,elem);
         },
