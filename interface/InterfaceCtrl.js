@@ -14,10 +14,6 @@ define(['app', 'common/defaults'], function (app, settings) {
         $scope.handleCalcInput();
       })
 
-      $scope.$watchCollection('settings', function () {
-        console.log("Settings changed....")
-      })
-
       $scope.changeColorScheme = function (scheme) {
         $scope.colorScheme = scheme;
       }

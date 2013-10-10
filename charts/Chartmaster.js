@@ -32,12 +32,9 @@ define(['underscore'], function (_) {
 
       var values = stats.values;
 
-  //    console.log("bar chart Values?",values)
-    	
       var numValues = values.length;
 
       var scale = d3.scale.linear()
-     //   .domain([_.min(values), _.max(values)])
         .domain([0, stats.finalValue])
         .range([0, 100]);
 
@@ -47,7 +44,7 @@ define(['underscore'], function (_) {
         .select(".frame");
 
       cm.addScalingSVG(frame)
-       // .attr("shape-rendering", "crispEdges")
+      
         .selectAll("rect")
         .data(values)
         .enter()
@@ -174,20 +171,24 @@ define(['underscore'], function (_) {
       cm.appendTitle(selector, "Stacked Values")
     }
 
-    this.donut = function (values, selector) {
+    this.donut = function (stats, selector) {
 
-     cm.clearElements(selector);
+      var startingVal = stats.startingValue;
+      var finalVal = stats.finalValue;
+      var totalRecurring = stats.recurringPayment * stats.numMonths;
+      
+      cm.clearElements(selector);
 
-     // console.log('Vlaues?',values)
-      values [1] -= values[0];
-      values [1] -= values[2];
+      finalVal -= startingVal;
+      finalVal -= totalRecurring;
+
+      var values = [startingVal,finalVal,totalRecurring]
 
       var scaleRads = d3.scale.linear()
         .domain([0, 100])
         .range([0, 2 * Math.PI]);
 
       var scale = d3.scale.linear()
-        //.domain([0, values[1]])
         .domain([0, _.total(values)])
         .range([0, 100]);
 
