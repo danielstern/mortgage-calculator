@@ -31,13 +31,13 @@
 		</td>
 		<td>
 		<!--	{{cp.investmentValue}}-->
-		<input ng-model="cp.downpay" type='number'>
+		<input ng-model="cp.downpay" type='number' ng-focus="cp.downpaySelected = true; cp.downpayPercentSelected = false">
 		</td>
 		<td>
 		  Down Payment (%)
 		</td>
 		<td>
-		<input  ng-model="cp.downpayPercent" type='number'>
+		<input  ng-model="cp.downpayPercent" type='number' ng-focus="cp.downpaySelected = false; cp.downpayPercentSelected = true">
   	</select>
 
 		</td>
@@ -60,23 +60,23 @@
 		</td>
 		<td>
 		<button type='button' 
-		ng-click='cp.paymentMonthly = !cp.paymentMonthly'
+		ng-click='cp.paymentMonthly = true; cp.paymentBiWeekly = false; cp.paymentWeekly = false'
 		class='btn btn-default'
 		ng-class="{true:'active', false:''}[cp.paymentMonthly]"
 		>Monthly</button>
 		</td>
 		<td>
 			<button 
-			ng-click='cp.paymentBiMonthly = !cp.paymentBiMonthly'
+			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = true; cp.paymentWeekly = false'
 			class='btn btn-default'
-			ng-class="{true:'active', false:''}[cp.paymentBiMonthly]">
+			ng-class="{true:'active', false:''}[cp.paymentBiWeekly]">
 				Every 2 Weeks
 			</button>
 		</td>
 		<td>
 			<button class='btn btn-default'
 			class='btn btn-default' 
-			ng-click='cp.paymentWeekly = !cp.paymentWeekly' 
+			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = false; cp.paymentWeekly = true' 
 			ng-class="{true:'active', false:''}[cp.paymentWeekly]">
 			Weekly</button>
 		</td>

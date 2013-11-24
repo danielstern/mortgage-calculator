@@ -6,25 +6,16 @@ define(['app', 'common/defaults'], function (app, settings) {
       $scope.fields = settings.fields;
 
       var cp = $scope.cp;
+      var old_cp;
 
-      $scope.$watchCollection('cp', function () {
+      $scope.$watchCollection('cp', function (oldValues, newValues) {
         $scope.handleCalcInput();
       })
 
       $scope.handleCalcInput = function () {
-        console.log("Calc input.");
-        return;
         
-        var selectedField = _.find($scope.fields, function (field) {
-          return field.selected
-        });
-        var key = selectedField.key;
-        var directive = key;
-        var value = calculationService.calculate(_.clone(cp), directive);
+        var output = calculationService.calculate(_.clone(cp), 'mortgage');
 
-        cp[key] = Number(value);
-
-        chartService.updateCharts($scope.getFullStats());
       }
 
       $scope.getFullStats = function () {

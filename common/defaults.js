@@ -6,7 +6,9 @@ return {	defaults:{
    downpay:20000,
    amortization:25,
    paymentWeekly: true,
+   paymentBiWeekly: false,
    paymentMonthly: false,
+   downpaySelected:true
    },
 }
 })
