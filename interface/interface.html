@@ -47,7 +47,7 @@
 			Mortgage Value
 		</td>
 		<td>
-			<h3>0</h3>
+			<h3>{{mortgageValue | number:0}}</h3>
 		</td>
 
 	</tr>
@@ -56,18 +56,18 @@
 			Regular Payment
 		</td>
 		<td>
-			0
+			{{payment | number:2}}
 		</td>
 		<td>
 		<button type='button' 
-		ng-click='cp.paymentMonthly = true; cp.paymentBiWeekly = false; cp.paymentWeekly = false'
+		ng-click='cp.paymentMonthly = true; cp.paymentBiWeekly = false; cp.paymentWeekly = false; freq="monthly"'
 		class='btn btn-default'
 		ng-class="{true:'active', false:''}[cp.paymentMonthly]"
 		>Monthly</button>
 		</td>
 		<td>
 			<button 
-			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = true; cp.paymentWeekly = false'
+			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = true; cp.paymentWeekly = false; freq="bi-weekly"';
 			class='btn btn-default'
 			ng-class="{true:'active', false:''}[cp.paymentBiWeekly]">
 				Every 2 Weeks
@@ -76,7 +76,7 @@
 		<td>
 			<button class='btn btn-default'
 			class='btn btn-default' 
-			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = false; cp.paymentWeekly = true' 
+			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = false; cp.paymentWeekly = true;freq="weekly"' 
 			ng-class="{true:'active', false:''}[cp.paymentWeekly]">
 			Weekly</button>
 		</td>
@@ -103,13 +103,15 @@
 			Interest Paid
 		</td>
 		<td>
-			0
+			{{interestPaid | number:2}}
 		</td>
 		<td>
 			Interest : Principal
 		</td>
 		<td>
-			0:0
+			{{interestRatio | number:2}}
 		</td>
 	</tr>
 </table>
+
+<h2>Your {{freq}} payment is {{payment | number}}</h2>

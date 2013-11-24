@@ -13,8 +13,23 @@ define(['app', 'common/defaults'], function (app, settings) {
       })
 
       $scope.handleCalcInput = function () {
-        
+
         var output = calculationService.calculate(_.clone(cp), 'mortgage');
+        console.log("Got output", output);
+        $scope.mortgageValue = output.pv;
+        $scope.payment = output.gmw;
+        $scope.interestPaid = output.interestPaid;
+        $scope.interestRatio = output.interestRatio;
+
+        if ($scope.cp.downpaySelected) {
+          $scope.cp.downpayPercent = output.dpp * 100;
+        }
+
+        if ($scope.cp.downpayPercentSelected) {
+          $scope.cp.downpay = output.dp;
+
+        }
+      //  $scope.$apply();
 
       }
 

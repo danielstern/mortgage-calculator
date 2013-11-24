@@ -13,9 +13,9 @@ define(['underscore'], function (_) {
 
     calc.calculate = function(paramaters, directive) {
   
-   //   console.log("Calculating", paramaters);
+      console.log("Calculating", paramaters);
       res = calc.preflightAndGo(paramaters)
-      return;
+      return res;
 
     }
 
@@ -35,12 +35,18 @@ define(['underscore'], function (_) {
         downPayment = params.downpay;
       }
 
-      calc.calculateMortgage(params.investmentValue, downPayment,interestRateMonthly, amortizationWeeks, paymentFreq);
+      return calc.calculateMortgage(params.investmentValue, downPayment,interestRateMonthly, amortizationWeeks, paymentFreq);
     }
 
     calc.calculateMortgage = function(p1, dp, pi, pm, pfq) {
        console.log("Mortgage go!",arguments);
        var r = {};
+      var precision;
+      var targetPrecision = 100; // less than this amount apart  
+
+      var count = 1000;
+      var adjustmentAmount = 50;
+      var totalpaid = 0;
 
        // phase 1
        var pv = p1 - dp;
@@ -48,36 +54,34 @@ define(['underscore'], function (_) {
        r.dpp = dp / p1;
        console.log("r", r);
 
-      var precision;
-      var targetPrecision = 100; // less than this amount apart  
-
-      var count = 1000;
-      var adjustmentAmount = 50;
 
       console.log("PV?",pv);
        var pve = pv;
 
-       // phase 2;
-       // guess at mw;
        var gmw = pv / 100;
        while(count > 0) {
     //  console.log("Gmw?", gmw);
+        totalpaid = 0;
          for (i = 0; i < pm ; i++) {
          // console.log("PVE?",pve);
          // console.log("week passes...");
           if (i == 0 || i%4 == 0) {
-            if (pfq == "monthly") pve = pve - gmw;
+            if (pfq == "monthly") 
+              {
+                pve = pve - gmw
+                totalpaid += gmw;
+              };
+
             pve *= pi;
 
           }
 
-         // console.log("PVE afer interest?",pve, i);
 
           if (i == 0 || i%2 == 0) {
-            if (pfq == "biWeekly") pve = pve - gmw;
+            if (pfq == "biWeekly") {pve = pve - gmw; totalpaid += gmw;};
           }
 
-          if (pfq == "weekly") pve = pve - gmw;
+          if (pfq == "weekly") {pve = pve - gmw; totalpaid += gmw;};
 
         //  console.log("Pve at end of this week?",pve);
           if (pve < 0) break;
@@ -111,6 +115,14 @@ define(['underscore'], function (_) {
 
     console.log("what is pve?",pve);
     console.log("what is gmw?", gmw);
+
+    r.gmw = gmw;
+    r.totalpaid = totalpaid;
+    r.interestPaid = totalpaid - pv;
+    r.dp = dp;
+    r.interestRatio = r.interestPaid / pv;
+
+    return r;
 
 
     }
