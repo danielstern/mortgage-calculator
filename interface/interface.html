@@ -59,14 +59,18 @@
 			0
 		</td>
 		<td>
-			Recurring
+		<button type='button' ng-click='cp.paymentMonthly = !cp.paymentMonthly' class='btn btn-default'>Monthly</button>
 		</td>
 		<td>
-			<select class="form-control">
-		<option>Monthly</option>
-  		<option>Every 2 Weeks</option>
-  		<option>Every Week</option>
-  	</select>
+			<button class='btn btn-default' 
+			ng-click='cp.paymentWeekly = !cp.paymentWeekly' 
+			ng-class="{true:'active', false:''}[cp.paymentWeekly]">
+				Every 2 Weeks
+			</button>
+		</td>
+		<td>
+			<button class='btn btn-default'>Weekly</button>
+		</td>
 		</td>
 	</tr>
 	<tr>
@@ -84,10 +88,10 @@
 	<tr>
 	
 		<td>
-		<input type='checkbox'>Monthly</input>
+		<button type='button' class='btn btn-default active'>Monthly</button>
 		</td>
 		<td>
-			<input type='checkbox'>Annually</input>
+			<button class='btn btn-default'>Annually</button>
 		</td>
 	</tr>
 

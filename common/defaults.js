@@ -4,7 +4,9 @@ return {	defaults:{
    downpayPercent:10,
    interestRate:10,
    downpay:20000,
-   amortization:25
+   amortization:25,
+   paymentWeekly: true,
+   paymentMonthly: false,
    },
 }
 })
