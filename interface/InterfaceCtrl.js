@@ -4,6 +4,7 @@ define(['app', 'common/defaults'], function (app, settings) {
 
       $scope.cp = settings.defaults;
       $scope.fields = settings.fields;
+      $scope.freq = 'monthly';
 
       var cp = $scope.cp;
       var old_cp;

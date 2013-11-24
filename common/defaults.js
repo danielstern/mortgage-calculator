@@ -8,7 +8,8 @@ return {	defaults:{
    paymentWeekly: false,
    paymentBiWeekly: false,
    paymentMonthly: true,
-   downpaySelected:true
+   downpaySelected:true,
+   freq:'monthly'
    },
 }
 })
