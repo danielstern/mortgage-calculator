@@ -59,51 +59,43 @@
 			0
 		</td>
 		<td>
-		<button type='button' ng-click='cp.paymentMonthly = !cp.paymentMonthly' class='btn btn-default'>Monthly</button>
+		<button type='button' 
+		ng-click='cp.paymentMonthly = !cp.paymentMonthly'
+		class='btn btn-default'
+		ng-class="{true:'active', false:''}[cp.paymentMonthly]"
+		>Monthly</button>
 		</td>
 		<td>
-			<button class='btn btn-default' 
-			ng-click='cp.paymentWeekly = !cp.paymentWeekly' 
-			ng-class="{true:'active', false:''}[cp.paymentWeekly]">
+			<button 
+			ng-click='cp.paymentBiMonthly = !cp.paymentBiMonthly'
+			class='btn btn-default'
+			ng-class="{true:'active', false:''}[cp.paymentBiMonthly]">
 				Every 2 Weeks
 			</button>
 		</td>
 		<td>
-			<button class='btn btn-default'>Weekly</button>
+			<button class='btn btn-default'
+			class='btn btn-default' 
+			ng-click='cp.paymentWeekly = !cp.paymentWeekly' 
+			ng-class="{true:'active', false:''}[cp.paymentWeekly]">
+			Weekly</button>
 		</td>
 		</td>
 	</tr>
 	<tr>
-		<td rowspan='2'>
+		<td>
 			Interest Rate (%)
 		</td>
-		<td rowspan='2'>
+		<td>
 			<input ng-model="cp.interestRate" type='number'>
-		</td>
-		<td colspan='2'>
-			Compounded
-		</td>
-		
+		</td>		
 	</tr>
 	<tr>
-	
 		<td>
-		<button type='button' class='btn btn-default active'>Monthly</button>
-		</td>
-		<td>
-			<button class='btn btn-default'>Annually</button>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			Amortization
+			Amortization (yrs)
 		</td>
 		<td>
 			<input ng-model="cp.amortization" type='number'>
-		</td>
-		<td>
-			Years
 		</td>
 	</tr>
 	<tr>
