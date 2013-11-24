@@ -4,19 +4,12 @@ define(['app', 'common/defaults'], function (app, settings) {
 
       $scope.cp = settings.defaults;
       $scope.fields = settings.fields;
-      $scope.colorScheme = 'jedi';
-      $scope.showRecurring = settings.showRecurring;
-      $scope.settingsOpen = settings.settingsOpen;
 
       var cp = $scope.cp;
 
       $scope.$watchCollection('cp', function () {
         $scope.handleCalcInput();
       })
-
-      $scope.changeColorScheme = function (scheme) {
-        $scope.colorScheme = scheme;
-      }
 
       $scope.handleCalcInput = function () {
         var selectedField = _.find($scope.fields, function (field) {

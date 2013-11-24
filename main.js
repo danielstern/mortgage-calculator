@@ -48,8 +48,6 @@ require([
 	"common/defaults",
 	"common/Utility",
 	
-	"settings/SettingsCtrl",
-	
 	"interface/InterfaceCtrl",
 
 	"charts/ChartCtrl",

@@ -11,13 +11,13 @@ return {	defaults:{
 	settingsOpen:false,
 	fields:[
 	  {
-	    name:"Starting Value",
+	    name:"House Value",
 	    key:"startingValue",
 	    primer:"$",
 	    step:25
 	  },
 	   {
-	    name:"Monthly Payment",
+	    name:"Down Payment",
 	    key:"recurringPayment",
 	    primer:"$",
 	    noCalc:true
@@ -29,7 +29,7 @@ return {	defaults:{
 	    selected:"true"
 	  },
 	  {
-	    name:"Time (Months)",
+	    name:"Mortgage Term",
 	    key:"numMonths",
 	    chaser:' months',
 	    step:5
