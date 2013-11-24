@@ -13,7 +13,7 @@ define(['underscore'], function (_) {
 
     calc.calculate = function(paramaters, directive) {
   
-      console.log("Calculating", paramaters);
+   //   console.log("Calculating", paramaters);
       res = calc.preflightAndGo(paramaters)
       return;
 
@@ -39,7 +39,16 @@ define(['underscore'], function (_) {
     }
 
     calc.calculateMortgage = function(p1, dp, i, pm, pfq) {
-      console.log("Mortgage go!",arguments)
+       console.log("Mortgage go!",arguments);
+       var r = {};
+
+       // phase 1
+       var pv = p1 - dp;
+       r.pv = pv;
+       r.dpp = dp / p1;
+       console.log("r", r);
+
+       // phase 2;
 
     }
   }
