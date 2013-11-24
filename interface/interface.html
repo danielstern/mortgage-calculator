@@ -21,7 +21,8 @@
 			Investment Value
 		</td>
 		<td>
-			0
+		<!--	{{cp.investmentValue}}-->
+		<input ng-model="cp.investmentValue" type='number'>
 		</td>
 	</tr>
 	<tr>
@@ -29,7 +30,16 @@
 			Down Payment
 		</td>
 		<td>
-			0
+		<!--	{{cp.investmentValue}}-->
+		<input ng-model="cp.downpay" type='number'>
+		</td>
+		<td>
+		  Down Payment (%)
+		</td>
+		<td>
+		<input  ng-model="cp.downpayPercent" type='number'>
+  	</select>
+
 		</td>
 	</tr>
 	<tr>
@@ -37,14 +47,9 @@
 			Mortgage Value
 		</td>
 		<td>
-			0
+			<h3>0</h3>
 		</td>
-		<td>
-			% Down Pay
-		</td>
-		<td>
-			0%
-		</td>
+
 	</tr>
 	<tr>
 		<td>
@@ -57,29 +62,41 @@
 			Recurring
 		</td>
 		<td>
-			Monthly
+			<select class="form-control">
+		<option>Monthly</option>
+  		<option>Every 2 Weeks</option>
+  		<option>Every Week</option>
+  	</select>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			Interest Rate
+		<td rowspan='2'>
+			Interest Rate (%)
 		</td>
-		<td>
-			0
+		<td rowspan='2'>
+			<input ng-model="cp.interestRate" type='number'>
 		</td>
-		<td>
+		<td colspan='2'>
 			Compounded
 		</td>
+		
+	</tr>
+	<tr>
+	
 		<td>
-			Montlhly
+		<input type='checkbox'>Monthly</input>
+		</td>
+		<td>
+			<input type='checkbox'>Annually</input>
 		</td>
 	</tr>
+
 	<tr>
 		<td>
 			Amortization
 		</td>
 		<td>
-			25
+			<input ng-model="cp.amortization" type='number'>
 		</td>
 		<td>
 			Years

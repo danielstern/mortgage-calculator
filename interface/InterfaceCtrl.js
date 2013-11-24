@@ -12,6 +12,9 @@ define(['app', 'common/defaults'], function (app, settings) {
       })
 
       $scope.handleCalcInput = function () {
+        console.log("Calc input.");
+        return;
+        
         var selectedField = _.find($scope.fields, function (field) {
           return field.selected
         });
