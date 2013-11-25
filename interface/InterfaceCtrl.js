@@ -31,6 +31,14 @@ define(['app', 'common/defaults'], function (app, settings) {
 
         }
 
+        if (output.timeout) $scope.timeout = output.timeout / 4;
+        if (output.weeks) $scope.months = output.weeks / 4;
+
+        if (!output.timeout) {
+          $scope.timeout = '';
+          $scope.months = '';
+        }
+
         if (output.accuracy > output.targetPrecision) {
           $('.glyphicon').addClass('red');
         } else {

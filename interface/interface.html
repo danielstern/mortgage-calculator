@@ -38,8 +38,6 @@
 		</td>
 		<td>
 		<input  ng-model="cp.downpayPercent" type='number' ng-focus="cp.downpaySelected = false; cp.downpayPercentSelected = true">
-  	</select>
-
 		</td>
 	</tr>
 	<tr>
@@ -49,14 +47,15 @@
 		<td>
 			<h3>{{mortgageValue | number:0}}</h3>
 		</td>
+		
 		<td>
-			<select ng-model='cp.compound'  class='form-control'>
-				<option>Annually</option>
-				<option>Bi-Annually</option>
-				<option>Monthly</option>
-				<option>Bi-Monthly</option>
-				<option>Bi-Weekly</option>
+			<select ng-model='cp.payoff'  class='form-control'>
+				<option>Pay Off Sooner</option>
+				<option>Pay Full Term</option>
 			</select>
+		</td>
+		<td>
+			{{timeout}} / {{months}}
 		</td>
 
 	</tr>
@@ -97,7 +96,14 @@
 		</td>
 		<td>
 			<input ng-model="cp.interestRate" type='number'>
-		</td>		
+		</td>	
+		<td>
+			<select ng-model='cp.compound'  class='form-control'>
+				<option>Annually</option>
+				<option>Bi-Annually</option>
+				<option>Monthly</option>
+			</select>
+		</td>	
 	</tr>
 	<tr>
 		<td>

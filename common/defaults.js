@@ -10,7 +10,8 @@ return {	defaults:{
    paymentMonthly: true,
    downpaySelected:true,
    compound:'Bi-Annually',
-   freq:'monthly'
+   freq:'monthly',
+   payoff:'Pay Full Term'
    },
 }
 })
