@@ -9,6 +9,7 @@ return {	defaults:{
    paymentBiWeekly: false,
    paymentMonthly: true,
    downpaySelected:true,
+   compound:'Bi-Annually',
    freq:'monthly'
    },
 }

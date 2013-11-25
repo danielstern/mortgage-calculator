@@ -31,7 +31,7 @@ define(['app', 'common/defaults'], function (app, settings) {
 
         }
 
-        if (output.accuracy > 10) {
+        if (output.accuracy > output.targetPrecision) {
           $('.glyphicon').addClass('red');
         } else {
           $('.glyphicon').removeClass('red');

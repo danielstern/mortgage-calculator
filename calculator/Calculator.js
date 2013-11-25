@@ -26,8 +26,28 @@ define(['underscore'], function (_) {
       if (params.paymentBiWeekly) paymentFreq = 'biWeekly';
       if (params.paymentMonthly) paymentFreq = 'monthly';
 
-      var interestRateMonthly = 1 + ((params.interestRate / 100)) / 12;
-      var interestRate = params.interestRate / 100 / 12;
+      //var interestRateMonthly = 1 + ((params.interestRate / 100)) / 12;
+      //var interestRate = params.interestRate / 100 / 12;
+      var interestRateHuman = params.interestRate;
+
+      var compound;
+      switch (params.compound) {
+        case "Bi-Weekly":
+        compound = 'biWeekly';
+        break;
+        case "Monthly":
+        compound = 'monthly';
+        break;
+        case "Bi-Monthly":
+        compound = 'biMonthly';
+        break;
+        case "Annually":
+        compound = 'annually';
+        break;
+        case "Bi-Annually":
+        compound = 'biAnnually';
+        break;
+      }
 
       var downPayment;
       if(params.downpayPercentSelected) {
@@ -36,40 +56,37 @@ define(['underscore'], function (_) {
         downPayment = params.downpay;
       }
 
-      //return calc.calculateMortgage(params.investmentValue, downPayment,interestRateMonthly, amortizationWeeks, paymentFreq);
-      return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
+      return calc.calculateMortgage(params.investmentValue, downPayment,interestRateHuman, amortizationWeeks, paymentFreq, compound);
+      //return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
 
-    calc.classicMortgage = function(p1, dp, pi, pm, pfq) {
-      //var deno = pi;
-      //var pdeno = Math.pow(deno, Term_of_Loan);
-      //var loan_amount = (Monthly_payment * Term_of_Loan * 12) / pdeno;
 
-      var r = {};
-
-      var pr = p1 - dp;
-      var pe = pm;
-      var i = pi;
-
-      console.log("Calculating mortgage...",pr,pe,i)
-
-      var pay = pr * i / (1 - Math.pow(1 + i, -pe));
-
-      console.log("Payment?",pay);
-      r.gmw = pay;
-      r.pv = pr;
-      return r;
-
-    }
-
-    calc.calculateMortgage = function(p1, dp, pi, pm, pfq) {
+    calc.calculateMortgage = function(p1, dp, pih, pm, pfq, cpd) {
       console.log("Mortgage calculate!",arguments);
-       var r = {};
+      var pi;
+      switch (cpd) {
+        case "biWeekly":
+        pi = 1 + (1 + ((pih - 1) / 24)) / 100;
+        break;
+        case "monthly":
+        pi = 1 + (1 + ((pih - 1) / 12)) / 100;
+        break;
+        case "biMonthly":
+        pi = 1 + (1 + ((pih - 1) / 6)) / 100;
+        break;
+        case "annually":
+        pi = 1 + (1 + ((pih - 1) / 1)) / 100;
+        break;
+        case "biAnnually":
+         pi = 1 + (1 + ((pih - 1) / 2)) / 100;
+        break;
+      }
+      console.log("PI?",pi)
+      return;
+      var r = {};
       var precision;
-      var targetPrecision = 10; // less than this amount apart  
 
       var count = 1000;
-      var adjustmentAmount = 50;
       var totalpaid = 0;
 
        var pv = p1 - dp;
@@ -77,12 +94,19 @@ define(['underscore'], function (_) {
        r.dpp = dp / p1;
 
        var pve = pv;
+      var adjustmentAmount = pve / 5000;
+    //   var targetPrecision = pv / 500; // less than this amount apart  
+       var targetPrecision = 250; // less than this amount apart  
        var weeks = pm * 4;
 
-       var gmw = pv / 161.2;
+       var gmw;
+
+       if (pfq == 'monthly') gmw = pv / 162.2;  // don't even ask.
+       if (pfq == 'biWeekly') gmw = pv / 344.4;
+       if (pfq == 'weekly') gmw = pv / 344.8;
+       // = pv / 161.2;
        while(count > 0) {
 
-        totalpaid = 0;
          for (i = 0; i < weeks ; i++) {
           
 
@@ -108,15 +132,13 @@ define(['underscore'], function (_) {
                 totalpaid += gmw;
             };
 
-            pve *= pi;
+            if (cpd =="monthly") pve *= pi;
 
           }
 
-       //   if (pve < -1000) break;
 
        }
 
-    //  console.log("Our estimated value at end of term with ipayment",i, gmw,pve);
 
         if(pve > 0) {
 
@@ -134,8 +156,10 @@ define(['underscore'], function (_) {
           break;
         }
 
-        adjustmentAmount *= 0.999;
+        adjustmentAmount *= 0.99;
+        
         pve = pv;
+        totalpaid = 0;
 
        count --;
 
@@ -148,6 +172,7 @@ define(['underscore'], function (_) {
     r.i = pi;
     r.interestRatio = r.interestPaid / pv;
     r.accuracy = precision;
+    r.targetPrecision = targetPrecision;
 
     window.r = r;
     return r;
@@ -158,3 +183,24 @@ define(['underscore'], function (_) {
 
      
 })
+
+/*
+    calc.classicMortgage = function(p1, dp, pi, pm, pfq) {
+
+    var r = {};
+
+      var pr = p1 - dp;
+      var pe = pm;
+      var i = pi;
+
+      console.log("Calculating mortgage...",pr,pe,i)
+
+      var pay = pr * i / (1 - Math.pow(1 + i, -pe));
+
+      console.log("Payment?",pay);
+      r.gmw = pay;
+      r.pv = pr;
+      return r;
+
+    }
+    */
