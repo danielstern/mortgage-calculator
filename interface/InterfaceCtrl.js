@@ -17,8 +17,8 @@ define(['app', 'common/defaults'], function (app, settings) {
 
         var output = calculationService.calculate(_.clone(cp), 'mortgage');
         console.log("Got output", output);
-        $scope.mortgageValue = output.pv;
         $scope.payment = output.gmw;
+        $scope.mortgageValue = output.pv;
         $scope.interestPaid = output.interestPaid;
         $scope.interestRatio = output.interestRatio;
 
@@ -29,6 +29,12 @@ define(['app', 'common/defaults'], function (app, settings) {
         if ($scope.cp.downpayPercentSelected) {
           $scope.cp.downpay = output.dp;
 
+        }
+
+        if (output.accuracy > 10) {
+          $('.glyphicon').addClass('red');
+        } else {
+          $('.glyphicon').removeClass('red');
         }
       //  $scope.$apply();
 

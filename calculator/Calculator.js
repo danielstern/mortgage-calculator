@@ -27,6 +27,7 @@ define(['underscore'], function (_) {
       if (params.paymentMonthly) paymentFreq = 'monthly';
 
       var interestRateMonthly = 1 + ((params.interestRate / 100)) / 12;
+      var interestRate = params.interestRate / 100 / 12;
 
       var downPayment;
       if(params.downpayPercentSelected) {
@@ -35,24 +36,29 @@ define(['underscore'], function (_) {
         downPayment = params.downpay;
       }
 
-      return calc.calculateMortgage(params.investmentValue, downPayment,interestRateMonthly, amortizationWeeks, paymentFreq);
+      //return calc.calculateMortgage(params.investmentValue, downPayment,interestRateMonthly, amortizationWeeks, paymentFreq);
+      return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
 
     calc.classicMortgage = function(p1, dp, pi, pm, pfq) {
-/*
-        var pv = p1 - dp;
+      //var deno = pi;
+      //var pdeno = Math.pow(deno, Term_of_Loan);
+      //var loan_amount = (Monthly_payment * Term_of_Loan * 12) / pdeno;
 
-        var tv = pv;
-        console.log("Tv?",tv);
-        for (var i = 0; i<pm;i++) {
-          tv *= pi;
-          console.log("Tv now...",tv);
-        }
+      var r = {};
 
-        var ti = tv - pv;
-        console.log("This is how much sweet interest you will owe us:",ti,"interest:",pi);
-        return;
-*/
+      var pr = p1 - dp;
+      var pe = pm;
+      var i = pi;
+
+      console.log("Calculating mortgage...",pr,pe,i)
+
+      var pay = pr * i / (1 - Math.pow(1 + i, -pe));
+
+      console.log("Payment?",pay);
+      r.gmw = pay;
+      r.pv = pr;
+      return r;
 
     }
 
@@ -60,7 +66,7 @@ define(['underscore'], function (_) {
       console.log("Mortgage calculate!",arguments);
        var r = {};
       var precision;
-      var targetPrecision = 100; // less than this amount apart  
+      var targetPrecision = 10; // less than this amount apart  
 
       var count = 1000;
       var adjustmentAmount = 50;
@@ -73,18 +79,12 @@ define(['underscore'], function (_) {
        var pve = pv;
        var weeks = pm * 4;
 
-       var gmw = pv / 50;
+       var gmw = pv / 161.2;
        while(count > 0) {
 
         totalpaid = 0;
          for (i = 0; i < weeks ; i++) {
           
-
-          if (i%52 ==0) {
-           // semi-annual stuff... 
-          // console.log("Pve this year?",pve);
-          }
-
 
           if (i == 0 || i%2 == 0) {
             if (pfq == "biWeekly")
@@ -101,7 +101,7 @@ define(['underscore'], function (_) {
           };
 
           if (i == 0 || i%4 == 0) {
-          //  console.log("Month beginning,",i);
+
             if (pfq == "monthly") 
             {
                 pve = pve - gmw;
@@ -116,7 +116,7 @@ define(['underscore'], function (_) {
 
        }
 
-       console.log("Our estimated value at end of term with ipayment",i, gmw,pve);
+    //  console.log("Our estimated value at end of term with ipayment",i, gmw,pve);
 
         if(pve > 0) {
 
@@ -134,15 +134,12 @@ define(['underscore'], function (_) {
           break;
         }
 
-        adjustmentAmount *= 0.99;
+        adjustmentAmount *= 0.999;
         pve = pv;
 
        count --;
 
      }
-
-  //  console.log("what is pve?",pve);
-   // console.log("what is gmw?", gmw);
 
     r.gmw = gmw;
     r.totalpaid = totalpaid;
@@ -150,6 +147,7 @@ define(['underscore'], function (_) {
     r.dp = dp;
     r.i = pi;
     r.interestRatio = r.interestPaid / pv;
+    r.accuracy = precision;
 
     window.r = r;
     return r;
