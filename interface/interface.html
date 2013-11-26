@@ -130,3 +130,32 @@
 </table>
 
 <h2>Your {{freq}} payment is {{payment | currency}}</h2>
+
+<table class='table table-bordered white-bg'>
+	<tr>
+		<td>
+			Annual Property Tax
+		</td>
+		<td>
+			<input ng-model="cp.propertyTax" type='number'>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Closing Costs
+		</td>
+		<td>
+			<input ng-model="cp.closingCosts" type='number'>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Monthly Maintenance Fee
+		</td>
+		<td>
+			<input ng-model="cp.maintenanceFee" type='number'>
+		</td>
+	</tr>
+</table>
+
+<h3>Your monthly debt service is {{monthlyService | currency}}</h3>

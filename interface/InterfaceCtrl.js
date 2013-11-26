@@ -39,6 +39,9 @@ define(['app', 'common/defaults'], function (app, settings) {
           $scope.months = '';
         }
 
+        $scope.paymentMonthly = output.paymentMonthly;
+        $scope.monthlyService = output.monthlyService;
+
         if (output.accuracy > output.targetPrecision) {
           $('.glyphicon').addClass('red');
         } else {

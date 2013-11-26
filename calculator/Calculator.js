@@ -49,6 +49,8 @@ define(['underscore'], function (_) {
         break;
       }
 
+      params.investmentValue += params.closingCosts;
+
       var downPayment;
       if (params.downpayPercentSelected) {
         downPayment = (params.downpayPercent / 100) * params.investmentValue;
@@ -56,7 +58,11 @@ define(['underscore'], function (_) {
         downPayment = params.downpay;
       }
 
-      return calc.calculateMortgage(params.investmentValue, downPayment, interestRateHuman, amortizationWeeks, paymentFreq, compound, params.payoff);
+      var r = calc.calculateMortgage(params.investmentValue, downPayment, interestRateHuman, amortizationWeeks, paymentFreq, compound, params.payoff);
+      r.monthlyService = r.paymentMonthly;
+      r.monthlyService += params.maintenanceFee;
+      r.monthlyService += params.propertyTax / 12;
+      return r;
       //return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
 
@@ -234,6 +240,10 @@ define(['underscore'], function (_) {
       }
 
       r.gmw = r.gmw || gmw;
+      r.paymentMonthly = undefined;
+      if (pfq =="weekly") r.paymentMonthly = r.gmw * 4;
+      if (pfq =="biWeekly") r.paymentMonthly = r.gmw * 2;
+      if (pfq =="monthly") r.paymentMonthly = r.gmw;
       r.totalpaid = totalpaid;
       r.interestPaid = totalpaid - pv;
       r.dp = dp;
