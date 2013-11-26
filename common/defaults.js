@@ -9,13 +9,13 @@ return {	defaults:{
    paymentBiWeekly: false,
    paymentMonthly: true,
    downpaySelected:true,
-   propertyTax:5000,
-   closingCosts:10000,
-   maintenanceFee:500,
+   propertyTax:0,
+   closingCosts:0,
+   maintenanceFee:0,
    compound:'Bi-Annually',
    freq:'monthly',
    payoff:'Pay Full Term',
-   income:2200
+   income:0
    },
 }
 })

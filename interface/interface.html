@@ -14,7 +14,7 @@
 	</tr>
 </table>-->
 
-
+<div id='wrapper' class='{{mode}}'>
 <table class='table table-bordered white-bg'>
 	<tr>
 		<td>
@@ -22,7 +22,7 @@
 		</td>
 		<td>
 		<!--	{{cp.investmentValue}}-->
-		<input ng-model="cp.investmentValue" type='number'>
+		<input ng-model="cp.investmentValue" type='number' step='1000'>
 		</td>
 	</tr>
 	<tr>
@@ -31,12 +31,12 @@
 		</td>
 		<td>
 		<!--	{{cp.investmentValue}}-->
-		<input ng-model="cp.downpay" type='number' ng-focus="cp.downpaySelected = true; cp.downpayPercentSelected = false">
+		<input ng-model="cp.downpay" type='number' ng-focus="cp.downpaySelected = true; cp.downpayPercentSelected = false" step='1000'>
 		</td>
-		<td>
+		<td class='advanced'>
 		  Down Payment (%)
 		</td>
-		<td>
+		<td class='advanced'>
 		<input  ng-model="cp.downpayPercent" type='number' ng-focus="cp.downpaySelected = false; cp.downpayPercentSelected = true">
 		</td>
 	</tr>
@@ -48,13 +48,13 @@
 			<h3>{{mortgageValue | number:0}}</h3>
 		</td>
 		
-		<td>
+		<td class='advanced'>
 			<select ng-model='cp.payoff'  class='form-control'>
 				<option>Pay Off Sooner</option>
 				<option>Pay Full Term</option>
 			</select>
 		</td>
-		<td>
+		<td class='advanced'>
 			{{timeout}} / {{months}}
 		</td>
 
@@ -66,14 +66,14 @@
 		<td>
 			{{payment | number:2}}
 		</td>
-		<td>
+		<td class='advanced'>
 		<button type='button' 
 		ng-click='cp.paymentMonthly = true; cp.paymentBiWeekly = false; cp.paymentWeekly = false; freq="monthly"'
 		class='btn btn-default'
 		ng-class="{true:'active', false:''}[cp.paymentMonthly]"
 		>Monthly</button>
 		</td>
-		<td>
+		<td class='advanced'>
 			<button 
 			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = true; cp.paymentWeekly = false; freq="bi-weekly"';
 			class='btn btn-default'
@@ -81,7 +81,7 @@
 				Every 2 Weeks
 			</button>
 		</td>
-		<td>
+		<td class='advanced'>
 			<button class='btn btn-default'
 			class='btn btn-default' 
 			ng-click='cp.paymentMonthly = false; cp.paymentBiWeekly = false; cp.paymentWeekly = true;freq="weekly"' 
@@ -97,7 +97,7 @@
 		<td>
 			<input ng-model="cp.interestRate" type='number'>
 		</td>	
-		<td>
+		<td class='advanced'>
 			<select ng-model='cp.compound'  class='form-control'>
 				<option>Annually</option>
 				<option>Bi-Annually</option>
@@ -113,7 +113,7 @@
 			<input ng-model="cp.amortization" type='number'>
 		</td>
 	</tr>
-	<tr>
+	<tr class='advanced'>
 		<td>
 			Interest Paid
 		</td>
@@ -131,7 +131,7 @@
 
 <h2>Your {{freq}} payment is {{payment | currency}}</h2>
 
-<table class='table table-bordered white-bg'>
+<table class='table table-bordered white-bg expert'>
 	<tr>
 		<td>
 			Annual Property Tax
@@ -158,9 +158,9 @@
 	</tr>
 </table>
 
-<h3>Your monthly debt service is {{monthlyService | currency}}</h3>
+<h3 class='expert'>Your monthly debt service is {{monthlyService | currency}}</h3>
 
-<table class='table table-bordered white-bg'>
+<table class='table table-bordered white-bg expert'>
 	<tr>
 		<td>
 			Rental Income
@@ -170,4 +170,5 @@
 		</td>
 	</tr>
 </table>
-<h3 ng:class="{red: net<0}">Your net cashflow is {{net | currency}}</h3>
+<h3 class='expert' ng:class="{red: net<0}">Your net cashflow is {{net | currency}}</h3>
+</div>

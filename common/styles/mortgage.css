@@ -1,0 +1,11 @@
+.basic .advanced {
+	display: none;
+}
+
+.basic .expert {
+	display: none;
+}
+
+.advanced .expert {
+	display: none;
+}

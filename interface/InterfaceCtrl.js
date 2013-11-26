@@ -6,6 +6,8 @@ define(['app', 'common/defaults'], function (app, settings) {
       $scope.fields = settings.fields;
       $scope.freq = 'monthly';
 
+      $scope.mode = 'advanced';
+
       var cp = $scope.cp;
       var old_cp;
 
