@@ -159,3 +159,15 @@
 </table>
 
 <h3>Your monthly debt service is {{monthlyService | currency}}</h3>
+
+<table class='table table-bordered white-bg'>
+	<tr>
+		<td>
+			Rental Income
+		</td>
+		<td>
+			<input ng-model="cp.income" type='number'>
+		</td>
+	</tr>
+</table>
+<h3 ng:class="{red: net<0}">Your net cashflow is {{net | currency}}</h3>

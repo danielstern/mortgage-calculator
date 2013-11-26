@@ -23,7 +23,7 @@ define(['app', 'common/defaults'], function (app, settings) {
         $scope.interestRatio = output.interestRatio;
 
         if ($scope.cp.downpaySelected) {
-          $scope.cp.downpayPercent = output.dpp * 100;
+          $scope.cp.downpayPercent = Number((output.dpp * 100).toFixed(2));
         }
 
         if ($scope.cp.downpayPercentSelected) {
@@ -38,6 +38,8 @@ define(['app', 'common/defaults'], function (app, settings) {
           $scope.timeout = '';
           $scope.months = '';
         }
+
+        $scope.net = output.net;
 
         $scope.paymentMonthly = output.paymentMonthly;
         $scope.monthlyService = output.monthlyService;

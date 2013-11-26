@@ -62,6 +62,8 @@ define(['underscore'], function (_) {
       r.monthlyService = r.paymentMonthly;
       r.monthlyService += params.maintenanceFee;
       r.monthlyService += params.propertyTax / 12;
+
+      r.net = params.income - r.monthlyService;
       return r;
       //return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
