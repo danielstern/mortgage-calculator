@@ -63,14 +63,45 @@ define(['underscore'], function (_) {
       r.monthlyService += params.maintenanceFee;
       r.monthlyService += params.propertyTax / 12;
 
+      var xm = [];
+      var qm = {};
+      qm.interestAccrued = 0;
+      qm.payment = 0;
+      qm.principalPaid = 0;
+      qm.valueNow = 0;
+      for (var i = 0; i < x.length; i++) {
+        qm.interestAccrued += x[i].interestAccrued;
+        qm.payment += x[i].payment;
+        qm.principalPaid += x[i].principalPaid;
+        qm.valueNow = x[i].valueNow;
+        if (i != 0 && i % 4 == 0) {
+          qm.month = i / 4;
+          xm.push(_.clone(qm));
+          qm = {};
+          qm.interestAccrued = 0;
+          qm.payment = 0;
+          qm.principalPaid = 0;
+          qm.valueNow = 0;
+        }
+      }
+      console.log("Analytics?",x,xm);
+
       r.net = params.income - r.monthlyService;
-      return r;
+
+      var m = {};
+      m.r = r;
+      m.a = {};
+      m.a.weekly = x;
+      m.a.monthly = xm;
+      return m;
       //return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
 
+    var x = [];
 
     calc.calculateMortgage = function (p1, dp, pih, pm, pfq, cpd, payoff) {
       console.log("Mortgage calculate!", arguments);
+      x = [];
       var pi;
       switch (cpd) {
       case "monthly":
@@ -84,13 +115,13 @@ define(['underscore'], function (_) {
         break;
       }
       console.log("PI?", pi)
-    //  return;
+    
       var r = {};
       var precision;
       var payOffSooner = false;
       var payStyle;
 
-      console.log("Payoff?",payoff);
+    
       if (payoff == "Pay Off Sooner") {
         payStyle = pfq;
         pfq = "monthly";
@@ -117,9 +148,11 @@ define(['underscore'], function (_) {
       if (pfq == 'biWeekly') gmw = pv / 344.4;
       if (pfq == 'weekly') gmw = pv / 344.8;
       // = pv / 161.2;
+      
       while (count > 0) {
 
         for (i = 0; i < weeks; i++) {
+        var q = {};
 
           if (pfq == "weekly") {
             pve = pve - gmw;
@@ -151,6 +184,7 @@ define(['underscore'], function (_) {
 
           }
 
+          
           if (i != 0 && i % 26 == 0) {
             if (cpd == "biAnnually") pve *= pi;
           }
@@ -159,13 +193,39 @@ define(['underscore'], function (_) {
             if (cpd == "annually") pve *= pi;
           }
 
+          q.interestAccrued = pve * pi - pve;
+          switch (cpd) {
+            case "monthly":
+              q.interestAccrued /= 4;
+              break;
+            case "biAnnually":
+              q.interestAccrued /= 26;
+              break;
+            case "annually":
+              q.interestAccrued /= 52;
+              break;
+          }
+
+          q.payment = gmw;
+          switch (pfq) {
+            case "monthly":
+              q.payment /= 4;
+              break;
+            case "biWeekly":
+              q.payment /= 2;
+              break;
+            //case "monthly":
+          }
+          q.principalPaid = q.payment - q.interestAccrued;
+       //   q.interestPaid = q.payment - q.principalPaid;
+          q.valueNow = pve;
+          x.push(q);
 
         }
 
 
         precision = Math.abs(pve);
 
-        //  console.log("precision?",precision);
         if (precision < targetPrecision) {
           break;
         }
@@ -184,15 +244,17 @@ define(['underscore'], function (_) {
 
         pve = pv;
         totalpaid = 0;
+        x =[];
 
         count--;
 
       }
 
       if (payOffSooner && payStyle != "monthly") {
-        console.log("Paying off sooner",gmw,payStyle, cpd, pi);
+
+        x = [];
+      
         totalpaid = 0;
-      //  return;
         pve = pv - gmw;
         for (i = 0; i < weeks; i++) {
 
@@ -220,19 +282,14 @@ define(['underscore'], function (_) {
             if (cpd == "annually") pve *= pi;
           }
 
-          //console.log("Pve at end of this year?",pve);
           if (pve < 1 ) {
             console.log ('paid off sooner,',totalpaid);
             console.log("i?",i,weeks);
             r.timeout = i;
             r.weeks = weeks;
-            if (payStyle =="weekly") r.gmw = gmw / 4;
-            if (payStyle =="biWeekly") r.gmw = gmw / 2;
             break;
           }
-
         }
-
       }
 
       if (payOffSooner && payStyle == "monthly" || !payOffSooner) {
