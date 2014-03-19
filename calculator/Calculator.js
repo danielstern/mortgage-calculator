@@ -10,6 +10,7 @@ define(['underscore'], function (_) {
 
 
     var values;
+    var analytics = {};
 
     calc.calculate = function (paramaters, directive) {
 
@@ -19,6 +20,52 @@ define(['underscore'], function (_) {
 
     }
 
+    calc.crunchAnalyticsToMonthly = function(x) {
+      var qm = {};
+      var xm = [];
+
+      qm.interestAccrued = 0;
+      qm.payment = 0;
+      qm.principalPaid = 0;
+      qm.valueNow = 0;
+      for (var i = 0; i < x.length; i++) {
+        qm.interestAccrued += x[i].interestAccrued;
+        qm.payment += x[i].payment;
+        qm.principalPaid += x[i].principalPaid;
+        qm.valueNow = x[i].valueNow;
+        qm.dp = x[i].dp;
+        if (i != 0 && i % 4 == 0) {
+          qm.month = i / 4;
+          xm.push(_.clone(qm));
+          qm = {};
+          qm.interestAccrued = 0;
+          qm.payment = 0;
+          qm.principalPaid = 0;
+          qm.valueNow = 0;
+        }
+      }
+
+      return xm;
+    }
+
+    calc.getStats = function() {
+      return analytics;
+    }
+
+    calc.crunch = function(seq) {
+      //console.log("crunching",seq);
+      var totalEquity = 0;
+
+      seq = _.map(seq, function(it) {
+        totalEquity += Number(it.principalPaid);
+        it.equity = totalEquity + it.dp;
+        it.realizedEquity = totalEquity;
+        return it;
+      })
+
+      return seq;
+    }
+
     calc.preflightAndGo = function (params) {
       // console.log("Preflighting...",params);
       var amortizationWeeks = params.amortization * 12;
@@ -26,8 +73,6 @@ define(['underscore'], function (_) {
       if (params.paymentBiWeekly) paymentFreq = 'biWeekly';
       if (params.paymentMonthly) paymentFreq = 'monthly';
 
-      //var interestRateMonthly = 1 + ((params.interestRate / 100)) / 12;
-      //var interestRate = params.interestRate / 100 / 12;
       var interestRateHuman = params.interestRate;
 
       var compound;
@@ -63,44 +108,25 @@ define(['underscore'], function (_) {
       r.monthlyService += params.maintenanceFee;
       r.monthlyService += params.propertyTax / 12;
 
-      var xm = [];
-      var qm = {};
-      qm.interestAccrued = 0;
-      qm.payment = 0;
-      qm.principalPaid = 0;
-      qm.valueNow = 0;
-      for (var i = 0; i < x.length; i++) {
-        qm.interestAccrued += x[i].interestAccrued;
-        qm.payment += x[i].payment;
-        qm.principalPaid += x[i].principalPaid;
-        qm.valueNow = x[i].valueNow;
-        if (i != 0 && i % 4 == 0) {
-          qm.month = i / 4;
-          xm.push(_.clone(qm));
-          qm = {};
-          qm.interestAccrued = 0;
-          qm.payment = 0;
-          qm.principalPaid = 0;
-          qm.valueNow = 0;
-        }
-      }
-      console.log("Analytics?",x,xm);
+      analytics.weekly = x;
+      analytics.monthly = calc.crunchAnalyticsToMonthly(x);
 
+      analytics.monthly = calc.crunch(analytics.monthly);
+     
       r.net = params.income - r.monthlyService;
 
       var m = {};
       m.r = r;
       m.a = {};
-      m.a.weekly = x;
-      m.a.monthly = xm;
       return m;
-      //return calc.classicMortgage(params.investmentValue, downPayment,interestRate, amortizationWeeks, paymentFreq);
     }
 
     var x = [];
+    var payStyle;
+    var payOffSooner = false;
 
     calc.calculateMortgage = function (p1, dp, pih, pm, pfq, cpd, payoff) {
-      console.log("Mortgage calculate!", arguments);
+
       x = [];
       var pi;
       switch (cpd) {
@@ -114,20 +140,10 @@ define(['underscore'], function (_) {
         pi = 1 + (pih / 100 / 2);
         break;
       }
-      console.log("PI?", pi)
+      
     
       var r = {};
       var precision;
-      var payOffSooner = false;
-      var payStyle;
-
-    
-      if (payoff == "Pay Off Sooner") {
-        payStyle = pfq;
-        pfq = "monthly";
-        payOffSooner = true;
-
-      }
 
       var count = 1000;
       var totalpaid = 0;
@@ -138,7 +154,6 @@ define(['underscore'], function (_) {
 
       var pve = pv;
       var adjustmentAmount = pve / 5000;
-      //   var targetPrecision = pv / 500; // less than this amount apart  
       var targetPrecision = 5; // less than this amount apart  
       var weeks = pm * 4;
 
@@ -147,7 +162,6 @@ define(['underscore'], function (_) {
       if (pfq == 'monthly') gmw = pv / 162.2; // don't even ask.
       if (pfq == 'biWeekly') gmw = pv / 344.4;
       if (pfq == 'weekly') gmw = pv / 344.8;
-      // = pv / 161.2;
       
       while (count > 0) {
 
@@ -214,11 +228,10 @@ define(['underscore'], function (_) {
             case "biWeekly":
               q.payment /= 2;
               break;
-            //case "monthly":
           }
           q.principalPaid = q.payment - q.interestAccrued;
-       //   q.interestPaid = q.payment - q.principalPaid;
           q.valueNow = pve;
+          q.dp = dp;
           x.push(q);
 
         }
@@ -230,15 +243,10 @@ define(['underscore'], function (_) {
           break;
         }
 
-
         if (pve > 0) {
-
           gmw += adjustmentAmount;
-
         } else {
-
           gmw -= adjustmentAmount;
-
         }
         adjustmentAmount *= 0.99;
 
@@ -250,59 +258,17 @@ define(['underscore'], function (_) {
 
       }
 
-      if (payOffSooner && payStyle != "monthly") {
-
-        x = [];
-      
-        totalpaid = 0;
-        pve = pv - gmw;
-        for (i = 0; i < weeks; i++) {
-
-          if (payStyle == "weekly") {
-            pve -= gmw / 4;
-            totalpaid += gmw / 4;
-          }
-
-          if (i != 0 && payStyle =="biWeekly" && i % 2 == 0) {
-            pve -= gmw / 2;
-            totalpaid += gmw / 2;
-          }
-
-          if (i % 4 == 0) {
-            if (i != 0 && cpd == "monthly") {
-              pve *= pi;
-            }
-          }
-
-          if (i != 0 && i % 26 == 0) {
-            if (cpd == "biAnnually") pve *= pi;
-          }
-
-          if (i != 0 && i % 52 == 0) {
-            if (cpd == "annually") pve *= pi;
-          }
-
-          if (pve < 1 ) {
-            console.log ('paid off sooner,',totalpaid);
-            console.log("i?",i,weeks);
-            r.timeout = i;
-            r.weeks = weeks;
-            break;
-          }
-        }
-      }
-
-      if (payOffSooner && payStyle == "monthly" || !payOffSooner) {
-         r.weeks = weeks;
-         r.timeout = weeks;
-
-      }
-
       r.gmw = r.gmw || gmw;
       r.paymentMonthly = undefined;
       if (pfq =="weekly") r.paymentMonthly = r.gmw * 4;
       if (pfq =="biWeekly") r.paymentMonthly = r.gmw * 2;
       if (pfq =="monthly") r.paymentMonthly = r.gmw;
+
+    //  if (pfq == "weekly") r.paymentMonthly = r.paymentMonthly / 4;
+     // if (payStyle == "biWeekly" || pfq == "biWeekly") r.paymentMonthly = r.paymentMonthly / 2;
+
+     r.payment = gmw;
+
       r.totalpaid = totalpaid;
       r.interestPaid = totalpaid - pv;
       r.dp = dp;

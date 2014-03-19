@@ -18,8 +18,7 @@ define(['app', 'common/defaults'], function (app, settings) {
       $scope.handleCalcInput = function () {
 
         var output = calculationService.calculate(_.clone(cp), 'mortgage');
-        console.log("Got output", output);
-        $scope.payment = output.gmw;
+        $scope.payment = output.payment;
         $scope.mortgageValue = output.pv;
         $scope.interestPaid = output.interestPaid;
         $scope.interestRatio = output.interestRatio;
@@ -51,31 +50,11 @@ define(['app', 'common/defaults'], function (app, settings) {
         } else {
           $('.glyphicon').removeClass('red');
         }
-      //  $scope.$apply();
 
+        $scope.analytics = calculationService.getStats();
+
+        console.log("analytics?",$scope.analytics);
       }
-
-      $scope.getFullStats = function () {
-        var stats = calculationService.getStats(cp);
-        return stats;
-      }
-      _.defer(function () {
-        chartService.updateCharts($scope.getFullStats())
-      });
-
-      $scope.handleRowClick = function (thing) {
-
-        var field = _.find($scope.fields, function (field) {
-          return field.key == thing
-        })
-        if(field.noCalc) return;
-        _.each($scope.fields, function (field) {
-          field.selected = false
-        })
-
-        field.selected = true;
-      }
-
     }
   ])
 })
